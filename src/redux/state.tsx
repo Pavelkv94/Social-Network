@@ -84,7 +84,7 @@ export function addPost(postMessage: string) {
     let newPost: PostDataType = {
         id: "5",
         message: postMessage,
-        src: "https://avatarko.ru/img/kartinka/2/Gubka_Bob.jpg",
+        src: "https://cdn140.picsart.com/330959057057201.jpg",
         likeCount: "0"
     }
     state.profile.postData.push(newPost);
