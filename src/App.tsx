@@ -8,17 +8,14 @@ import { Profile } from './components/Profile/Profile';
 import { Music } from './components/Music/Music';
 import { News } from './components/News/News';
 import { Setting } from './components/Setting/Setting';
-import { StateType } from './redux/state';
+import { store, StoreType } from './redux/state';
 
 type AppPropsType = {
-  appState: StateType
-  addPost: (postMessage: string) => void
-  updateNewPostText: (newText: string) => void
-
+  store: StoreType
 }
 
 function App(props: AppPropsType) {
-
+const appState = store.getState();
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -26,15 +23,15 @@ function App(props: AppPropsType) {
         <Navbar />
         <div className="app-wrapper-content">
           <Route render={() => <Dialogs
-            dialogsData={props.appState.dialogs.dialogsData}
-            messagesData={props.appState.dialogs.messagesData}
+            dialogsData={appState.dialogs.dialogsData}
+            messagesData={appState.dialogs.messagesData}
           />} path="/dialogs" />
           <Route render={() => <Profile
-            postData={props.appState.profile.postData}
-            profileData={props.appState.profile.profileData}
-            addPost={props.addPost}
-            newPostText={props.appState.profile.newPostText}
-            updateNewPostText = {props.updateNewPostText}
+            postData={appState.profile.postData}
+            profileData={appState.profile.profileData}
+            addPost={store.addPost.bind(props.store)}
+            newPostText={appState.profile.newPostText}
+            updateNewPostText = {store.updateNewPostText.bind(props.store)}
           />} path="/profile" />
           <Route render={() => <News />} path="/news" />
           <Route render={() => <Music />} path="/music" />
