@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Social-Network/static/css/main.ed280ce0.chunk.css",
-    "main.js": "/Social-Network/static/js/main.f4960803.chunk.js",
-    "main.js.map": "/Social-Network/static/js/main.f4960803.chunk.js.map",
+    "main.js": "/Social-Network/static/js/main.4f01187e.chunk.js",
+    "main.js.map": "/Social-Network/static/js/main.4f01187e.chunk.js.map",
     "runtime-main.js": "/Social-Network/static/js/runtime-main.60f4c472.js",
     "runtime-main.js.map": "/Social-Network/static/js/runtime-main.60f4c472.js.map",
     "static/js/2.ce6d4dde.chunk.js": "/Social-Network/static/js/2.ce6d4dde.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.60f4c472.js",
     "static/js/2.ce6d4dde.chunk.js",
     "static/css/main.ed280ce0.chunk.css",
-    "static/js/main.f4960803.chunk.js"
+    "static/js/main.4f01187e.chunk.js"
   ]
 }
