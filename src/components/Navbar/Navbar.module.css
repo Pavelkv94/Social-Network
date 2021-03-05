@@ -1,0 +1,39 @@
+.nav {
+  grid-area: n;
+  background-color: rgb(160, 246, 210);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.item {
+  width: 170px;
+  height: 50px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item:hover {
+  background-color: rgba(0, 0, 0, 0.452);
+}
+.item a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.item a:hover {
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  transform: scale(1.2);
+  transition-duration: 0.5s;
+}
+.item a.active {
+  color: rgb(9, 75, 0);
+  font-weight: 600;
+  font-size: 20px;
+}
+.item a.active:hover {
+  color: white;
+}

@@ -1,0 +1,16 @@
+.item {
+  color: black;
+  padding: 20px;
+}
+.item img {
+  width: 100px;
+  border-radius: 150%;
+}
+.item button {
+  color: blue;
+  font-weight: 600;
+  border-radius: 30%;
+}
+.item button:hover {
+  transform: scale(1.2);
+}
