@@ -11,7 +11,7 @@ export function Profile(props: ProfileType) {
   return (
     <div className="container">
       <ProfileInfo background={props.profileData[0].background} ava={props.profileData[0].ava} />
-      <MyPosts posts={props.postData} addPost = {props.addPost} newPostText = {props.newPostText} updateNewPostText = {props.updateNewPostText}/>
+      <MyPosts posts={props.postData}  newPostText = {props.newPostText} dispatch={props.dispatch}/>
     </div>
   )
 }

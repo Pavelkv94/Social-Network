@@ -30,8 +30,7 @@ export type ProfileType = {
     postData: Array<PostDataType>
     newPostText: string
     profileData: Array<ProfileDataType>
-    addPost:(postMessage: string) => void
-    updateNewPostText:(newText: string)=>void
+    dispatch: (action: ActionTypes) => void
 }
 export type ProfileStateType = {
     postData: Array<PostDataType>
@@ -44,13 +43,22 @@ export type StateType = {
 }
 export type StoreType = {
     _state: StateType
-    getState: ()=>StateType
-    _callSubscriber: ()=>void
-    addPost:(postMessage: string) => void
-    updateNewPostText:(newText: string)=>void
-    subscribe:(observer: () => void) => void
+    getState: () => StateType
+    _callSubscriber: () => void
+    // addPost: (postMessage: string) => void
+    // updateNewPostText: (newText: string) => void
+    subscribe: (observer: () => void) => void
+    dispatch: (action: ActionTypes) => void
 }
-
+export type ActionTypes = AddPostActionType | UpdatePostActionType
+type AddPostActionType = {
+    type: "ADD-POST"
+    postMessage: string
+}
+type UpdatePostActionType = {
+    type: "UPDATE-POST-TEXT"
+    newText: string
+}
 
 export let store: StoreType = {
     _state: {
@@ -85,33 +93,52 @@ export let store: StoreType = {
             profileData: [
                 { background: "https://demo.qodeinteractive.com/central/wp-content/uploads/2013/05/header.jpg", ava: "Ava" }
             ],
-            
+
         }
-    },
-    getState(){
-        return this._state
     },
     _callSubscriber() {
         console.log("sad")
     },
-    //TODO Создаем функцию для добавления нового поста на стену
-    addPost(postMessage: string) {
-        let newPost: PostDataType = {
-            id: "5",
-            message: postMessage,
-            src: "https://cdn140.picsart.com/330959057057201.jpg",
-            likeCount: "0"
-        }
-        this._state.profile.postData.push(newPost);
-        this._callSubscriber();
-    },
-    //TODO Создаем функцию FLUX круговорота для textarea
-    updateNewPostText(newText: string) {
-        this._state.profile.newPostText = newText;
-        this._callSubscriber()
+    getState() {
+        return this._state
     },
     subscribe(observer: () => void) {
         this._callSubscriber = observer   //Наблюдатель паттерн
     },
+
+    //!Функции для изменения UI
+    // //TODO Создаем функцию для добавления нового поста на стену
+    // addPost(postMessage: string) {
+    //     let newPost: PostDataType = {
+    //         id: "5",
+    //         message: postMessage,
+    //         src: "https://cdn140.picsart.com/330959057057201.jpg",
+    //         likeCount: "0"
+    //     }
+    //     this._state.profile.postData.push(newPost);
+    //     this._callSubscriber();
+    // },
+    // //TODO Создаем функцию FLUX круговорота для textarea
+    // updateNewPostText(newText: string) {
+    //     this._state.profile.newPostText = newText;
+    //     this._callSubscriber()
+    // },
+    //TODO ВВодим dispatch
+    dispatch(action) {   //action - обьект который имеет {type: "ADD-POST"}
+        if (action.type === "ADD-POST") {
+            let newPost: PostDataType = {
+                id: "5",
+                message: action.postMessage,
+                src: "https://cdn140.picsart.com/330959057057201.jpg",
+                likeCount: "0"
+            }
+            this._state.profile.postData.push(newPost);
+            this._callSubscriber();
+        }
+        else if (action.type === "UPDATE-POST-TEXT") {
+            this._state.profile.newPostText = action.newText;
+            this._callSubscriber()
+        }
+    }
 
 }

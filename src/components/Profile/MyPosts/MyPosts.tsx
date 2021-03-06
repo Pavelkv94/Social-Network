@@ -1,13 +1,12 @@
 import React from 'react';
-import { PostDataType } from '../../../redux/state';
+import { ActionTypes, PostDataType } from '../../../redux/state';
 import mypost from './MyPosts.module.css'
 import { Post } from './Post/Post';
 
 type MyPostType = {
     posts: Array<PostDataType>
-    addPost: (message: string) => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionTypes) => void
 
 }
 
@@ -19,12 +18,12 @@ export function MyPosts(props: MyPostType) {
     const addPost = () => {
         let text = newPostElement.current?.value; //  newPostElement.current &&  newPostElement.current.value; (Если элемент существует то возьмем его значение)
         if (text) {
-            props.addPost(text)
+            props.dispatch({type:"ADD-POST", postMessage: text})
         };
-        props.updateNewPostText("")
+        props.dispatch({type: "UPDATE-POST-TEXT", newText: " "})
     }
     const onPostChange = (e:any) => {
-        props.updateNewPostText(e.currentTarget.value);
+        props.dispatch({type: "UPDATE-POST-TEXT", newText:e.currentTarget.value})
     }
     // const onPostChange = () => {
     //     let text = newPostElement.current?.value;
