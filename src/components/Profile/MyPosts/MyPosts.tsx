@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionTypes, PostDataType, addPostActionCreator, updatePowtTextActionCreator} from '../../../redux/state';
+import { ActionTypes, PostDataType, addPostActionCreator, updatePostTextActionCreator} from '../../../redux/state';
 import mypost from './MyPosts.module.css'
 import { Post } from './Post/Post';
 
@@ -22,10 +22,10 @@ export function MyPosts(props: MyPostType) {
         if (text) {
             props.dispatch(addPostActionCreator(text))
         };
-        props.dispatch(updatePowtTextActionCreator(""))
+        props.dispatch(updatePostTextActionCreator(""))
     }
     const onPostChange = (e: any) => {
-        props.dispatch(updatePowtTextActionCreator(e.currentTarget.value))
+        props.dispatch(updatePostTextActionCreator(e.currentTarget.value))
     }
     // const onPostChange = () => {
     //     let text = newPostElement.current?.value;

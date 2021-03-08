@@ -25,6 +25,14 @@ export type ProfileDataType = {
 export type DialogsType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
+    newMessageBody: string
+    dispatch: (action: ActionTypes) => void
+}
+
+export type DialogsStateType = {
+    dialogsData: Array<UserType>
+    messagesData: Array<UserMessageType>
+    newMessageBody: string
 }
 export type ProfileType = {
     postData: Array<PostDataType>
@@ -38,7 +46,7 @@ export type ProfileStateType = {
     profileData: Array<ProfileDataType>
 }
 export type StateType = {
-    dialogs: DialogsType
+    dialogs: DialogsStateType
     profile: ProfileStateType
 }
 export type StoreType = {
@@ -50,17 +58,26 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionTypes) => void
 }
-export type ActionTypes = AddPostActionType | UpdatePostActionType
+export type ActionTypes = AddPostActionType | UpdatePostActionType | UpdateNewMessageType | SendMessageType
 export type AddPostActionType = {
     type: "ADD-POST"
     postMessage: string
 }
+// export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdatePostActionType = {
     type: "UPDATE-POST-TEXT"
     newText: string
 }
+export type UpdateNewMessageType = {
+    type: "UPDATE-NEW-MESSAGE-BODY"
+    body: string
+}
+export type SendMessageType = {
+    type: "SEND-MESSAGE"
 
-//TODO----------------------STORE----------
+}
+
+//!BLL----------------------STORE----------
 export let store: StoreType = {
     _state: {
         dialogs: {
@@ -80,6 +97,8 @@ export let store: StoreType = {
                 { id: "5", message: " " },
                 { id: "6", message: "Im sexy" },
             ],
+            newMessageBody: "",
+
 
         },
         profile: {
@@ -94,6 +113,7 @@ export let store: StoreType = {
             profileData: [
                 { background: "https://demo.qodeinteractive.com/central/wp-content/uploads/2013/05/header.jpg", ava: "Ava" }
             ],
+
 
         }
     },
@@ -138,7 +158,17 @@ export let store: StoreType = {
         }
         else if (action.type === "UPDATE-POST-TEXT") {
             this._state.profile.newPostText = action.newText;
-            this._callSubscriber()
+            this._callSubscriber();
+        }
+        else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+            this._state.dialogs.newMessageBody = action.body;
+            this._callSubscriber();
+        }
+        else if (action.type === "SEND-MESSAGE") {
+            let body = this._state.dialogs.newMessageBody;
+            this._state.dialogs.newMessageBody = "";
+            this._state.dialogs.messagesData.push({ id: "7", message: body },)
+            this._callSubscriber();
         }
     }
 }
@@ -149,9 +179,22 @@ export const addPostActionCreator = (text: string): AddPostActionType => {
         postMessage: text
     }
 }
-export const updatePowtTextActionCreator = (newText: string): UpdatePostActionType => {
+export const updatePostTextActionCreator = (newText: string): UpdatePostActionType => {
     return {
         type: "UPDATE-POST-TEXT",
         newText: newText
+    }
+}
+export const updateNewMessageBodyCreator = (body: string): UpdateNewMessageType => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        body: body
+    }
+}
+export const sendMessageCreator = (): SendMessageType => {
+    return {
+        type: "SEND-MESSAGE",
+
+
     }
 }

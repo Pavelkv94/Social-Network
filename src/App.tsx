@@ -25,6 +25,8 @@ function App(props: AppPropsType) {
           <Route render={() => <Dialogs
             dialogsData={appState.dialogs.dialogsData}
             messagesData={appState.dialogs.messagesData}
+            newMessageBody = {appState.dialogs.newMessageBody}
+            dispatch={store.dispatch.bind(props.store)}
           />} path="/dialogs" />
           <Route render={() => <Profile
             postData={appState.profile.postData}
