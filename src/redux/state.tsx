@@ -51,15 +51,16 @@ export type StoreType = {
     dispatch: (action: ActionTypes) => void
 }
 export type ActionTypes = AddPostActionType | UpdatePostActionType
-type AddPostActionType = {
+export type AddPostActionType = {
     type: "ADD-POST"
     postMessage: string
 }
-type UpdatePostActionType = {
+export type UpdatePostActionType = {
     type: "UPDATE-POST-TEXT"
     newText: string
 }
 
+//TODO----------------------STORE----------
 export let store: StoreType = {
     _state: {
         dialogs: {
@@ -140,5 +141,17 @@ export let store: StoreType = {
             this._callSubscriber()
         }
     }
-
+}
+//TODO----------------------создаем ACTION-CREATORS----------
+export const addPostActionCreator = (text: string): AddPostActionType => {
+    return {
+        type: "ADD-POST",
+        postMessage: text
+    }
+}
+export const updatePowtTextActionCreator = (newText: string): UpdatePostActionType => {
+    return {
+        type: "UPDATE-POST-TEXT",
+        newText: newText
+    }
 }
