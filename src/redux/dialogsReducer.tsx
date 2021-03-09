@@ -1,4 +1,4 @@
-import { ActionTypes, DialogsStateType } from "./state";
+import { ActionTypes, DialogsStateType, SendMessageType, UpdateNewMessageType } from "./state";
 
 
 export const dialogsReducer = (state: DialogsStateType, action:ActionTypes) => {
@@ -12,5 +12,20 @@ export const dialogsReducer = (state: DialogsStateType, action:ActionTypes) => {
         state.messagesData.push({ id: "7", message: body },)
         return state;
         default: return state;
+    }
+}
+
+//TODO----------------------создаем ACTION-CREATORS----------
+export const updateNewMessageBodyCreator = (body: string): UpdateNewMessageType => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        body: body
+    }
+}
+export const sendMessageCreator = (): SendMessageType => {
+    return {
+        type: "SEND-MESSAGE",
+
+
     }
 }

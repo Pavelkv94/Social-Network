@@ -1,4 +1,4 @@
-import { ActionTypes, PostDataType, ProfileStateType, StateType } from "./state";
+import { ActionTypes, AddPostActionType, PostDataType, ProfileStateType, StateType, UpdatePostActionType } from "./state";
 
 
 export const profileReducer = (state: ProfileStateType, action: ActionTypes) => {
@@ -16,5 +16,19 @@ export const profileReducer = (state: ProfileStateType, action: ActionTypes) => 
             state.newPostText = action.newText;
             return state;
         default: return state;
+    }
+}
+
+//TODO----------------------создаем ACTION-CREATORS----------
+export const addPostActionCreator = (text: string): AddPostActionType => {
+    return {
+        type: "ADD-POST",
+        postMessage: text
+    }
+}
+export const updatePostTextActionCreator = (newText: string): UpdatePostActionType => {
+    return {
+        type: "UPDATE-POST-TEXT",
+        newText: newText
     }
 }

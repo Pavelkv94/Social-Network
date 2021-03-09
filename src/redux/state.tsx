@@ -157,29 +157,5 @@ export let store: StoreType = {
         this._callSubscriber()
     }
 }
-//TODO----------------------создаем ACTION-CREATORS----------
-export const addPostActionCreator = (text: string): AddPostActionType => {
-    return {
-        type: "ADD-POST",
-        postMessage: text
-    }
-}
-export const updatePostTextActionCreator = (newText: string): UpdatePostActionType => {
-    return {
-        type: "UPDATE-POST-TEXT",
-        newText: newText
-    }
-}
-export const updateNewMessageBodyCreator = (body: string): UpdateNewMessageType => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        body: body
-    }
-}
-export const sendMessageCreator = (): SendMessageType => {
-    return {
-        type: "SEND-MESSAGE",
 
 
-    }
-}
