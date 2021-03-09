@@ -1,3 +1,6 @@
+import { dialogsReducer } from "./dialogsReducer"
+import { profileReducer } from "./profileReducer"
+import { sidebarReducer } from "./sidebarReducer"
 
 
 export type UserType = {
@@ -48,6 +51,7 @@ export type ProfileStateType = {
 export type StateType = {
     dialogs: DialogsStateType
     profile: ProfileStateType
+    sidebar: any
 }
 export type StoreType = {
     _state: StateType
@@ -115,7 +119,8 @@ export let store: StoreType = {
             ],
 
 
-        }
+        },
+        sidebar: {},
     },
     _callSubscriber() {
         console.log("sad")
@@ -145,31 +150,11 @@ export let store: StoreType = {
     //     this._callSubscriber()
     // },
     //TODO ВВодим dispatch
-    dispatch(action) {   //action - обьект который имеет {type: "ADD-POST"}
-        if (action.type === "ADD-POST") {
-            let newPost: PostDataType = {
-                id: "5",
-                message: action.postMessage,
-                src: "https://cdn140.picsart.com/330959057057201.jpg",
-                likeCount: "0"
-            }
-            this._state.profile.postData.push(newPost);
-            this._callSubscriber();
-        }
-        else if (action.type === "UPDATE-POST-TEXT") {
-            this._state.profile.newPostText = action.newText;
-            this._callSubscriber();
-        }
-        else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-            this._state.dialogs.newMessageBody = action.body;
-            this._callSubscriber();
-        }
-        else if (action.type === "SEND-MESSAGE") {
-            let body = this._state.dialogs.newMessageBody;
-            this._state.dialogs.newMessageBody = "";
-            this._state.dialogs.messagesData.push({ id: "7", message: body },)
-            this._callSubscriber();
-        }
+    dispatch(action) {   //action - обьект который имеет Как минимум тайп{type: "ADD-POST"}
+        this._state.profile = profileReducer(this._state.profile, action);
+        this._state.dialogs = dialogsReducer(this._state.dialogs, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+        this._callSubscriber()
     }
 }
 //TODO----------------------создаем ACTION-CREATORS----------
