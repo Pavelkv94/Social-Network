@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileType } from '../../redux/state';
+import { ProfileType } from '../../redux/store';
 import { MyPosts } from './MyPosts/MyPosts';
 import prof from './Profile.module.css'
 import { ProfileInfo} from './ProfileInfo/ProfileInfo';

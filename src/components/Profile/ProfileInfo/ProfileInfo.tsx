@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileDataType } from '../../../redux/state';
+import { ProfileDataType } from '../../../redux/store';
 import p from './ProfileInfo.module.css'
 
 

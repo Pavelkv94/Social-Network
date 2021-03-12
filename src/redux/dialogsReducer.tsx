@@ -1,4 +1,4 @@
-import { ActionTypes, DialogsStateType, SendMessageType, UpdateNewMessageType } from "./state";
+import { ActionTypes, DialogsStateType, SendMessageType, UpdateNewMessageType } from "./store";
 
 
 export const dialogsReducer = (state: DialogsStateType, action:ActionTypes) => {
