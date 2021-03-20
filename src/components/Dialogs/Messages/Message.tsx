@@ -12,4 +12,3 @@ export function Message(props: MessageType) {
     )
 }
 
-    
