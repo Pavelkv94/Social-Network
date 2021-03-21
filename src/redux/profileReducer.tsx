@@ -1,7 +1,10 @@
 import { ActionTypes, AddPostActionType, PostDataType, ProfileStateType, StateType, UpdatePostActionType } from "./store";
 
 
-export const profileReducer = (state: ProfileStateType, action: ActionTypes) => {
+
+
+
+export const profileReducer = (state: ProfileStateType , action: ActionTypes) => {
     switch (action.type) {
         case "ADD-POST":
             let newPost: PostDataType = {

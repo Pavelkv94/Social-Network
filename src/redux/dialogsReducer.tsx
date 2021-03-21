@@ -1,7 +1,8 @@
 import { ActionTypes, DialogsStateType, SendMessageType, UpdateNewMessageType } from "./store";
 
 
-export const dialogsReducer = (state: DialogsStateType, action:ActionTypes) => {
+
+export const dialogsReducer = (state: DialogsStateType , action:ActionTypes) => {
     switch(action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
             state.newMessageBody = action.body;
