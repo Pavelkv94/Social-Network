@@ -1,6 +1,6 @@
 import { ActionTypes } from "./store";
 
-let initialState = {};
+let initialState:any = {};
 
 export const sidebarReducer = (state:any=initialState, action:ActionTypes) => {
 

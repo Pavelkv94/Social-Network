@@ -2,6 +2,7 @@ import { combineReducers, createStore } from "redux";
 import { dialogsReducer } from "./dialogsReducer";
 import { profileReducer } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
+import { StoreType } from "./store";
 
 //Обьединяем наши редьюсеры
 let reducers = combineReducers({

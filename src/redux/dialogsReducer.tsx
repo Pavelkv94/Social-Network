@@ -1,6 +1,6 @@
 import { ActionTypes, DialogsStateType, SendMessageType, UpdateNewMessageType } from "./store";
 
-let initialState = {
+let initialState:DialogsStateType = {
     dialogsData: [
         { id: "1", name: "Anna" },
         { id: "2", name: "Dimych" },

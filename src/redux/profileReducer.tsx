@@ -1,6 +1,6 @@
 import { ActionTypes, AddPostActionType, PostDataType, ProfileStateType, StateType, UpdatePostActionType } from "./store";
 
-let initialState = {
+let initialState:ProfileStateType = {
     postData: [
         { id: "1", message: "My first post", src: "http://pm1.narvii.com/6889/74979d4d2744ec6e27995b6e866f091d04c0b40cr1-515-414v2_uhq.jpg", likeCount: "23" },
         { id: "2", message: "Hey friends!!!", src: "https://i.pinimg.com/236x/74/05/5f/74055f83bfbdc20fdc1f9d1fc116fd26.jpg", likeCount: "1" },
