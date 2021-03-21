@@ -12,4 +12,4 @@ let reducers = combineReducers({
     });
 
 //отдаем редсеры стору
-export let store = createStore(reducers, );
+export let store:StoreType = createStore(reducers, );
