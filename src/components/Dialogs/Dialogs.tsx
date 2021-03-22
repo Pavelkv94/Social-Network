@@ -8,7 +8,7 @@ import { Message } from './Messages/Message';
 
 
 export function Dialogs(props: DialogsType) {
-    const dialogsElements = props.dialogsData.map(d => <DialogItem name={d.name} id={d.id} />);
+    const dialogsElements = props.dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>);
     const messageElements = props.messagesData.map(m => <Message mes={m.message} />);
     const onSendMessageClick = () => {props.dispatch(sendMessageCreator())};
     const onNewMessageChange =(e:ChangeEvent<HTMLTextAreaElement>) => {props.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))}

@@ -1,4 +1,22 @@
-import { ActionTypes, AddPostActionType, PostDataType, ProfileStateType, StateType, UpdatePostActionType } from "./store";
+import { ActionTypes, AddPostActionType, UpdatePostActionType } from "./redux-store";
+
+type PostDataType = {
+    id: string
+    message: string
+    src: string
+    likeCount: string
+}
+type ProfileDataType = {
+    background: string
+    ava: string
+}
+type ProfileStateType = {
+    postData: Array<PostDataType>
+    newPostText: string
+    profileData: Array<ProfileDataType>
+}
+
+
 
 let initialState:ProfileStateType = {
     postData: [
@@ -18,7 +36,7 @@ let initialState:ProfileStateType = {
 
 
 
-export const profileReducer = (state: ProfileStateType = initialState, action: ActionTypes) => {
+export const profileReducer = (state: ProfileStateType = initialState, action: ActionTypes): ProfileStateType => {
     switch (action.type) {
         case "ADD-POST":
             let newPost: PostDataType = {

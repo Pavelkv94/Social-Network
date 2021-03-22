@@ -8,6 +8,7 @@ import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
 
 export function Profile(props: ProfileType) {
+
   return (
     <div className="container">
       <ProfileInfo background={props.profileData[0].background} ava={props.profileData[0].ava} />
