@@ -1,10 +1,16 @@
 import React from 'react';
-import { ProfileType } from '../../redux/store';
+import { PostDataType, ProfileDataType } from '../../redux/profileReducer';
+import { ActionTypes } from '../../redux/redux-store';
 import { MyPosts } from './MyPosts/MyPosts';
 import prof from './Profile.module.css'
 import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
-
+export type ProfileType = {
+  postData: Array<PostDataType>
+  newPostText: string
+  profileData: Array<ProfileDataType>
+  dispatch: (action: ActionTypes) => void
+}
 
 
 export function Profile(props: ProfileType) {

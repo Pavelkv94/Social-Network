@@ -1,10 +1,16 @@
 import React, { ChangeEvent } from 'react';
-import { DialogsType } from '../../redux/store';
-import { sendMessageCreator,  updateNewMessageBodyCreator } from '../../redux/dialogsReducer';
+import { sendMessageCreator,  updateNewMessageBodyCreator, UserMessageType, UserType } from '../../redux/dialogsReducer';
+import { ActionTypes } from '../../redux/redux-store';
 import { DialogItem } from './DialogItems/DialogItem';
 import d from "./Dialogs.module.css"
 import { Message } from './Messages/Message';
 
+export type DialogsType = {
+    dialogsData: Array<UserType>
+    messagesData: Array<UserMessageType>
+    newMessageBody: string
+    dispatch: (action: ActionTypes) => void
+}
 
 
 export function Dialogs(props: DialogsType) {

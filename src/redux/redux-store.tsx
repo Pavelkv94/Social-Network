@@ -3,23 +3,6 @@ import { dialogsReducer, DialogsStateType, UserMessageType, UserType } from "./d
 import { profileReducer, PostDataType, ProfileDataType, ProfileStateType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
 
-export type DialogsType = {
-    dialogsData: Array<UserType>
-    messagesData: Array<UserMessageType>
-    newMessageBody: string
-    dispatch: (action: ActionTypes) => void
-}
-export type ProfileType = {
-    postData: Array<PostDataType>
-    newPostText: string
-    profileData: Array<ProfileDataType>
-    dispatch: (action: ActionTypes) => void
-}
-export type StateType = {
-    dialogs: DialogsStateType
-    profile: ProfileStateType
-    sidebar: any
-}
 
 export type ActionTypes = AddPostActionType | UpdatePostActionType | UpdateNewMessageType | SendMessageType
 export type AddPostActionType = {
@@ -46,8 +29,13 @@ let reducers = combineReducers({
     dialogsPage: dialogsReducer,
     sidebarPage: sidebarReducer
 });
+export type  ReduxStateType = {
+    profilePage: ProfileStateType
+    dialogsPage: DialogsStateType
+    sidebarPage: any
+    }
 type ReduxStoreType = {
-    getState: () => StateType
+    getState: () => ReduxStateType
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionTypes) => void
 }
