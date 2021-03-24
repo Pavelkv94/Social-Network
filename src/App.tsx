@@ -7,18 +7,16 @@ import { Profile } from './components/Profile/Profile';
 import { Music } from './components/Music/Music';
 import { News } from './components/News/News';
 import { Setting } from './components/Setting/Setting';
-import { ActionTypes } from './redux/redux-store';
+import { ActionTypes, ReduxStateType, ReduxStoreType } from './redux/redux-store';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 
 type AppPropsType = {
-  store: any
-  state: any
+  store: ReduxStoreType
+  state: ReduxStateType
   dispatch:(action: ActionTypes) => void
 }
 
 function App(props: AppPropsType) {
-  
-  const appState = props.store.getState();
   
   return (
     <BrowserRouter>
@@ -30,10 +28,7 @@ function App(props: AppPropsType) {
            store={props.store}
           />} path="/dialogs" />
           <Route render={() => <Profile
-            postData={appState.profilePage.postData}
-            profileData={appState.profilePage.profileData}
-            dispatch={props.dispatch}
-            newPostText={appState.profilePage.newPostText}
+            store={props.store}
           />} path="/profile" />
           <Route render={() => <News />} path="/news" />
           <Route render={() => <Music />} path="/music" />

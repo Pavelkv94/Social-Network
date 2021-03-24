@@ -1,17 +1,14 @@
 import React from 'react';
-import { ActionTypes, PostDataType} from '../../../redux/store';
-import {  addPostActionCreator, updatePostTextActionCreator} from '../../../redux/profileReducer';
+import { PostDataType } from '../../../redux/store';
 import mypost from './MyPosts.module.css'
 import { Post } from './Post/Post';
-
 
 type MyPostType = {
     posts: Array<PostDataType>
     newPostText: string
-    dispatch: (action: ActionTypes) => void
+    addPost: (text: string) => void
+    updatePost: (body: string) => void
 }
-
-
 
 export function MyPosts(props: MyPostType) {
 
@@ -21,12 +18,12 @@ export function MyPosts(props: MyPostType) {
     const addPost = () => {
         let text = newPostElement.current?.value; //  newPostElement.current &&  newPostElement.current.value; (Если элемент существует то возьмем его значение)
         if (text) {
-            props.dispatch(addPostActionCreator(text))
+            props.addPost(text)
         };
-        props.dispatch(updatePostTextActionCreator(""))
+        props.updatePost("")
     }
     const onPostChange = (e: any) => {
-        props.dispatch(updatePostTextActionCreator(e.currentTarget.value))
+        props.updatePost(e.currentTarget.value)
     }
     // const onPostChange = () => {
     //     let text = newPostElement.current?.value;
