@@ -1,16 +1,16 @@
 import { ActionTypes, SendMessageType, UpdateNewMessageType } from "./redux-store";
 
 
-type UserType = {
+export type UserType = {
     id: string
     name: string
 }
 
-type UserMessageType = {
+export type UserMessageType = {
     id: string
     message: string
 }
-type DialogsStateType = {
+export type DialogsStateType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
     newMessageBody: string

@@ -1,30 +1,7 @@
 import { combineReducers, createStore } from "redux";
-import { dialogsReducer } from "./dialogsReducer";
-import { profileReducer } from "./profileReducer";
+import { dialogsReducer, DialogsStateType, UserMessageType, UserType } from "./dialogsReducer";
+import { profileReducer, PostDataType, ProfileDataType, ProfileStateType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
-
-
-export type UserType = {
-    id: string
-    name: string
-}
-
-export type UserMessageType = {
-    id: string
-    message: string
-}
-
-export type PostDataType = {
-    id: string
-    message: string
-    src: string
-    likeCount: string
-}
-
-export type ProfileDataType = {
-    background: string
-    ava: string
-}
 
 export type DialogsType = {
     dialogsData: Array<UserType>
@@ -32,37 +9,18 @@ export type DialogsType = {
     newMessageBody: string
     dispatch: (action: ActionTypes) => void
 }
-
-export type DialogsStateType = {
-    dialogsData: Array<UserType>
-    messagesData: Array<UserMessageType>
-    newMessageBody: string
-}
 export type ProfileType = {
     postData: Array<PostDataType>
     newPostText: string
     profileData: Array<ProfileDataType>
     dispatch: (action: ActionTypes) => void
 }
-export type ProfileStateType = {
-    postData: Array<PostDataType>
-    newPostText: string
-    profileData: Array<ProfileDataType>
-}
 export type StateType = {
     dialogs: DialogsStateType
     profile: ProfileStateType
     sidebar: any
 }
-export type StoreType = {
-    // _state: StateType
-    getState: () => StateType
-    // _callSubscriber: () => void
-    // addPost: (postMessage: string) => void
-    // updateNewPostText: (newText: string) => void
-    subscribe: (observer: () => void) => void
-    dispatch: (action: ActionTypes) => void
-}
+
 export type ActionTypes = AddPostActionType | UpdatePostActionType | UpdateNewMessageType | SendMessageType
 export type AddPostActionType = {
     type: "ADD-POST"

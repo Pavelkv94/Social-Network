@@ -1,16 +1,16 @@
 import { ActionTypes, AddPostActionType, UpdatePostActionType } from "./redux-store";
 
-type PostDataType = {
+export type PostDataType = {
     id: string
     message: string
     src: string
     likeCount: string
 }
-type ProfileDataType = {
+export type ProfileDataType = {
     background: string
     ava: string
 }
-type ProfileStateType = {
+export type ProfileStateType = {
     postData: Array<PostDataType>
     newPostText: string
     profileData: Array<ProfileDataType>
