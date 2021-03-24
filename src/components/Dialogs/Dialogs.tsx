@@ -9,15 +9,15 @@ export type DialogsType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
     newMessageBody: string
-    dispatch: (action: ActionTypes) => void
+    sendMessageCreator: ()=>void
+    updateNewMessageBodyCreator:(body:string)=>void
 }
-
 
 export function Dialogs(props: DialogsType) {
     const dialogsElements = props.dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>);
     const messageElements = props.messagesData.map(m => <Message mes={m.message} />);
-    const onSendMessageClick = () => {props.dispatch(sendMessageCreator())};
-    const onNewMessageChange =(e:ChangeEvent<HTMLTextAreaElement>) => {props.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))}
+    const onSendMessageClick = () => {props.sendMessageCreator();};
+    const onNewMessageChange =(e:ChangeEvent<HTMLTextAreaElement>) => {props.updateNewMessageBodyCreator(e.currentTarget.value)}
     return (
         <div className={d.dialogs}>
             <div className={d.dialogsItems}>

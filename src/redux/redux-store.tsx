@@ -34,7 +34,7 @@ export type  ReduxStateType = {
     dialogsPage: DialogsStateType
     sidebarPage: any
     }
-type ReduxStoreType = {
+export type ReduxStoreType = {
     getState: () => ReduxStateType
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionTypes) => void

@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store, StateType } from './redux/redux-store';
+import { ReduxStateType, store} from './redux/redux-store';
 import './index.css';
 
 
 
-let rerenderEntireTree = (state: StateType) => {
+let rerenderEntireTree = (state: ReduxStateType) => {
 
   ReactDOM.render(
     <React.StrictMode>
