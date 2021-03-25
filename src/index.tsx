@@ -7,9 +7,6 @@ import { ReduxStateType, store} from './redux/redux-store';
 import './index.css';
 import { Provider } from 'react-redux';
 
-
-
-
 let rerenderEntireTree = (state: ReduxStateType) => {
 
   ReactDOM.render(

@@ -1,4 +1,4 @@
-import { combineReducers, createStore } from "redux";
+import { combineReducers, createStore, Store } from "redux";
 import { dialogsReducer, DialogsStateType } from "./dialogsReducer";
 import { profileReducer, ProfileStateType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
@@ -40,4 +40,4 @@ export type ReduxStoreType = {
     dispatch: DispatchType
 }
 //отдаем редьюсеры стору
-export let store: ReduxStoreType = createStore(reducers);
+export let store: Store = createStore(reducers);
