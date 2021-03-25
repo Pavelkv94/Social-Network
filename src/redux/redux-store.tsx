@@ -1,6 +1,6 @@
 import { combineReducers, createStore } from "redux";
-import { dialogsReducer, DialogsStateType, UserMessageType, UserType } from "./dialogsReducer";
-import { profileReducer, PostDataType, ProfileDataType, ProfileStateType } from "./profileReducer";
+import { dialogsReducer, DialogsStateType } from "./dialogsReducer";
+import { profileReducer, ProfileStateType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
 
 

@@ -1,27 +1,32 @@
-import React, { ChangeEvent } from 'react';
-import { sendMessageCreator,  updateNewMessageBodyCreator, UserMessageType, UserType } from '../../redux/dialogsReducer';
+import React from 'react';
+import { sendMessageCreator, updateNewMessageBodyCreator, UserMessageType, UserType } from '../../redux/dialogsReducer';
 import { ReduxStoreType } from '../../redux/redux-store';
-import { DialogItem } from './DialogItems/DialogItem';
 import { Dialogs } from './Dialogs';
-import d from "./Dialogs.module.css"
-import { Message } from './Messages/Message';
+import { StoreContext } from '../..//StoreContext';
 
 export type DialogsContainerType = {
-    store: ReduxStoreType
+    // store: ReduxStoreType
 }
 
 
 export function DialogsContainer(props: DialogsContainerType) {
-    let state= props.store.getState();
-        const onSendMessageClick = () => {props.store.dispatch(sendMessageCreator())};
-    const onNewMessageChange =(body:string) => {props.store.dispatch(updateNewMessageBodyCreator(body))}
+
     return (
-        <Dialogs
-        dialogsData={state.dialogsPage.dialogsData}
-    messagesData={state.dialogsPage.messagesData}
-    newMessageBody={state.dialogsPage.newMessageBody}
-    sendMessageCreator={onSendMessageClick}
-    updateNewMessageBodyCreator={onNewMessageChange}
-        />
+        <StoreContext.Consumer>
+            {//!фигурная скобка с новой строки
+            (store: ReduxStoreType) => {
+            let state = store.getState();
+            const onSendMessageClick = () => { store.dispatch(sendMessageCreator()) };
+            const onNewMessageChange = (body: string) => { store.dispatch(updateNewMessageBodyCreator(body)) }
+            return <Dialogs
+                dialogsData={state.dialogsPage.dialogsData}
+                messagesData={state.dialogsPage.messagesData}
+                newMessageBody={state.dialogsPage.newMessageBody}
+                sendMessageCreator={onSendMessageClick}
+                updateNewMessageBodyCreator={onNewMessageChange}
+            />
+
+        }
+        }</StoreContext.Consumer>
     )
 }

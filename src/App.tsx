@@ -7,17 +7,14 @@ import { Profile } from './components/Profile/Profile';
 import { Music } from './components/Music/Music';
 import { News } from './components/News/News';
 import { Setting } from './components/Setting/Setting';
-import { ActionTypes, ReduxStateType, ReduxStoreType } from './redux/redux-store';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 
 type AppPropsType = {
-  store: ReduxStoreType
-  state: ReduxStateType
-  dispatch:(action: ActionTypes) => void
+  // store: ReduxStoreType
 }
 
 function App(props: AppPropsType) {
-  
+
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -25,10 +22,8 @@ function App(props: AppPropsType) {
         <Navbar />
         <div className="app-wrapper-content">
           <Route render={() => <DialogsContainer
-           store={props.store}
           />} path="/dialogs" />
           <Route render={() => <Profile
-            store={props.store}
           />} path="/profile" />
           <Route render={() => <News />} path="/news" />
           <Route render={() => <Music />} path="/music" />
