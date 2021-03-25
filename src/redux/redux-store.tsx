@@ -22,7 +22,7 @@ export type SendMessageType = {
     type: "SEND-MESSAGE"
 
 }
-
+export type DispatchType = (action: ActionTypes) => void
 //Обьединяем наши редьюсеры
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -37,7 +37,7 @@ export type  ReduxStateType = {
 export type ReduxStoreType = {
     getState: () => ReduxStateType
     subscribe: (observer: () => void) => void
-    dispatch: (action: ActionTypes) => void
+    dispatch: DispatchType
 }
 //отдаем редьюсеры стору
 export let store: ReduxStoreType = createStore(reducers);

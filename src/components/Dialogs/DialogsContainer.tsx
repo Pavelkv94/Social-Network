@@ -1,12 +1,9 @@
 import React from 'react';
 import { sendMessageCreator, updateNewMessageBodyCreator, UserMessageType, UserType } from '../../redux/dialogsReducer';
-import { ActionTypes, ReduxStateType } from '../../redux/redux-store';
+import { ActionTypes, DispatchType, ReduxStateType } from '../../redux/redux-store';
 import { Dialogs } from './Dialogs';
 import { connect } from 'react-redux';
 
-export type DialogsContainerType = ReturnType<typeof connect>
-
-type DispatchType = (action: ActionTypes) => void
 type MapStateToPropsType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
