@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { addPostActionCreator, updatePostTextActionCreator } from '../../../redux/profileReducer';
 import { ReduxStoreType, store } from '../../../redux/redux-store';
 import { StoreContext } from '../../../StoreContext';
