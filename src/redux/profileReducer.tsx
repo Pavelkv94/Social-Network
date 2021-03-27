@@ -16,8 +16,6 @@ export type ProfileStateType = {
     profileData: Array<ProfileDataType>
 }
 
-
-
 let initialState:ProfileStateType = {
     postData: [
         { id: "1", message: "My first post", src: "http://pm1.narvii.com/6889/74979d4d2744ec6e27995b6e866f091d04c0b40cr1-515-414v2_uhq.jpg", likeCount: "23" },
@@ -38,18 +36,24 @@ let initialState:ProfileStateType = {
 
 export const profileReducer = (state: ProfileStateType = initialState, action: ActionTypes): ProfileStateType => {
     switch (action.type) {
-        case "ADD-POST":
+        case "ADD-POST": {
             let newPost: PostDataType = {
                 id: "5",
                 message: action.postMessage,
                 src: "https://cdn140.picsart.com/330959057057201.jpg",
                 likeCount: "0"
             };
-            state.postData.push(newPost);
-            return state;
-        case "UPDATE-POST-TEXT":
-            state.newPostText = action.newText;
-            return state;
+            let stateCopy = {...state}
+            stateCopy.postData=[...state.postData]
+            stateCopy.postData.push(newPost);
+            stateCopy.newPostText="";
+            return stateCopy;
+        }
+        case "UPDATE-POST-TEXT":{
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
+        }
         default: return state;
     }
 }
