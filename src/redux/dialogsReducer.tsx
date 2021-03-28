@@ -35,22 +35,22 @@ let initialState: DialogsStateType = {
 }
 
 export const dialogsReducer = (state: DialogsStateType = initialState, action: ActionTypes): DialogsStateType => {
-    let stateCopy = { ...state };
+
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
-            stateCopy = {
+            return {
                 ...state,
                 newMessageBody: action.body
             };
-            return stateCopy;
+
         case "SEND-MESSAGE":
-            let body = stateCopy.newMessageBody;
-            stateCopy = {
+            let body = state.newMessageBody;
+            return {
                 ...state,
                 newMessageBody: "",
                 messagesData: [...state.messagesData, { id: "7", message: body }] //используем спрэд-оператор вместо push
             }
-            return stateCopy;
+
         default: return state;
     }
 }
