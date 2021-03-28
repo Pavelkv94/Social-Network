@@ -1,6 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { sendMessageCreator,  updateNewMessageBodyCreator, UserMessageType, UserType } from '../../redux/dialogsReducer';
-import { ActionTypes } from '../../redux/redux-store';
+import { UserMessageType, UserType } from '../../redux/dialogsReducer';
 import { DialogItem } from './DialogItems/DialogItem';
 import d from "./Dialogs.module.css"
 import { Message } from './Messages/Message';
@@ -9,15 +8,15 @@ export type DialogsType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
     newMessageBody: string
-    sendMessageCreator: ()=>void
-    updateNewMessageBodyCreator:(body:string)=>void
+    sendMessageCreator: () => void
+    updateNewMessageBodyCreator: (body: string) => void
 }
 
 export function Dialogs(props: DialogsType) {
-    const dialogsElements = props.dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>);
-    const messageElements = props.messagesData.map(m => <Message mes={m.message} />);
-    const onSendMessageClick = () => {props.sendMessageCreator();};
-    const onNewMessageChange =(e:ChangeEvent<HTMLTextAreaElement>) => {props.updateNewMessageBodyCreator(e.currentTarget.value)}
+    const dialogsElements = props.dialogsData.map(d => <DialogItem name={d.name} id={d.id} key={d.id} />);
+    const messageElements = props.messagesData.map(m => <Message mes={m.message} key={m.id} />);
+    const onSendMessageClick = () => { props.sendMessageCreator(); };
+    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => { props.updateNewMessageBodyCreator(e.currentTarget.value) }
     return (
         <div className={d.dialogs}>
             <div className={d.dialogsItems}>

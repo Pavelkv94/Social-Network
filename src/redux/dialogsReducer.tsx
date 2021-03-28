@@ -18,7 +18,7 @@ export type DialogsStateType = {
 
 
 
-let initialState:DialogsStateType = {
+let initialState: DialogsStateType = {
     dialogsData: [
         { id: "1", name: "Anna" },
         { id: "2", name: "Dimych" },
@@ -40,16 +40,22 @@ let initialState:DialogsStateType = {
 
 }
 
-export const dialogsReducer = (state: DialogsStateType = initialState, action:ActionTypes):DialogsStateType => {
-    switch(action.type) {
+export const dialogsReducer = (state: DialogsStateType = initialState, action: ActionTypes): DialogsStateType => {
+    let stateCopy = { ...state };
+    switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
-            state.newMessageBody = action.body;
-            return state;
-        case "SEND-MESSAGE": 
-        let body = state.newMessageBody;
-        state.newMessageBody = "";
-        state.messagesData.push({ id: "7", message: body },)
-        return state;
+
+            stateCopy.newMessageBody = action.body;
+            return stateCopy;
+
+        case "SEND-MESSAGE":
+
+            stateCopy.messagesData = [...state.messagesData]
+            let body = stateCopy.newMessageBody;
+            stateCopy.newMessageBody = "";
+            stateCopy.messagesData.push({ id: "7", message: body },)
+            return stateCopy;
+
         default: return state;
     }
 }
