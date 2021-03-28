@@ -8,6 +8,7 @@ import { Music } from './components/Music/Music';
 import { News } from './components/News/News';
 import { Setting } from './components/Setting/Setting';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
+import { Users } from './components/Users/Users';
 
 type AppPropsType = {
   // store: ReduxStoreType
@@ -27,6 +28,8 @@ function App(props: AppPropsType) {
           />} path="/profile" />
           <Route render={() => <News />} path="/news" />
           <Route render={() => <Music />} path="/music" />
+          <Route render={() => <Users
+          />} path="/users" />
           <Route render={() => <Setting />} path="/setting" />
         </div>
       </div>

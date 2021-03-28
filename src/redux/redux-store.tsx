@@ -1,27 +1,14 @@
 import { combineReducers, createStore, Store } from "redux";
-import { dialogsReducer, DialogsStateType } from "./dialogsReducer";
-import { profileReducer, ProfileStateType } from "./profileReducer";
+import { dialogsReducer, DialogsStateType, SendMessageType, UpdateNewMessageType } from "./dialogsReducer";
+import { AddPostActionType, profileReducer, ProfileStateType, UpdatePostActionType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
+import { FollowType, UnFollowType } from "./usersReducer";
 
 
-export type ActionTypes = AddPostActionType | UpdatePostActionType | UpdateNewMessageType | SendMessageType
-export type AddPostActionType = {
-    type: "ADD-POST"
-    postMessage: string
-}
-// export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type UpdatePostActionType = {
-    type: "UPDATE-POST-TEXT"
-    newText: string
-}
-export type UpdateNewMessageType = {
-    type: "UPDATE-NEW-MESSAGE-BODY"
-    body: string
-}
-export type SendMessageType = {
-    type: "SEND-MESSAGE"
+export type ActionTypes = AddPostActionType | UpdatePostActionType | UpdateNewMessageType | SendMessageType | FollowType | UnFollowType
 
-}
+
+
 export type DispatchType = (action: ActionTypes) => void
 //Обьединяем наши редьюсеры
 let reducers = combineReducers({

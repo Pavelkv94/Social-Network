@@ -1,4 +1,4 @@
-import { ActionTypes, SendMessageType, UpdateNewMessageType } from "./redux-store";
+import { ActionTypes } from "./redux-store";
 
 export type UserType = {
     id: string
@@ -12,6 +12,13 @@ export type DialogsStateType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
     newMessageBody: string
+}
+export type UpdateNewMessageType = {
+    type: "UPDATE-NEW-MESSAGE-BODY"
+    body: string
+}
+export type SendMessageType = {
+    type: "SEND-MESSAGE"
 }
 
 let initialState: DialogsStateType = {

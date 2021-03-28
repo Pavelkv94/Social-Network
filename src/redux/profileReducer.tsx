@@ -1,4 +1,4 @@
-import { ActionTypes, AddPostActionType, UpdatePostActionType } from "./redux-store";
+import { ActionTypes } from "./redux-store";
 
 export type PostDataType = {
     id: string
@@ -14,6 +14,15 @@ export type ProfileStateType = {
     postData: Array<PostDataType>
     newPostText: string
     profileData: Array<ProfileDataType>
+}
+export type AddPostActionType = {
+    type: "ADD-POST"
+    postMessage: string
+}
+// export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type UpdatePostActionType = {
+    type: "UPDATE-POST-TEXT"
+    newText: string
 }
 
 let initialState: ProfileStateType = {
