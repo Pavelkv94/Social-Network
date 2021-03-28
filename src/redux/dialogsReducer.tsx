@@ -1,11 +1,9 @@
 import { ActionTypes, SendMessageType, UpdateNewMessageType } from "./redux-store";
 
-
 export type UserType = {
     id: string
     name: string
 }
-
 export type UserMessageType = {
     id: string
     message: string
@@ -15,8 +13,6 @@ export type DialogsStateType = {
     messagesData: Array<UserMessageType>
     newMessageBody: string
 }
-
-
 
 let initialState: DialogsStateType = {
     dialogsData: [
@@ -36,26 +32,25 @@ let initialState: DialogsStateType = {
         { id: "6", message: "Im sexy" },
     ],
     newMessageBody: "",
-
-
 }
 
 export const dialogsReducer = (state: DialogsStateType = initialState, action: ActionTypes): DialogsStateType => {
     let stateCopy = { ...state };
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
-
-            stateCopy.newMessageBody = action.body;
+            stateCopy = {
+                ...state,
+                newMessageBody: action.body
+            };
             return stateCopy;
-
         case "SEND-MESSAGE":
-
-            stateCopy.messagesData = [...state.messagesData]
             let body = stateCopy.newMessageBody;
-            stateCopy.newMessageBody = "";
-            stateCopy.messagesData.push({ id: "7", message: body },)
+            stateCopy = {
+                ...state,
+                newMessageBody: "",
+                messagesData: [...state.messagesData, { id: "7", message: body }] //используем спрэд-оператор вместо push
+            }
             return stateCopy;
-
         default: return state;
     }
 }

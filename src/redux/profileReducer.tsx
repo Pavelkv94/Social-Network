@@ -32,8 +32,6 @@ let initialState: ProfileStateType = {
 
 }
 
-
-
 export const profileReducer = (state: ProfileStateType = initialState, action: ActionTypes): ProfileStateType => {
     let stateCopy = { ...state }
     switch (action.type) {
@@ -44,16 +42,18 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
                 src: "https://cdn140.picsart.com/330959057057201.jpg",
                 likeCount: "0"
             };
-
-            stateCopy.postData = [...state.postData]
-            stateCopy.postData.push(newPost);
-            stateCopy.newPostText = "";
+            stateCopy = {
+                ...state,
+                postData: [...state.postData, newPost], //используем спрэд-оператор вместо push
+                newPostText: ""
+            }
             return stateCopy;
-
         case "UPDATE-POST-TEXT":
-            stateCopy.newPostText = action.newText;
+            stateCopy = {
+                ...state,
+                newPostText: action.newText
+            }
             return stateCopy;
-
         default: return state;
     }
 }
