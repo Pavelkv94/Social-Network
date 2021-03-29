@@ -4,13 +4,14 @@ export type LocationType = {
   city: string;
   country: string;
 };
+
 export type UserOfSearchType = {
   id: number;
-  photo: string
+  photos: any
   followed: boolean;
-  fullName: string;
+  name: string;
   status: string;
-  location: LocationType;
+  //location: LocationType;
 };
 export type UsersOfSearchType = Array<UserOfSearchType>;
 export type UsersStateType = {

@@ -1,5 +1,8 @@
+import axios from 'axios';
 import React from 'react';
 import { UsersOfSearchType } from '../../redux/usersReducer';
+import profileLogo from '../../assets/images/profileLogo.png'
+import style from './Users.module.css'
 
 type UsersType = {
     users: UsersOfSearchType
@@ -10,57 +13,20 @@ type UsersType = {
 
 export function Users(props: UsersType) {
 
-    if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                photo: "https://download-cs.net/steam/avatars/3412.jpg",
-                followed: false,
-                fullName: "Dmitry",
-                status: "I am a boss",
-                location: { city: "Minsk", country: "Belarus" },
-            },
-            {
-                id: 2,
-                photo: "https://download-cs.net/steam/avatars/3412.jpg",
-                followed: true,
-                fullName: "Ann",
-                status: "I am a english man",
-                location: { city: "Gomel", country: "Belarus" },
-            },
-            {
-                id: 3,
-                photo: "https://download-cs.net/steam/avatars/3412.jpg",
-                followed: true,
-                fullName: "Kalvin",
-                status: "I am js developer",
-                location: { city: "Moskow", country: "Russia" },
-            },
-            {
-                id: 4,
-                photo: "https://download-cs.net/steam/avatars/3412.jpg",
-                followed: true,
-                fullName: "Henry",
-                status: "west cost customs",
-                location: { city: "Seatle", country: "United St." },
-            },
-            {
-                id: 5,
-                photo: "https://download-cs.net/steam/avatars/3412.jpg",
-                followed: false,
-                fullName: "Dominica",
-                status: "I am a lady",
-                location: { city: "Rio", country: "Brazil" },
-            }
-        ])
+    if (props.users.length === 0) {  // выполнятеся условние если userReducer пустой
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+
+            props.setUsers(response.data.items);
+        });
+
     }
-    return <div>
+    return <div className={style.container}>
         {
             props.users.map(u =>
-                <div key={u.id}>
+                <div key={u.id} className={style.userInfo}>
                     <span>
                         <div>
-                            <img src={u.photo} alt="ava" />
+                            <img src={u.photos.small != null ? u.photos.small : profileLogo} alt="avatar" className={style.userLogo} />
                         </div>
                         <div>
                             {u.followed
@@ -71,12 +37,12 @@ export function Users(props: UsersType) {
                     </span>
                     <span>
                         <span>
-                            <div>{u.fullName}</div>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
                         <span>
-                            <div>{u.location.city}</div>
-                            <div>{u.location.country}</div>
+                            <div>{'u.location.city'}</div>
+                            <div>{'u.location.country'}</div>
                         </span>
                     </span>
                 </div>)

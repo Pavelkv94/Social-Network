@@ -1,0 +1,11 @@
+.userLogo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.container {
+    padding: 10px;
+}
+.userInfo {
+    padding: 10px;
+}
