@@ -12,15 +12,15 @@ type UsersType = {
 }
 
 export function Users(props: UsersType) {
-
-    if (props.users.length === 0) {  // выполнятеся условние если userReducer пустой
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-
-            props.setUsers(response.data.items);
-        });
-
+    let getUsers = () => {
+        if (props.users.length === 0) {  // выполнятеся условние если userReducer пустой
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                props.setUsers(response.data.items);
+            });
+        }
     }
     return <div className={style.container}>
+        <button onClick={getUsers}>get</button>
         {
             props.users.map(u =>
                 <div key={u.id} className={style.userInfo}>
