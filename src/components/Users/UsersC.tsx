@@ -5,17 +5,18 @@ import profileLogo from '../../assets/images/profileLogo.png'
 import style from './Users.module.css'
 
 export class Users extends React.Component <UsersType>{
-
-    getUsers = () => {
+    constructor(props:any) {
+        super(props) ;
+        alert("NEW")
         if (this.props.users.length === 0) {  // выполнятеся условние если userReducer пустой
             axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
                 this.props.setUsers(response.data.items);
             });
         }
     }
-    render(){
+       render(){
         return <div className={style.container}>
-        <button onClick={this.getUsers}>get</button>
+        
         {
             this.props.users.map(u =>
                 <div key={u.id} className={style.userInfo}>
