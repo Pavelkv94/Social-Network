@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { DispatchType, ReduxStateType } from '../../redux/redux-store';
 import { followAC, setUserAC, unfollowAC, UsersOfSearchType } from '../../redux/usersReducer';
-import { Users } from './Users';
+import { Users } from './UsersC';
 
 type MapStateToPropsType = {
     users: UsersOfSearchType

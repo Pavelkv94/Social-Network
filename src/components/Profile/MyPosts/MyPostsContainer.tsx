@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { addPostActionCreator, PostDataType, updatePostTextActionCreator } from '../../../redux/profileReducer';
 import { DispatchType, ReduxStateType } from '../../../redux/redux-store';

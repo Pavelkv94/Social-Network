@@ -8,7 +8,6 @@ import { Music } from './components/Music/Music';
 import { News } from './components/News/News';
 import { Setting } from './components/Setting/Setting';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
-import { Users } from './components/Users/Users';
 import { UsersContainer } from './components/Users/UsersContainer';
 
 type AppPropsType = {
