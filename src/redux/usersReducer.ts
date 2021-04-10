@@ -40,9 +40,9 @@ export type CurrentPageType = {
 }
 let initialState: UsersStateType = {
   users: [],
-  pageSize: 5,
-  totalUsersCount: 20,
-  currentPage: 2
+  pageSize: 10,
+  totalUsersCount: 500,
+  currentPage: 1
 };
 
 export const usersReducer = (
@@ -75,7 +75,7 @@ export const usersReducer = (
       };
 
     case "SET-USERS": {
-      return { ...state, users: [...state.users, ...action.users] };
+      return { ...state, users: action.users };
     };
     case "SET-CURRENT-PAGE": {
       return { ...state, currentPage: action.currentPage };
