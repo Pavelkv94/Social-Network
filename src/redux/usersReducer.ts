@@ -44,8 +44,8 @@ export type TotalCountType = {
 }
 let initialState: UsersStateType = {
   users: [],
-  pageSize: 10,
-  totalUsersCount: 500,
+  pageSize: 100,
+  totalUsersCount: 5,
   currentPage: 1
 };
 
