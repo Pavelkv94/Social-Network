@@ -19,6 +19,7 @@ export type UsersStateType = {
   pageSize: number
   totalUsersCount: number
   currentPage: number
+  isFetching: boolean
 };
 
 export type FollowType = {
@@ -42,11 +43,16 @@ export type TotalCountType = {
   type: "SET-TOTAL-COUNT",
   totalUsersCount: number
 }
+export type ToggleIsFetchingType = {
+  type: "TOGGLE-IS-FETCHING",
+  isFetching: boolean
+};
 let initialState: UsersStateType = {
   users: [],
   pageSize: 25,
   totalUsersCount: 5,
-  currentPage: 1
+  currentPage: 1,
+  isFetching: false
 };
 
 export const usersReducer = (
@@ -87,12 +93,16 @@ export const usersReducer = (
     case "SET-TOTAL-COUNT": {
       return { ...state, totalUsersCount: action.totalUsersCount };
     }
+    case "TOGGLE-IS-FETCHING": {
+      return {...state, isFetching: action.isFetching}
+    }
     default:
       return state;
   }
 };
 
 //TODO----------------------создаем ACTION-CREATORS----------
+//! переписать под payload {}
 //follow friends
 export const followAC = (userId: number): FollowType => {
   return {
@@ -126,5 +136,12 @@ export const setTotalCountAC = (totalUsersCount: number): TotalCountType => {
   return {
     type: "SET-TOTAL-COUNT",
     totalUsersCount: totalUsersCount
+  };
+};
+//создаем прелоадер
+export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingType => {
+  return {
+    type: "TOGGLE-IS-FETCHING",
+    isFetching: isFetching
   };
 };
