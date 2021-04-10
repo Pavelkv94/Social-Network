@@ -36,7 +36,7 @@ export class Users extends React.Component<UsersType>{
         let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
         let pages = [];
         //for (let i = 1; i <= pagesCount; i++) {
-           for (let i=Math.max(this.props.currentPage - 5, 1); i <= Math.max(1, Math.min(this.props.currentPage + 5, pagesCount)); i++){
+        for (let i = Math.max(this.props.currentPage - 5, 1); i <= Math.max(1, Math.min(this.props.currentPage + 5, pagesCount)); i++) {
             pages.push(i)
         }
 
@@ -44,8 +44,8 @@ export class Users extends React.Component<UsersType>{
         return <div className={style.container}>
             <div>
                 {pages.map(p => {
-                    return <span
-                        className={this.props.currentPage === p ? style.selected : ""}
+                    return <span 
+                    className={this.props.currentPage === p ? style.selected : style.paginat}
                         onClick={() => this.onPageChanged(p)}
                     >{p}</span>
                 })}
