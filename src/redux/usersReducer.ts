@@ -38,6 +38,10 @@ export type CurrentPageType = {
   type: "SET-CURRENT-PAGE"
   currentPage: number
 }
+export type TotalCountType = {
+  type: "SET-TOTAL-COUNT",
+  totalUsersCount: number
+}
 let initialState: UsersStateType = {
   users: [],
   pageSize: 10,
@@ -80,6 +84,9 @@ export const usersReducer = (
     case "SET-CURRENT-PAGE": {
       return { ...state, currentPage: action.currentPage };
     }
+    case "SET-TOTAL-COUNT": {
+      return { ...state, totalUsersCount: action.totalUsersCount };
+    }
     default:
       return state;
   }
@@ -107,10 +114,17 @@ export const setUserAC = (users: UsersOfSearchType): SetUsersType => {
     users: users,
   };
 };
-//
+//установить текущую страницу
 export const setCurrentPageAC = (currentPage: number): CurrentPageType => {
   return {
     type: "SET-CURRENT-PAGE",
     currentPage: currentPage
+  };
+};
+//установить общее кол-во пользователей с сервера
+export const setTotalCountAC = (totalUsersCount: number): TotalCountType => {
+  return {
+    type: "SET-TOTAL-COUNT",
+    totalUsersCount: totalUsersCount
   };
 };
