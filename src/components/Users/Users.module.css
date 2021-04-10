@@ -9,3 +9,7 @@
 .userInfo {
     padding: 10px;
 }
+
+.selected {
+    font-weight: bold;
+}
