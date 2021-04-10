@@ -29,10 +29,15 @@ export type UnFollowType = {
   type: "UNFOLLOW";
   userId: number;
 };
+
 export type SetUsersType = {
   type: "SET-USERS";
   users: UsersOfSearchType;
 };
+export type CurrentPageType = {
+  type: "SET-CURRENT-PAGE"
+  currentPage: number
+}
 let initialState: UsersStateType = {
   users: [],
   pageSize: 5,
@@ -71,6 +76,9 @@ export const usersReducer = (
 
     case "SET-USERS": {
       return { ...state, users: [...state.users, ...action.users] };
+    };
+    case "SET-CURRENT-PAGE": {
+      return { ...state, currentPage: action.currentPage };
     }
     default:
       return state;
@@ -97,5 +105,12 @@ export const setUserAC = (users: UsersOfSearchType): SetUsersType => {
   return {
     type: "SET-USERS",
     users: users,
+  };
+};
+//
+export const setCurrentPageAC = (currentPage: number): CurrentPageType => {
+  return {
+    type: "SET-CURRENT-PAGE",
+    currentPage: currentPage
   };
 };

@@ -12,6 +12,7 @@ type UsersType = {
     follow: (userId: number) => void,
     unfollow: (usersId: number) => void
     setUsers: (users: UsersOfSearchType) => void
+    setCurrentPage: (currentPage: number) =>void
 }
 export class Users extends React.Component<UsersType>{
 
@@ -32,7 +33,10 @@ export class Users extends React.Component<UsersType>{
         }
             return <div className={style.container}>
                 <div>
-                    {pages.map(p=>{ return <span className = {this.props.currentPage === p ? style.selected: ""}>{p}</span>})}
+                    {pages.map(p=>{ return <span 
+                    className = {this.props.currentPage === p ? style.selected: ""}
+                    onClick={()=>this.props.setCurrentPage(p)}
+                    >{p}</span>})}
                     
                 </div>
                 {
