@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { DispatchType, ReduxStateType } from '../../redux/redux-store';
 import { followAC, setCurrentPageAC, setTotalCountAC, setUserAC, unfollowAC, UsersOfSearchType } from '../../redux/usersReducer';
-import { Users } from './Users';
+import { UsersAPiComponent } from './UsersAPiComponent';
 
 type MapStateToPropsType = {
     users: UsersOfSearchType
@@ -34,4 +34,4 @@ let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
 
     }
 };
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPiComponent);
