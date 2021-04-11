@@ -81,15 +81,25 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 };
-let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
-    return {
-        follow: (userId: number) => { dispatch(followAC(userId)) },
-        unfollow: (usersId: number) => { dispatch(unfollowAC(usersId)) },
-        setUsers: (users: UsersOfSearchType) => { dispatch(setUserAC(users)) },
-        setCurrentPage: (currentPage: number) => { dispatch(setCurrentPageAC(currentPage)) },
-        setTotalCount: (totalUsersCount: number) => { dispatch(setTotalCountAC(totalUsersCount)) },
-        toggleIsFetching: (isFetching: boolean) => { dispatch(toggleIsFetchingAC(isFetching)) }
+// let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
+//     return {
+//         follow: (userId: number) => { dispatch(followAC(userId)) },
+//         unfollow: (usersId: number) => { dispatch(unfollowAC(usersId)) },
+//         setUsers: (users: UsersOfSearchType) => { dispatch(setUserAC(users)) },
+//         setCurrentPage: (currentPage: number) => { dispatch(setCurrentPageAC(currentPage)) },
+//         setTotalCount: (totalUsersCount: number) => { dispatch(setTotalCountAC(totalUsersCount)) },
+//         toggleIsFetching: (isFetching: boolean) => { dispatch(toggleIsFetchingAC(isFetching)) }
 
-    }
-};
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPiComponent);
+//     }
+// };
+
+
+export const UsersContainer = connect(mapStateToProps, {
+    follow: followAC,
+    unfollow: unfollowAC,
+    setUsers: setUserAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalCount: setTotalCountAC,
+    toggleIsFetching: toggleIsFetchingAC
+
+})(UsersAPiComponent);
