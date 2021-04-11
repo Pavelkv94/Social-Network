@@ -104,42 +104,42 @@ export const usersReducer = (
 //TODO----------------------создаем ACTION-CREATORS----------
 //! переписать под payload {}
 //follow friends
-export const followAC = (userId: number): FollowType => {
+export const follow = (userId: number): FollowType => {
   return {
     type: "FOLLOW",
     userId: userId,
   };
 };
 //unfollow friends
-export const unfollowAC = (userId: number): UnFollowType => {
+export const unfollow = (userId: number): UnFollowType => {
   return {
     type: "UNFOLLOW",
     userId: userId,
   };
 };
 //засунуть пользователей которых мы найдем в стейт
-export const setUserAC = (users: UsersOfSearchType): SetUsersType => {
+export const setUsers = (users: UsersOfSearchType): SetUsersType => {
   return {
     type: "SET-USERS",
     users: users,
   };
 };
 //установить текущую страницу
-export const setCurrentPageAC = (currentPage: number): CurrentPageType => {
+export const setCurrentPage = (currentPage: number): CurrentPageType => {
   return {
     type: "SET-CURRENT-PAGE",
     currentPage: currentPage
   };
 };
 //установить общее кол-во пользователей с сервера
-export const setTotalCountAC = (totalUsersCount: number): TotalCountType => {
+export const setTotalCount = (totalUsersCount: number): TotalCountType => {
   return {
     type: "SET-TOTAL-COUNT",
     totalUsersCount: totalUsersCount
   };
 };
 //создаем прелоадер
-export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingType => {
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingType => {
   return {
     type: "TOGGLE-IS-FETCHING",
     isFetching: isFetching

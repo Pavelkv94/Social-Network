@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { DispatchType, ReduxStateType } from '../../redux/redux-store';
-import { followAC, setCurrentPageAC, setTotalCountAC, setUserAC, toggleIsFetchingAC, unfollowAC, UsersOfSearchType } from '../../redux/usersReducer';
+import { follow, setCurrentPage, setTotalCount, setUsers, toggleIsFetching, unfollow, UsersOfSearchType } from '../../redux/usersReducer';
 import React from 'react';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
@@ -95,11 +95,11 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow: followAC,
-    unfollow: unfollowAC,
-    setUsers: setUserAC,
-    setCurrentPage: setCurrentPageAC,
-    setTotalCount: setTotalCountAC,
-    toggleIsFetching: toggleIsFetchingAC
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalCount,
+    toggleIsFetching
 
 })(UsersAPiComponent);
