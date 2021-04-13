@@ -1,16 +1,37 @@
 import { ActionTypes } from "./redux-store";
-
+type ContactsType={
+    "facebook": string | null
+    "website": string | null
+    "vk": string | null
+    "twitter": string | null
+    "instagram": string | null
+    "youtube": string | null
+    "github": string | null
+    "mainLink": string | null
+}
+type PhotosType = {
+    "small": string
+    "large": string
+}
+export type ProfileDataType = {
+    "aboutMe": string | null
+    "contacts": ContactsType
+    "lookingForAJob": boolean
+    "lookingForAJobDescription": string | null
+    "fullName": string
+    "userId": number
+    "photos": PhotosType
+} | null
 export type PostDataType = {
     id: string
     message: string
     src: string
     likeCount: string
 }
-export type ProfileDataType = any
 export type ProfileStateType = {
     postData: Array<PostDataType>
     newPostText: string
-    profileData: any     //!-----------------<<<<<<<<<<<<<<<
+    profileData: ProfileDataType    
 }
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -23,7 +44,7 @@ export type UpdatePostActionType = {
 }
 export type SetUserProfileType = {
     type: "SET-USER-PROFILE",
-    profile: any    //!-----------------<<<<<<<<<<<<<<<
+    profile: ProfileDataType
 }
 
 let initialState: ProfileStateType = {

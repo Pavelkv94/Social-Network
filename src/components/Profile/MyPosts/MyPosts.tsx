@@ -1,5 +1,5 @@
 import React from 'react';
-import { PostDataType } from '../../../redux/store';
+import { PostDataType } from '../../../redux/profileReducer';
 import mypost from './MyPosts.module.css'
 import { Post } from './Post/Post';
 

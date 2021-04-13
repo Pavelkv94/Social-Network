@@ -3,10 +3,12 @@ import { ProfileDataType } from '../../../redux/profileReducer';
 import { Preloader } from '../../common/Preloader/Preloader';
 import p from './ProfileInfo.module.css'
 
+type PropsType = {
+  profile: ProfileDataType
+}
 
 
-
-export function ProfileInfo(props: ProfileDataType) {
+export function ProfileInfo(props: PropsType) {
   if(!props.profile) {return <Preloader/>}
   console.log(props)
   return (
