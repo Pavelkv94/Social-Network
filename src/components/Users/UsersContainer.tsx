@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { DispatchType, ReduxStateType } from '../../redux/redux-store';
+import { ReduxStateType } from '../../redux/redux-store';
 import { follow, setCurrentPage, setTotalCount, setUsers, toggleIsFetching, unfollow, UsersOfSearchType } from '../../redux/usersReducer';
 import React from 'react';
 import { Users } from './Users';
@@ -13,14 +13,14 @@ type MapStateToPropsType = {
     currentPage: number
     isFetching: boolean
 }
-type MapDispatchToPropsType = {
-    follow: (userId: number) => void,
-    unfollow: (usersId: number) => void
-    setUsers: (users: UsersOfSearchType) => void
-    setCurrentPage: (currentPage: number) => void
-    setTotalCount: (totalUsersCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-}
+// type MapDispatchToPropsType = {
+//     follow: (userId: number) => void,
+//     unfollow: (usersId: number) => void
+//     setUsers: (users: UsersOfSearchType) => void
+//     setCurrentPage: (currentPage: number) => void
+//     setTotalCount: (totalUsersCount: number) => void
+//     toggleIsFetching: (isFetching: boolean) => void
+// }
 
 
 type UsersAPIType = {

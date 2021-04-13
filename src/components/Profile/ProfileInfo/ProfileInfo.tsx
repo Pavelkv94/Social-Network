@@ -1,12 +1,13 @@
 import React from 'react';
 import { ProfileDataType } from '../../../redux/profileReducer';
+import { Preloader } from '../../common/Preloader/Preloader';
 import p from './ProfileInfo.module.css'
 
 
 
 
 export function ProfileInfo(props: ProfileDataType) {
-  if(!props.profile) {return <h1>qqqqqqqqqqqqq</h1>}
+  if(!props.profile) {return <Preloader/>}
   console.log(props)
   return (
     <div className={p.content}>

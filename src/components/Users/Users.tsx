@@ -37,7 +37,7 @@ export function Users(props: UsersType) {
                     <span>
                         <div>
                             <NavLink to={`/profile/ + ${u.id}`}>
-                            <img src={u.photos.small != null ? u.photos.small : profileLogo} alt="avatar" className={style.userLogo} />
+                                <img src={u.photos.small != null ? u.photos.small : profileLogo} alt="avatar" className={style.userLogo} />
                             </NavLink>
                         </div>
                         <div>
