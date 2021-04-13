@@ -1,11 +1,22 @@
 import { combineReducers, createStore, Store } from "redux";
 import { dialogsReducer, DialogsStateType, SendMessageType, UpdateNewMessageType } from "./dialogsReducer";
-import { AddPostActionType, profileReducer, ProfileStateType, UpdatePostActionType } from "./profileReducer";
+import { AddPostActionType, profileReducer, ProfileStateType, SetUserProfileType, UpdatePostActionType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, TotalCountType, UnFollowType, usersReducer, UsersStateType } from "./usersReducer";
 
 
-export type ActionTypes = AddPostActionType | UpdatePostActionType | UpdateNewMessageType | SendMessageType | FollowType | UnFollowType | SetUsersType | CurrentPageType | TotalCountType | ToggleIsFetchingType
+export type ActionTypes =
+    AddPostActionType
+    | UpdatePostActionType
+    | UpdateNewMessageType
+    | SendMessageType
+    | FollowType
+    | UnFollowType
+    | SetUsersType
+    | CurrentPageType
+    | TotalCountType
+    | ToggleIsFetchingType
+    | SetUserProfileType
 
 
 
@@ -17,12 +28,12 @@ let reducers = combineReducers({
     sidebarPage: sidebarReducer,
     usersPage: usersReducer
 });
-export type  ReduxStateType = {
+export type ReduxStateType = {
     profilePage: ProfileStateType
     dialogsPage: DialogsStateType
     sidebarPage: any
-    usersPage:  UsersStateType
-    }
+    usersPage: UsersStateType
+}
 export type ReduxStoreType = {
     getState: () => ReduxStateType
     subscribe: (observer: () => void) => void

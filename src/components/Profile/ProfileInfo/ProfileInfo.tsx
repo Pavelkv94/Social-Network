@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileDataType } from '../../../redux/store';
+import { ProfileDataType } from '../../../redux/profileReducer';
 import p from './ProfileInfo.module.css'
 
 
@@ -8,8 +8,8 @@ import p from './ProfileInfo.module.css'
 export function ProfileInfo(props: ProfileDataType) {
   return (
     <div className={p.content}>
-      <img src={props.background} alt="" />
-      <div>{props.ava} </div>
+      <img src="https://demo.qodeinteractive.com/central/wp-content/uploads/2013/05/header.jpg" alt="" />
+      <div>AVA </div>
     </div>
   )
 }
