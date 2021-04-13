@@ -6,10 +6,7 @@ export type PostDataType = {
     src: string
     likeCount: string
 }
-export type ProfileDataType = {
-    background: string
-    ava: string
-}
+export type ProfileDataType = any
 export type ProfileStateType = {
     postData: Array<PostDataType>
     newPostText: string
