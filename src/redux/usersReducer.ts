@@ -20,7 +20,7 @@ export type UsersStateType = {
   totalUsersCount: number
   currentPage: number
   isFetching: boolean
-  followingInProgress: boolean
+  followingInProgress: Array<number | null>
 };
 
 export type FollowType = {
@@ -50,7 +50,8 @@ export type ToggleIsFetchingType = {
 };
 export type ToggleIsFollowingProgressType = {
   type: "TOGGLE-IS-FOLLOWING-PROGRESS",
-  followingInProgress: boolean
+  isFetching: boolean
+  userId: number
 };
 let initialState: UsersStateType = {
   users: [],
@@ -58,7 +59,7 @@ let initialState: UsersStateType = {
   totalUsersCount: 5,
   currentPage: 1,
   isFetching: false,
-  followingInProgress: false
+  followingInProgress: []
 };
 
 export const usersReducer = (
@@ -103,7 +104,12 @@ export const usersReducer = (
       return { ...state, isFetching: action.isFetching }
     }
     case "TOGGLE-IS-FOLLOWING-PROGRESS": {
-      return { ...state, followingInProgress: action.followingInProgress }
+      return {
+        ...state,
+        followingInProgress: action.isFetching
+          ? [...state.followingInProgress, action.userId]
+          : state.followingInProgress.filter(id => id != action.userId)
+      }
     }
     default:
       return state;
@@ -155,9 +161,10 @@ export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingType => {
   };
 };
 //отключаем кнопку фоловинга при нажатии
-export const toggleIsFollowingProgress = (followingInProgress: boolean): ToggleIsFollowingProgressType => {
+export const toggleIsFollowingProgress = (isFetching: boolean, userId: number): ToggleIsFollowingProgressType => {
   return {
     type: "TOGGLE-IS-FOLLOWING-PROGRESS",
-    followingInProgress
+    isFetching,
+    userId
   };
 };

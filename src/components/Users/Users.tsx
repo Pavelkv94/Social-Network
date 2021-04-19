@@ -10,11 +10,11 @@ type UsersType = {
     pageSize: number
     currentPage: number
     users: UsersOfSearchType
-    followingProgress:boolean
+    followingProgress:Array<number | null>
     follow: (userId: number) => void,
     unfollow: (usersId: number) => void
     onPageChanged: (pageNumber: number) => void
-    toggleIsFollowingProgress: (isFollowing: boolean) => void
+    toggleIsFollowingProgress: (isFollowing: boolean, userId:number) => void
 
 }
 export function Users(props: UsersType) {
@@ -47,9 +47,9 @@ export function Users(props: UsersType) {
                         <div>
                             {u.followed
                                 ? <button
-                                disabled={props.followingProgress}
+                                disabled={props.followingProgress.some(id=>id===u.id)}
                                     onClick={() => {
-                                        props.toggleIsFollowingProgress(true);
+                                        props.toggleIsFollowingProgress(true, u.id);
                                         //Delete принимает 2 параметра, сначала url адресс запроса потом параметры запроса
                                         //headers: {"API-KEY": "92cf59a3-3b12-407b-a573-626b86aed9d2"} - ключ запроса (берется с сервера)
                                         axios.delete(
@@ -60,14 +60,14 @@ export function Users(props: UsersType) {
                                                 if (response.data.resultCode == 0) {
                                                     props.unfollow(u.id);
                                                 }
-                                                props.toggleIsFollowingProgress(false);
+                                                props.toggleIsFollowingProgress(false, u.id);
                                             });
 
                                     }}>UNFOLLOW</button>
                                 : <button
-                                    disabled={props.followingProgress}
+                                disabled={props.followingProgress.some(id=>id===u.id)}
                                     onClick={() => {
-                                        props.toggleIsFollowingProgress(true);
+                                        props.toggleIsFollowingProgress(true, u.id);
                                         //post принимает 3 параметра, сначала url адресс запроса , потом обьект, потом параметры запроса
                                         //headers: {"API-KEY": "92cf59a3-3b12-407b-a573-626b86aed9d2"} - ключ запроса (берется с сервера)
                                         axios.post(
@@ -78,7 +78,7 @@ export function Users(props: UsersType) {
                                             if (response.data.resultCode == 0) {
                                                 props.follow(u.id);
                                             }
-                                            props.toggleIsFollowingProgress(false);
+                                            props.toggleIsFollowingProgress(false, u.id);
                                         });
 
 
