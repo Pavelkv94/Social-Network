@@ -5,6 +5,7 @@ import { follow, setCurrentPage, setTotalCount, setUsers, toggleIsFetching, unfo
 import React from 'react';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
+import { getUsers } from '../../api/api';
 
 type MapStateToPropsType = {
     users: UsersOfSearchType
@@ -40,7 +41,8 @@ export class UsersAPiComponent extends React.Component<UsersAPIType>{
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials:true}).then(response => {
+
+        getUsers(this.props.currentPage, this.props.pageSize).then(response => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items);
             this.props.setTotalCount(response.data.totalCount);
