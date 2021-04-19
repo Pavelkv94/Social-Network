@@ -5,7 +5,8 @@ import { follow, setCurrentPage, setTotalCount, setUsers, toggleIsFetching, unfo
 import React from 'react';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
-import { getUsers } from '../../api/api';
+import { usersAPI } from '../../api/api';
+
 
 type MapStateToPropsType = {
     users: UsersOfSearchType
@@ -42,7 +43,7 @@ export class UsersAPiComponent extends React.Component<UsersAPIType>{
     componentDidMount() {
         this.props.toggleIsFetching(true)
 
-        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(data.items);
             this.props.setTotalCount(data.totalCount);
@@ -52,7 +53,7 @@ export class UsersAPiComponent extends React.Component<UsersAPIType>{
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true)
-        getUsers(pageNumber, this.props.pageSize).then(data => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false)
             this.props.setUsers(data.items);
         });
