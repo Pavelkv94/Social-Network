@@ -3,10 +3,12 @@
   background-color: rgba(0, 0, 0, 0.815);
   display: flex;
 }
+
 .header img {
   width: 60px;
   border-radius: 60% 0 60% 0;
 }
+
 .title {
   color: rgb(255, 255, 255);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -15,6 +17,13 @@
   align-items: center;
   margin-left: 10px;
 }
+
 .title:hover {
   cursor: default;
+}
+
+.loginBlock {
+  background-color: bisque;
+  align-self: center;
+  justify-self: flex-end
 }

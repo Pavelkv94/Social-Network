@@ -3,7 +3,7 @@ import { dialogsReducer, DialogsStateType, SendMessageType, UpdateNewMessageType
 import { AddPostActionType, profileReducer, ProfileStateType, SetUserProfileType, UpdatePostActionType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, TotalCountType, UnFollowType, usersReducer, UsersStateType } from "./usersReducer";
-import { authReducer, setUserDataType } from "./authReducer";
+import { authReducer, setAuthUserDataType } from "./authReducer";
 
 
 export type ActionTypes =
@@ -18,7 +18,7 @@ export type ActionTypes =
     | TotalCountType
     | ToggleIsFetchingType
     | SetUserProfileType
-    | setUserDataType
+    | setAuthUserDataType
 
 
 
@@ -44,3 +44,6 @@ export type ReduxStoreType = {
 }
 //отдаем редьюсеры стору
 export let store: Store = createStore(reducers);
+
+//@ts-ignore
+window.store = store
