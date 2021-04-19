@@ -2,7 +2,7 @@ import { combineReducers, createStore, Store } from "redux";
 import { dialogsReducer, DialogsStateType, SendMessageType, UpdateNewMessageType } from "./dialogsReducer";
 import { AddPostActionType, profileReducer, ProfileStateType, SetUserProfileType, UpdatePostActionType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
-import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, TotalCountType, UnFollowType, usersReducer, UsersStateType } from "./usersReducer";
+import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, ToggleIsFollowingProgressType, TotalCountType, UnFollowType, usersReducer, UsersStateType } from "./usersReducer";
 import { authReducer, setAuthUserDataType } from "./authReducer";
 
 
@@ -19,7 +19,7 @@ export type ActionTypes =
     | ToggleIsFetchingType
     | SetUserProfileType
     | setAuthUserDataType
-
+    | ToggleIsFollowingProgressType
 
 
 export type DispatchType = (action: ActionTypes) => void
