@@ -3,6 +3,7 @@ import { dialogsReducer, DialogsStateType, SendMessageType, UpdateNewMessageType
 import { AddPostActionType, profileReducer, ProfileStateType, SetUserProfileType, UpdatePostActionType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, TotalCountType, UnFollowType, usersReducer, UsersStateType } from "./usersReducer";
+import { authReducer, setUserDataType } from "./authReducer";
 
 
 export type ActionTypes =
@@ -17,6 +18,7 @@ export type ActionTypes =
     | TotalCountType
     | ToggleIsFetchingType
     | SetUserProfileType
+    | setUserDataType
 
 
 
@@ -26,7 +28,8 @@ let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebarPage: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 });
 export type ReduxStateType = {
     profilePage: ProfileStateType
