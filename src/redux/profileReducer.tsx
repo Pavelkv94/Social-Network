@@ -1,5 +1,6 @@
-import { ActionTypes } from "./redux-store";
-type ContactsType={
+import { usersAPI } from "../api/api";
+import { ActionTypes, DispatchType } from "./redux-store";
+type ContactsType = {
     "facebook": string | null
     "website": string | null
     "vk": string | null
@@ -31,7 +32,7 @@ export type PostDataType = {
 export type ProfileStateType = {
     postData: Array<PostDataType>
     newPostText: string
-    profileData: ProfileDataType    
+    profileData: ProfileDataType
 }
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -102,9 +103,21 @@ export const updatePostTextActionCreator = (newText: string): UpdatePostActionTy
         newText: newText
     }
 }
-export const setUserProfile = (profile: any): SetUserProfileType => {
+const setUserProfile = (profile: any): SetUserProfileType => {
     return {
         type: "SET-USER-PROFILE",
         profile,
+    }
+}
+
+
+//TODO----------------------создаем Thunk-CREATORS----------
+
+export const getUserProfileThunkCreator = (userId: string) => {
+    (dispatch: DispatchType) => {
+        usersAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data));
+            });
     }
 }

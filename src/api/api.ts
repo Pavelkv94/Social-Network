@@ -22,10 +22,7 @@ export const usersAPI = {
     },
     //! ошибка с картинкой
     getProfile(userId: string = "1") {
-        return instance.get(
-            //`profile/ + ${userId}`
-            `profile/2`
-            );
+        return instance.get(`profile/ + ${userId}`);
     },
 }
 
