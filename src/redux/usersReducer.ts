@@ -1,4 +1,5 @@
-import { ActionTypes } from "./redux-store";
+import { usersAPI } from "../api/api";
+import { ActionTypes, DispatchType } from "./redux-store";
 
 export type LocationType = {
   city: string;
@@ -168,3 +169,26 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number): 
     userId
   };
 };
+
+//todo Создаем ThunkCreator
+
+//создаем санку
+// export const getUsersThunk = (dispatch:DispatchType) => {
+//   dispatch(toggleIsFetching(true))
+
+//   usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+//        dispatch(toggleIsFetching(false));
+//        dispatch(setUsers(data.items));
+//        dispatch(setTotalCount(data.totalCount));
+//   });
+// }
+export const getUsersThunkCreator = (currentPage:number, pageSize:number)=>{
+  return (dispatch:DispatchType) => {
+  dispatch(toggleIsFetching(true))
+
+  usersAPI.getUsers(currentPage, pageSize).then(data => {
+       dispatch(toggleIsFetching(false));
+       dispatch(setUsers(data.items));
+       dispatch(setTotalCount(data.totalCount));
+  });
+}}
