@@ -120,14 +120,14 @@ export const usersReducer = (
 //TODO----------------------создаем ACTION-CREATORS----------
 //! переписать под payload {}
 //follow friends
-export const follow = (userId: number): FollowType => {
+export const followSuccess = (userId: number): FollowType => {
   return {
     type: "FOLLOW",
     userId: userId,
   };
 };
 //unfollow friends
-export const unfollow = (userId: number): UnFollowType => {
+export const unfollowSuccess = (userId: number): UnFollowType => {
   return {
     type: "UNFOLLOW",
     userId: userId,
@@ -192,4 +192,32 @@ export const getUsersThunkCreator = (currentPage:number, pageSize:number)=>{
        dispatch(setUsers(data.items));
        dispatch(setTotalCount(data.totalCount));
   });
+}}
+
+export const followThunkCreator = (userId:any)=>{
+  
+  return (dispatch:DispatchType) => {
+    dispatch(toggleIsFollowingProgress(true, userId ));
+
+    usersAPI.getFollow(userId)
+        .then(response => {
+            if (response.data.resultCode == 0) {
+              dispatch(followSuccess(userId));
+            }
+            dispatch(toggleIsFollowingProgress(false, userId));
+        });
+}}
+
+export const unFollowThunkCreator = (userId:any)=>{
+  
+  return (dispatch:DispatchType) => {
+    dispatch(toggleIsFollowingProgress(true, userId ));
+
+    usersAPI.getUnFollow(userId)
+        .then(response => {
+            if (response.data.resultCode == 0) {
+              dispatch(unfollowSuccess(userId));
+            }
+            dispatch(toggleIsFollowingProgress(false, userId));
+        });
 }}

@@ -4,17 +4,20 @@ import profileLogo from '../../assets/images/profileLogo.png'
 import style from './Users.module.css'
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { usersAPI } from '../../api/api';
 
 type UsersType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
     users: UsersOfSearchType
-    followingProgress:Array<number | null>
-    follow: (userId: number) => void,
-    unfollow: (usersId: number) => void
+    followingProgress: Array<number | null>
+    //followSuccess: (userId: number) => void,
+    //unfollowSuccess: (usersId: number) => void
     onPageChanged: (pageNumber: number) => void
-    toggleIsFollowingProgress: (isFollowing: boolean, userId:number) => void
+    // toggleIsFollowingProgress: (isFollowing: boolean, userId: number) => void
+    followThunkCreator: (userId: any) => void
+    unFollowThunkCreator: (userId: any) => void
 
 }
 export function Users(props: UsersType) {
@@ -47,39 +50,15 @@ export function Users(props: UsersType) {
                         <div>
                             {u.followed
                                 ? <button
-                                disabled={props.followingProgress.some(id=>id===u.id)}
+                                    disabled={props.followingProgress.some(id => id === u.id)}
                                     onClick={() => {
-                                        props.toggleIsFollowingProgress(true, u.id);
-                                        //Delete принимает 2 параметра, сначала url адресс запроса потом параметры запроса
-                                        //headers: {"API-KEY": "92cf59a3-3b12-407b-a573-626b86aed9d2"} - ключ запроса (берется с сервера)
-                                        axios.delete(
-                                            `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,  //параметр 1
-                                            {
-                                                withCredentials: true, headers: { "API-KEY": "92cf59a3-3b12-407b-a573-626b86aed9d2" } //параметр 2
-                                            }).then(response => {
-                                                if (response.data.resultCode == 0) {
-                                                    props.unfollow(u.id);
-                                                }
-                                                props.toggleIsFollowingProgress(false, u.id);
-                                            });
+                                        props.followThunkCreator(u.id)
 
                                     }}>UNFOLLOW</button>
                                 : <button
-                                disabled={props.followingProgress.some(id=>id===u.id)}
+                                    disabled={props.followingProgress.some(id => id === u.id)}
                                     onClick={() => {
-                                        props.toggleIsFollowingProgress(true, u.id);
-                                        //post принимает 3 параметра, сначала url адресс запроса , потом обьект, потом параметры запроса
-                                        //headers: {"API-KEY": "92cf59a3-3b12-407b-a573-626b86aed9d2"} - ключ запроса (берется с сервера)
-                                        axios.post(
-                                            `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,      //параметр 1
-                                            {},                                                                 //параметр 2
-                                            { withCredentials: true, headers: { "API-KEY": "92cf59a3-3b12-407b-a573-626b86aed9d2" } }       //параметр 3
-                                        ).then(response => {
-                                            if (response.data.resultCode == 0) {
-                                                props.follow(u.id);
-                                            }
-                                            props.toggleIsFollowingProgress(false, u.id);
-                                        });
+                                        props.unFollowThunkCreator(u.id)
 
 
                                     }}>FOLLOW</button>

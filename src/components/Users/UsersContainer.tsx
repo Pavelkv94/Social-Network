@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { ReduxStateType } from '../../redux/redux-store';
-import { follow, setCurrentPage, setTotalCount, setUsers, toggleIsFetching, unfollow, UsersOfSearchType, toggleIsFollowingProgress, getUsersThunkCreator } from '../../redux/usersReducer';
+import {
+    followSuccess, setCurrentPage, setTotalCount, setUsers, toggleIsFetching, unfollowSuccess, UsersOfSearchType, toggleIsFollowingProgress, getUsersThunkCreator, followThunkCreator,
+    unFollowThunkCreator
+} from '../../redux/usersReducer';
 import React from 'react';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
@@ -33,15 +36,16 @@ type UsersAPIType = {
     users: UsersOfSearchType
     isFetching: boolean
     followingProgress: Array<number | null>
-    follow: (userId: number) => void,
-    unfollow: (usersId: number) => void
+    // followSuccess: (userId: number) => void,
+    // unfollowSuccess: (usersId: number) => void
     //setUsers: (users: UsersOfSearchType) => void
     setCurrentPage: (currentPage: number) => void
     //setTotalCount: (totalUsersCount: number) => void
     // toggleIsFetching: (isFetching: boolean) => void
     toggleIsFollowingProgress: (isFollowing: boolean, userId: number) => void
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
-    //getUsersThunkCreator: ()=>void
+    followThunkCreator: (userId: any) => void
+    unFollowThunkCreator: (userId: any) => void
 
 }
 export class UsersAPiComponent extends React.Component<UsersAPIType>{
@@ -80,10 +84,13 @@ export class UsersAPiComponent extends React.Component<UsersAPIType>{
                 currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
                 users={this.props.users}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
-                toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+                //followSuccess={this.props.followSuccess}
+                //unfollowSuccess={this.props.unfollowSuccess}
+                // toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
                 followingProgress={this.props.followingProgress}
+                followThunkCreator={this.props.followThunkCreator}
+                unFollowThunkCreator={this.props.unFollowThunkCreator}
+
             />
         </>
     }
@@ -113,8 +120,8 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow,
-    unfollow,
+    // followSuccess,
+    // unfollowSuccess,
     //setUsers,
     setCurrentPage,
     // setTotalCount,
@@ -122,5 +129,8 @@ export const UsersContainer = connect(mapStateToProps, {
     toggleIsFollowingProgress,
     //?--thunk
     getUsersThunkCreator,
+    followThunkCreator,
+    unFollowThunkCreator,
+
 
 })(UsersAPiComponent);
