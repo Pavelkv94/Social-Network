@@ -35,12 +35,12 @@ type UsersAPIType = {
     followingProgress: Array<number | null>
     follow: (userId: number) => void,
     unfollow: (usersId: number) => void
-    setUsers: (users: UsersOfSearchType) => void
+    //setUsers: (users: UsersOfSearchType) => void
     setCurrentPage: (currentPage: number) => void
-    setTotalCount: (totalUsersCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-    toggleIsFollowingProgress: (isFollowing: boolean, userId:number) => void
-    getUsersThunkCreator: (currentPage:number, pageSize:number)=>void
+    //setTotalCount: (totalUsersCount: number) => void
+    // toggleIsFetching: (isFetching: boolean) => void
+    toggleIsFollowingProgress: (isFollowing: boolean, userId: number) => void
+    getUsersThunkCreator: (currentPage: number, pageSize: number) => void
     //getUsersThunkCreator: ()=>void
 
 }
@@ -83,7 +83,7 @@ export class UsersAPiComponent extends React.Component<UsersAPIType>{
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
                 toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
-                followingProgress= {this.props.followingProgress}
+                followingProgress={this.props.followingProgress}
             />
         </>
     }
@@ -115,10 +115,10 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 export const UsersContainer = connect(mapStateToProps, {
     follow,
     unfollow,
-    setUsers,
+    //setUsers,
     setCurrentPage,
-    setTotalCount,
-    toggleIsFetching,
+    // setTotalCount,
+    // toggleIsFetching,
     toggleIsFollowingProgress,
     //?--thunk
     getUsersThunkCreator,

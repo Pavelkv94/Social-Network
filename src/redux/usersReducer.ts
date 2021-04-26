@@ -183,6 +183,7 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number): 
 //   });
 // }
 export const getUsersThunkCreator = (currentPage:number, pageSize:number)=>{
+  //через замыкание
   return (dispatch:DispatchType) => {
   dispatch(toggleIsFetching(true))
 
