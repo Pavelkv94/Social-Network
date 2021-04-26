@@ -1,9 +1,10 @@
-import { combineReducers, createStore, Store } from "redux";
+import { applyMiddleware, combineReducers, createStore, Store } from "redux";
 import { dialogsReducer, DialogsStateType, SendMessageType, UpdateNewMessageType } from "./dialogsReducer";
 import { AddPostActionType, profileReducer, ProfileStateType, SetUserProfileType, UpdatePostActionType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, ToggleIsFollowingProgressType, TotalCountType, UnFollowType, usersReducer, UsersStateType } from "./usersReducer";
 import { authReducer, setAuthUserDataType } from "./authReducer";
+import thunkMiddleware from "redux-thunk"
 
 
 export type ActionTypes =
@@ -43,7 +44,7 @@ export type ReduxStoreType = {
     dispatch: DispatchType
 }
 //отдаем редьюсеры стору
-export let store: Store = createStore(reducers);
+export let store: Store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 //@ts-ignore
 window.store = store

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { ReduxStateType } from '../../redux/redux-store';
-import { follow, setCurrentPage, setTotalCount, setUsers, toggleIsFetching, unfollow, UsersOfSearchType, toggleIsFollowingProgress } from '../../redux/usersReducer';
+import { follow, setCurrentPage, setTotalCount, setUsers, toggleIsFetching, unfollow, UsersOfSearchType, toggleIsFollowingProgress, getUsersThunkCreator } from '../../redux/usersReducer';
 import React from 'react';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
@@ -40,18 +40,23 @@ type UsersAPIType = {
     setTotalCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
     toggleIsFollowingProgress: (isFollowing: boolean, userId:number) => void
+    getUsersThunkCreator: (currentPage:number, pageSize:number)=>void
+    //getUsersThunkCreator: ()=>void
 
 }
 export class UsersAPiComponent extends React.Component<UsersAPIType>{
 
     componentDidMount() {
-        this.props.toggleIsFetching(true)
 
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items);
-            this.props.setTotalCount(data.totalCount);
-        });
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
+        //Этот код мы отправили в санки
+        // this.props.toggleIsFetching(true)
+
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        //     this.props.toggleIsFetching(false)
+        //     this.props.setUsers(data.items);
+        //     this.props.setTotalCount(data.totalCount);
+        // });
     }
 
     onPageChanged = (pageNumber: number) => {
@@ -112,5 +117,7 @@ export const UsersContainer = connect(mapStateToProps, {
     setTotalCount,
     toggleIsFetching,
     toggleIsFollowingProgress,
+    //?--thunk
+    getUsersThunkCreator,
 
 })(UsersAPiComponent);
