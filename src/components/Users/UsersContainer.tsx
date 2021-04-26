@@ -60,12 +60,15 @@ export class UsersAPiComponent extends React.Component<UsersAPIType>{
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items);
-        });
+
+        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
+
+        // this.props.setCurrentPage(pageNumber);
+        // this.props.toggleIsFetching(true)
+        // usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+        //     this.props.toggleIsFetching(false)
+        //     this.props.setUsers(data.items);
+        // });
     };
 
     render() {
