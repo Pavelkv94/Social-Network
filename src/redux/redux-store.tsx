@@ -3,7 +3,7 @@ import { dialogsReducer, DialogsStateType, SendMessageType, UpdateNewMessageType
 import { AddPostActionType, profileReducer, ProfileStateType, SetUserProfileType, UpdatePostActionType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, ToggleIsFollowingProgressType, TotalCountType, UnFollowType, usersReducer, UsersStateType } from "./usersReducer";
-import { authReducer, setAuthUserDataType } from "./authReducer";
+import { authReducer, setAuthUserDataType, InitialAuthType } from "./authReducer";
 import thunkMiddleware from "redux-thunk"
 
 
@@ -37,6 +37,7 @@ export type ReduxStateType = {
     dialogsPage: DialogsStateType
     sidebarPage: any
     usersPage: UsersStateType
+    auth: InitialAuthType
 }
 export type ReduxStoreType = {
     getState: () => ReduxStateType

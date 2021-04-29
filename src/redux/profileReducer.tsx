@@ -113,11 +113,10 @@ const setUserProfile = (profile: any): SetUserProfileType => {
 
 //TODO----------------------создаем Thunk-CREATORS----------
 
-export const getUserProfileThunkCreator = (userId: string) => {
+export const getUserProfileThunkCreator = (userId: string) => 
     (dispatch: DispatchType) => {
         usersAPI.getProfile(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data));
             });
     }
-}

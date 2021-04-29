@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import { Redirect } from 'react-router';
 import { UserMessageType, UserType } from '../../redux/dialogsReducer';
 import { DialogItem } from './DialogItems/DialogItem';
 import d from "./Dialogs.module.css"
@@ -8,6 +9,7 @@ export type DialogsType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
     newMessageBody: string
+    isAuth:boolean
     sendMessageCreator: () => void
     updateNewMessageBodyCreator: (body: string) => void
 }
@@ -17,6 +19,11 @@ export function Dialogs(props: DialogsType) {
     const messageElements = props.messagesData.map(m => <Message mes={m.message} key={m.id} />);
     const onSendMessageClick = () => { props.sendMessageCreator(); };
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => { props.updateNewMessageBodyCreator(e.currentTarget.value) }
+
+    //todo если мы не залогинены то редирект происходит на страницу логина
+if (props.isAuth === false) return <Redirect to={'/login'} />
+
+
     return (
         <div className={d.dialogs}>
             <div className={d.dialogsItems}>

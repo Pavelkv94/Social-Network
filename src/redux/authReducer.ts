@@ -2,7 +2,7 @@ import { authAPI } from "../api/api";
 import { ActionTypes, DispatchType } from "./redux-store";
 
 
-type InitialAuthType = {
+export type InitialAuthType = {
     id: null | number
     login: null | string
     email: null | string
