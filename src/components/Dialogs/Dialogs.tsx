@@ -21,7 +21,7 @@ export function Dialogs(props: DialogsType) {
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => { props.updateNewMessageBodyCreator(e.currentTarget.value) }
 
     //todo если мы не залогинены то редирект происходит на страницу логина
-if (props.isAuth === false) return <Redirect to={'/login'} />
+if (!props.isAuth) return <Redirect to={'/login'} />
 
 
     return (
