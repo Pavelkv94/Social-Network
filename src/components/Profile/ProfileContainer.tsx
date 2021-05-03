@@ -38,13 +38,13 @@ class ProfileContainer extends React.Component<CommonPropsType>{
     }
 }
 
-let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
+//let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
 
 let mapStateToProps = (state: ReduxStateType): MapStatePropsType => ({     //!-----------------<<<<<<<<<<<<<<<
     profile: state.profilePage.profileData,
 });
 
 
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
+const WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, { getUserProfileThunkCreator })(WithUrlDataContainerComponent);
+export default WithAuthRedirect(connect(mapStateToProps, { getUserProfileThunkCreator })(WithUrlDataContainerComponent));

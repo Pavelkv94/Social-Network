@@ -10,7 +10,7 @@ type MapStateToPropsType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
     newMessageBody: string
-    isAuth: boolean
+   // isAuth: boolean
 }
 type MapDispatchToPropsType = {
     sendMessageCreator: () => void
@@ -22,7 +22,7 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
         dialogsData: state.dialogsPage.dialogsData,
         messagesData: state.dialogsPage.messagesData,
         newMessageBody: state.dialogsPage.newMessageBody,
-        isAuth: state.auth.isAuth,
+        //isAuth: state.auth.isAuth,
     }
 }
 let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
@@ -32,6 +32,6 @@ let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
     }
 }
 
-let AuthRedirectComponent = WithAuthRedirect(Dialogs);
+//let AuthRedirectComponent = WithAuthRedirect(Dialogs);
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+export const DialogsContainer = WithAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Dialogs));

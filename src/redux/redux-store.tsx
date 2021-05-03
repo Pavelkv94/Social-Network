@@ -39,6 +39,7 @@ export type ReduxStateType = {
     usersPage: UsersStateType
     auth: InitialAuthType
 }
+//export type ReduxStateType = ReturnType<typeof reducers>
 export type ReduxStoreType = {
     getState: () => ReduxStateType
     subscribe: (observer: () => void) => void
