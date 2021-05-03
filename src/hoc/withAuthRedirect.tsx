@@ -9,7 +9,7 @@ let mapStateToPropsForRedirect = (state: ReduxStateType): MapStatePropsType => (
 });
 
 
-export function WithAuthRedirect<T>(Component: ComponentType<T>) {
+export function withAuthRedirect<T>(Component: ComponentType<T>) {
 
     const RedirectComponent = (props: MapStatePropsType) => {
 

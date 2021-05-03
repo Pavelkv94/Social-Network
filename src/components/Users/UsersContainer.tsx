@@ -8,7 +8,8 @@ import React from 'react';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
 import { usersAPI } from '../../api/api';
-import { WithAuthRedirect } from '../../hoc/withAuthRedirect';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 type MapStateToPropsType = {
@@ -120,21 +121,14 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 
 
 
-
-
-
-export const UsersContainer = WithAuthRedirect(connect(mapStateToProps, {
-    // followSuccess,
-    // unfollowSuccess,
-    //setUsers,
-    setCurrentPage,
-    // setTotalCount,
-    // toggleIsFetching,
-    toggleIsFollowingProgress,
-    //?--thunk
-    getUsersThunkCreator,
-    followThunkCreator,
-    unFollowThunkCreator,
-
-
-})(UsersAPiComponent));
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        setCurrentPage,
+        toggleIsFollowingProgress,
+        //?--thunk
+        getUsersThunkCreator,
+        followThunkCreator,
+        unFollowThunkCreator,
+    })
+)(UsersAPiComponent)
