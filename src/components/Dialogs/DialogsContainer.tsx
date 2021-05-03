@@ -3,6 +3,8 @@ import { DispatchType, ReduxStateType } from '../../redux/redux-store';
 import { Dialogs } from './Dialogs';
 import { connect } from 'react-redux';
 import { InitialAuthType } from '../../redux/authReducer';
+import { Redirect } from 'react-router';
+import { WithAuthRedirect } from '../../hoc/withAuthRedirect';
 
 type MapStateToPropsType = {
     dialogsData: Array<UserType>
@@ -29,4 +31,7 @@ let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
         updateNewMessageBodyCreator: (body: string) => { dispatch(updateNewMessageBodyCreator(body)) }
     }
 }
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+
+let AuthRedirectComponent = WithAuthRedirect(Dialogs);
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
