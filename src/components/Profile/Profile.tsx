@@ -6,7 +6,7 @@ import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 
 export type ProfileType = {
   profile: ProfileDataType
-  isAuth: boolean
+  //isAuth: boolean
   getUserProfileThunkCreator: (userId: string) => void
 }
 

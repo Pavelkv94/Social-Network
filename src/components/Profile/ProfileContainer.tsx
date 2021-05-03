@@ -7,7 +7,7 @@ import { getUserProfileThunkCreator } from '../../redux/profileReducer'
 import { WithAuthRedirect } from '../../hoc/withAuthRedirect';
 type MapStatePropsType = {
     profile: any
-    isAuth: boolean
+    //isAuth: boolean
 }
 type MapDispatchPropsType = {
     getUserProfileThunkCreator: (userId: string) => void
@@ -42,8 +42,8 @@ let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
 
 let mapStateToProps = (state: ReduxStateType): MapStatePropsType => ({     //!-----------------<<<<<<<<<<<<<<<
     profile: state.profilePage.profileData,
-    isAuth: state.auth.isAuth
 });
+
 
 let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 

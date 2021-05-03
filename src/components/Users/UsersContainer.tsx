@@ -8,6 +8,7 @@ import React from 'react';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
 import { usersAPI } from '../../api/api';
+import { WithAuthRedirect } from '../../hoc/withAuthRedirect';
 
 
 type MapStateToPropsType = {
@@ -118,7 +119,11 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 // };
 
 
-export const UsersContainer = connect(mapStateToProps, {
+
+
+
+
+export const UsersContainer = WithAuthRedirect(connect(mapStateToProps, {
     // followSuccess,
     // unfollowSuccess,
     //setUsers,
@@ -132,4 +137,4 @@ export const UsersContainer = connect(mapStateToProps, {
     unFollowThunkCreator,
 
 
-})(UsersAPiComponent);
+})(UsersAPiComponent));
