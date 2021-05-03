@@ -43,7 +43,7 @@ let mapStateToProps = (state: ReduxStateType): MapStatePropsType => ({
     profile: state.profilePage.profileData,
 });
 
-export default compose(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, { getUserProfileThunkCreator }),
     withRouter,
     withAuthRedirect
