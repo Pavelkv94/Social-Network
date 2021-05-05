@@ -103,7 +103,7 @@ export const updatePostTextActionCreator = (newText: string): UpdatePostActionTy
         newText: newText
     }
 }
-const setUserProfile = (profile: any): SetUserProfileType => {
+const setUserProfile = (profile: ProfileDataType): SetUserProfileType => {
     return {
         type: "SET-USER-PROFILE",
         profile,

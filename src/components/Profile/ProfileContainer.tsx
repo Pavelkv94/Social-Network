@@ -24,6 +24,7 @@ class ProfileContainer extends React.Component<CommonPropsType>{
     componentDidMount() {
         // debugger
         let userId = this.props.match.params.userId;
+        //! ошибка с фото профиля
         if (!userId) { userId = "2" }
         this.props.getUserProfileThunkCreator(userId)
     }

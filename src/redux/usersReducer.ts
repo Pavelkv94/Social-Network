@@ -172,16 +172,6 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number): 
 
 //todo Создаем ThunkCreator
 
-//создаем санку
-// export const getUsersThunk = (dispatch:DispatchType) => {
-//   dispatch(toggleIsFetching(true))
-
-//   usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-//        dispatch(toggleIsFetching(false));
-//        dispatch(setUsers(data.items));
-//        dispatch(setTotalCount(data.totalCount));
-//   });
-// }
 export const getUsersThunkCreator = (currentPage:number, pageSize:number)=>{
   //через замыкание
   return (dispatch:DispatchType) => {
@@ -201,7 +191,7 @@ export const followThunkCreator = (userId:any)=>{
 
     usersAPI.getFollow(userId)
         .then(response => {
-            if (response.data.resultCode == 0) {
+            if (response.data.resultCode === 0) {
               dispatch(followSuccess(userId));
             }
             dispatch(toggleIsFollowingProgress(false, userId));
@@ -215,7 +205,7 @@ export const unFollowThunkCreator = (userId:any)=>{
 
     usersAPI.getUnFollow(userId)
         .then(response => {
-            if (response.data.resultCode == 0) {
+            if (response.data.resultCode === 0) {
               dispatch(unfollowSuccess(userId));
             }
             dispatch(toggleIsFollowingProgress(false, userId));

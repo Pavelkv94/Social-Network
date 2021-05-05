@@ -9,7 +9,7 @@ export type ProfileType = {
 }
 
 export function Profile(props: ProfileType) {
-  console.log(props)
+  //console.log(props)
   
   return (
     <div className="container">

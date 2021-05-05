@@ -2,6 +2,7 @@ import { UsersOfSearchType } from '../../redux/usersReducer';
 import profileLogo from '../../assets/images/profileLogo.png'
 import style from './Users.module.css'
 import { NavLink } from 'react-router-dom';
+import { v1 } from 'uuid';
 
 
 type UsersType = {
@@ -16,7 +17,6 @@ type UsersType = {
 
 }
 export function Users(props: UsersType) {
-
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = Math.max(props.currentPage - 5, 1); i <= Math.max(1, Math.min(props.currentPage + 5, pagesCount)); i++) {

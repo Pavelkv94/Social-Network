@@ -22,7 +22,8 @@ export const usersAPI = {
     },
     //! ошибка с картинкой
     getProfile(userId: string = "1") {
-        return instance.get(`profile/${userId}`);
+        console.warn('Obsolete method. Please use profileAPI object.')
+        return profileAPI.getProfile(userId);
     },
 }
 
@@ -32,3 +33,15 @@ export const authAPI = {
     }
 }
 
+export const profileAPI = {
+    //! ошибка с картинкой
+    getProfile(userId: string = "1") {
+        return instance.get(`profile/${userId}`);
+    },
+    getStatus(userId: string = "1") {
+        return instance.get(`status/${userId}`)
+    },
+    updateStatus(status:string) {
+        return instance.put(`status`)
+    }
+}
