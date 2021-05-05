@@ -1,10 +1,8 @@
-import React from 'react';
 import { UsersOfSearchType } from '../../redux/usersReducer';
 import profileLogo from '../../assets/images/profileLogo.png'
 import style from './Users.module.css'
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
-import { usersAPI } from '../../api/api';
+
 
 type UsersType = {
     totalUsersCount: number
@@ -12,10 +10,7 @@ type UsersType = {
     currentPage: number
     users: UsersOfSearchType
     followingProgress: Array<number | null>
-    //followSuccess: (userId: number) => void,
-    //unfollowSuccess: (usersId: number) => void
     onPageChanged: (pageNumber: number) => void
-    // toggleIsFollowingProgress: (isFollowing: boolean, userId: number) => void
     followThunkCreator: (userId: any) => void
     unFollowThunkCreator: (userId: any) => void
 
@@ -24,7 +19,6 @@ export function Users(props: UsersType) {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
-    //for (let i = 1; i <= pagesCount; i++) {
     for (let i = Math.max(props.currentPage - 5, 1); i <= Math.max(1, Math.min(props.currentPage + 5, pagesCount)); i++) {
         pages.push(i)
     }

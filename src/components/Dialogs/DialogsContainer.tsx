@@ -2,8 +2,6 @@ import { sendMessageCreator, updateNewMessageBodyCreator, UserMessageType, UserT
 import { DispatchType, ReduxStateType } from '../../redux/redux-store';
 import { Dialogs } from './Dialogs';
 import { connect } from 'react-redux';
-import { InitialAuthType } from '../../redux/authReducer';
-import { Redirect } from 'react-router';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
@@ -11,7 +9,6 @@ type MapStateToPropsType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
     newMessageBody: string
-    // isAuth: boolean
 }
 type MapDispatchToPropsType = {
     sendMessageCreator: () => void
@@ -23,7 +20,6 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
         dialogsData: state.dialogsPage.dialogsData,
         messagesData: state.dialogsPage.messagesData,
         newMessageBody: state.dialogsPage.newMessageBody,
-        //isAuth: state.auth.isAuth,
     }
 }
 let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {

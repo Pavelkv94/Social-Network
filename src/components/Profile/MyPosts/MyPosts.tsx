@@ -25,10 +25,7 @@ export function MyPosts(props: MyPostType) {
     const onPostChange = (e: any) => {
         props.updatePost(e.currentTarget.value)
     }
-    // const onPostChange = () => {
-    //     let text = newPostElement.current?.value;
-    //     props.updateNewPostText(text);
-    // }
+
     return (
         <div className={mypost.block}>
             <h3>My posts</h3>

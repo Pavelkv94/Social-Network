@@ -1,4 +1,3 @@
-import React from 'react';
 import { ProfileDataType } from '../../../redux/profileReducer';
 import { Preloader } from '../../common/Preloader/Preloader';
 import p from './ProfileInfo.module.css'

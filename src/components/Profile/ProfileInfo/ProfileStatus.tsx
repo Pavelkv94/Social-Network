@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import p from './ProfileInfo.module.css'
+import { useState } from 'react';
 
 type ProfileStatusType = {
     status: string
 }
 export const ProfileStatus = (props: ProfileStatusType) => {
     let [edit, setEdit] = useState(false);
-    const editMode = ()=>{
+    const editMode = () => {
         setEdit(!edit)
     }
 
@@ -17,7 +16,7 @@ export const ProfileStatus = (props: ProfileStatusType) => {
             </div>
             :
             <div>
-                <input value={props.status} onBlur={editMode} autoFocus/>
+                <input value={props.status} onBlur={editMode} autoFocus />
             </div>}
     </div>)
 }
