@@ -62,7 +62,7 @@ let initialState: ProfileStateType = {
     ],
     newPostText: "it=kamasutra.com",
     profileData: null,
-    status: "",
+    status: "Мой статус",
 
 }
 
