@@ -5,6 +5,8 @@ import { ProfileStatus } from './ProfileStatus';
 
 type PropsType = {
   profile: ProfileDataType
+  status: string
+  updateStatus: (userId: string) => void
 }
 
 
@@ -14,7 +16,7 @@ export function ProfileInfo(props: PropsType) {
   return (
     <div className={p.content}>
       <img src="https://demo.qodeinteractive.com/central/wp-content/uploads/2013/05/header.jpg" alt="Background" />
-      <ProfileStatus status={"Hello world"} />
+      <ProfileStatus status={props.status} />
       <div>AVA </div>
       <img src={props.profile.photos.large} alt="ava" style={{ width: "300px", marginLeft: "20px" }} />
     </div>
