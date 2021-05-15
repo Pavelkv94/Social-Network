@@ -8,10 +8,11 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 type MapStatePropsType = {
     profile: ProfileDataType
-    //isAuth: boolean
+    status:string
 }
 type MapDispatchPropsType = {
     getUserProfileThunkCreator: (userId: string) => void
+    getUserStatus: (userId: string) => void
 }
 type PathParamsType = {
     userId: string
@@ -26,7 +27,8 @@ class ProfileContainer extends React.Component<CommonPropsType>{
         let userId = this.props.match.params.userId;
         //! ошибка с фото профиля
         if (!userId) { userId = "2" }
-        this.props.getUserProfileThunkCreator(userId)
+        this.props.getUserProfileThunkCreator(userId);
+        this.props.getUserStatus(userId);
     }
     render() {
         return (
@@ -37,6 +39,7 @@ class ProfileContainer extends React.Component<CommonPropsType>{
 
 let mapStateToProps = (state: ReduxStateType): MapStatePropsType => ({
     profile: state.profilePage.profileData,
+    status: state.profilePage.status,
 });
 
 export default compose<React.ComponentType>(

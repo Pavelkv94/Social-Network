@@ -1,4 +1,4 @@
-import { usersAPI } from "../api/api";
+import { profileAPI, usersAPI } from "../api/api";
 import { ActionTypes, DispatchType } from "./redux-store";
 type ContactsType = {
     "facebook": string | null
@@ -33,6 +33,7 @@ export type ProfileStateType = {
     postData: Array<PostDataType>
     newPostText: string
     profileData: ProfileDataType
+    status: string
 }
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -47,6 +48,10 @@ export type SetUserProfileType = {
     type: "SET-USER-PROFILE",
     profile: ProfileDataType
 }
+export type SetStatusType = {
+    type: "SET-STATUS"
+    status: string
+}
 
 let initialState: ProfileStateType = {
     postData: [
@@ -56,8 +61,8 @@ let initialState: ProfileStateType = {
         { id: "5", message: "My second post", src: "https://www.meme-arsenal.com/memes/be50e6ba99654b5455027dcc82beb5b3.jpg", likeCount: "4" },
     ],
     newPostText: "it=kamasutra.com",
-    profileData: null
-
+    profileData: null,
+    status: "",
 
 }
 
@@ -86,6 +91,11 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
                 ...state,
                 profileData: action.profile
             }
+        case "SET-STATUS":
+            return {
+                ...state,
+                status: action.status
+            }
         default: return state;
     }
 }
@@ -109,14 +119,29 @@ const setUserProfile = (profile: ProfileDataType): SetUserProfileType => {
         profile,
     }
 }
+export const setStatus = (status: string): SetStatusType => {
+    return {
+        type: "SET-STATUS",
+        status: status
+    }
+}
 
 
 //TODO----------------------создаем Thunk-CREATORS----------
 
-export const getUserProfileThunkCreator = (userId: string) => 
+export const getUserProfileThunkCreator = (userId: string) =>
     (dispatch: DispatchType) => {
         usersAPI.getProfile(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data));
             });
     }
+
+    export const getStatus = (userId: string) =>
+    (dispatch: DispatchType) => {
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data));
+            });
+    }
+
