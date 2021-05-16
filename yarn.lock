@@ -1827,6 +1827,14 @@
     "@types/prop-types" "*"
     "csstype" "^3.0.2"
 
+"@types/redux-form@^8.3.1":
+  "integrity" "sha512-8lmJFxHtUBMWoI7lLX8Q+lhz9/nmkerEtrxgHZzhRwhQzD73MWkP9EA9w6Gx7cc02Fz3FkpYlfTN+9ELGUXZQQ=="
+  "resolved" "https://registry.npmjs.org/@types/redux-form/-/redux-form-8.3.1.tgz"
+  "version" "8.3.1"
+  dependencies:
+    "@types/react" "*"
+    "redux" "^3.6.0 || ^4.0.0"
+
 "@types/redux-thunk@^2.1.0":
   "integrity" "sha1-vCtulylhgxr7gqm/TwZybjUflBY="
   "resolved" "https://registry.npmjs.org/@types/redux-thunk/-/redux-thunk-2.1.0.tgz"
@@ -9603,7 +9611,7 @@
   "resolved" "https://registry.npmjs.org/redux-thunk/-/redux-thunk-2.3.0.tgz"
   "version" "2.3.0"
 
-"redux@*", "redux@^4.0.0", "redux@^4.0.5":
+"redux@*", "redux@^3.6.0 || ^4.0.0", "redux@^4.0.0", "redux@^4.0.5":
   "integrity" "sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w=="
   "resolved" "https://registry.npmjs.org/redux/-/redux-4.0.5.tgz"
   "version" "4.0.5"
