@@ -25,14 +25,17 @@ class ProfileContainer extends React.Component<CommonPropsType>{
 
     componentDidMount() {
         // debugger
-    
+        //! проверка
        // let userId = this.props.match.params.userId.slice(3);
         let userId = "16082";
         //console.log(this.props.match.params.userId.slice(3))
         console.log(this.props.status)
         if (!userId) { userId = "2" }
+
         this.props.getUserProfileThunkCreator(userId);
-        this.props.getUserStatus(userId);
+        //! setTimeout для теста
+        setTimeout(()=>
+        this.props.getUserStatus(userId), 1000)
     }
     render() {
         return (

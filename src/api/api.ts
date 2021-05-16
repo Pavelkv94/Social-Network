@@ -20,8 +20,7 @@ export const usersAPI = {
         return instance.post(`follow/${userId}`, {}
         ).then(response => response.data)
     },
-    //! ошибка с картинкой
-    getProfile(userId: string = "1") {
+    getProfile(userId: string = "16082") {
         console.warn('Obsolete method. Please use profileAPI object.')
         return profileAPI.getProfile(userId);
     },
@@ -34,14 +33,13 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-    //! ошибка с картинкой
-    getProfile(userId: string = "1") {
+    getProfile(userId: string = "16082") {
         return instance.get(`profile/${userId}`);
     },
-    getStatus(userId: string = "1") {
+    getStatus(userId: string = "16082") {
         return instance.get(`profile/status/${userId}`)
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status/`, { status: status })
+        return instance.put(`profile/status`, { status: status })
     }
 }

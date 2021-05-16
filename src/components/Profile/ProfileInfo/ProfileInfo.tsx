@@ -1,7 +1,8 @@
 import { ProfileDataType } from '../../../redux/profileReducer';
 import { Preloader } from '../../common/Preloader/Preloader';
 import p from './ProfileInfo.module.css'
-import { ProfileStatus } from './ProfileStatus';
+import ProfileStatus from './ProfileStatus';
+//import { ProfileStatus } from './ProfileStatus';
 
 type PropsType = {
   profile: ProfileDataType
