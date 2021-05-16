@@ -24,18 +24,16 @@ type ProfileContainerType = MapStatePropsType & MapDispatchPropsType
 class ProfileContainer extends React.Component<CommonPropsType>{
 
     componentDidMount() {
-        // debugger
-        //! проверка
-       // let userId = this.props.match.params.userId.slice(3);
-        let userId = "16082";
+
+        let userId = this.props.match.params.userId;
         //console.log(this.props.match.params.userId.slice(3))
         console.log(this.props.status)
-        if (!userId) { userId = "2" }
+        if (!userId) { userId = " + 16082" }
 
-        this.props.getUserProfileThunkCreator(userId);
-        //! setTimeout для теста
-        setTimeout(()=>
-        this.props.getUserStatus(userId), 1000)
+        this.props.getUserProfileThunkCreator(userId.slice(3));
+
+
+        this.props.getUserStatus(userId.slice(3));
     }
     render() {
         return (
