@@ -11,14 +11,14 @@ export type UserMessageType = {
 export type DialogsStateType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
-    newMessageBody: string
 }
-export type UpdateNewMessageType = {
-    type: "UPDATE-NEW-MESSAGE-BODY"
-    body: string
-}
+// export type UpdateNewMessageType = {
+//     type: "UPDATE-NEW-MESSAGE-BODY"
+//     body: string
+// }
 export type SendMessageType = {
     type: "SEND-MESSAGE"
+    newMessageBody: string
 }
 
 let initialState: DialogsStateType = {
@@ -38,23 +38,15 @@ let initialState: DialogsStateType = {
         { id: "5", message: " " },
         { id: "6", message: "Im sexy" },
     ],
-    newMessageBody: "",
 }
 
 export const dialogsReducer = (state: DialogsStateType = initialState, action: ActionTypes): DialogsStateType => {
 
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY":
-            return {
-                ...state,
-                newMessageBody: action.body
-            };
-
         case "SEND-MESSAGE":
-            let body = state.newMessageBody;
+            let body = action.newMessageBody;
             return {
                 ...state,
-                newMessageBody: "",
                 messagesData: [...state.messagesData, { id: "7", message: body }] //используем спрэд-оператор вместо push
             }
 
@@ -63,16 +55,11 @@ export const dialogsReducer = (state: DialogsStateType = initialState, action: A
 }
 
 //TODO----------------------создаем ACTION-CREATORS----------
-export const updateNewMessageBodyCreator = (body: string): UpdateNewMessageType => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        body: body
-    }
-}
-export const sendMessageCreator = (): SendMessageType => {
+
+export const sendMessageCreator = (newMessageBody: string): SendMessageType => {
     return {
         type: "SEND-MESSAGE",
-
+        newMessageBody
 
     }
 }
