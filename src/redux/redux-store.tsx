@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, createStore, Store } from "redux";
 import { dialogsReducer, DialogsStateType, SendMessageType } from "./dialogsReducer";
-import { AddPostActionType, profileReducer, ProfileStateType, SetStatusType, SetUserProfileType, UpdatePostActionType } from "./profileReducer";
+import { AddPostActionType, profileReducer, ProfileStateType, SetStatusType, SetUserProfileType} from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, ToggleIsFollowingProgressType, TotalCountType, UnFollowType, usersReducer, UsersStateType } from "./usersReducer";
 import { authReducer, setAuthUserDataType, InitialAuthType } from "./authReducer";
@@ -9,7 +9,7 @@ import { reducer as formReducer } from 'redux-form';
 
 export type ActionTypes =
     AddPostActionType
-    | UpdatePostActionType
+
     | SendMessageType
     | FollowType
     | UnFollowType

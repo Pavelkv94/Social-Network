@@ -31,7 +31,6 @@ export type PostDataType = {
 }
 export type ProfileStateType = {
     postData: Array<PostDataType>
-    newPostText: string
     profileData: ProfileDataType
     status: string
 }
@@ -40,10 +39,6 @@ export type AddPostActionType = {
     postMessage: string
 }
 // export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type UpdatePostActionType = {
-    type: "UPDATE-POST-TEXT"
-    newText: string
-}
 export type SetUserProfileType = {
     type: "SET-USER-PROFILE",
     profile: ProfileDataType
@@ -60,7 +55,6 @@ let initialState: ProfileStateType = {
         { id: "4", message: "very very good job", src: "https://lh3.googleusercontent.com/proxy/RqAvSoYAmNP0F1MEhQV9ZgwTX4rxVUWToq68lzomZ9MBM0bbIRm5bSLY74w8pz2ccpwuuGGBUCb0kwwZofYuWMyTfL1D5asYWMEV0jIYKdz6w6Uj70palMXJAUmTSL_q-FuTA802COPQYA9_gWKU9OQhhqN2KbPl3Fj2-FeyRg", likeCount: "32" },
         { id: "5", message: "My second post", src: "https://www.meme-arsenal.com/memes/be50e6ba99654b5455027dcc82beb5b3.jpg", likeCount: "4" },
     ],
-    newPostText: "it=kamasutra.com",
     profileData: null,
     status: "Мой статус",
 
@@ -78,13 +72,6 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
             return {
                 ...state,
                 postData: [...state.postData, newPost], //используем спрэд-оператор вместо push
-                newPostText: ""
-            }
-
-        case "UPDATE-POST-TEXT":
-            return {
-                ...state,
-                newPostText: action.newText
             }
         case "SET-USER-PROFILE":
             return {
@@ -101,16 +88,10 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
 }
 
 //TODO----------------------создаем ACTION-CREATORS----------
-export const addPostActionCreator = (text: string): AddPostActionType => {
+export const addPostActionCreator = (newPostText: string): AddPostActionType => {
     return {
         type: "ADD-POST",
-        postMessage: text
-    }
-}
-export const updatePostTextActionCreator = (newText: string): UpdatePostActionType => {
-    return {
-        type: "UPDATE-POST-TEXT",
-        newText: newText
+        postMessage: newPostText
     }
 }
 const setUserProfile = (profile: ProfileDataType): SetUserProfileType => {
