@@ -1,6 +1,13 @@
 import { Field, InjectedFormProps } from "redux-form"
 
-export const LoginForm = (props: InjectedFormProps) => {
+export type FormDataType = {
+    login: string
+    password: string
+    rememberMe: boolean
+}
+
+
+export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
@@ -12,7 +19,7 @@ export const LoginForm = (props: InjectedFormProps) => {
                 <Field component="input" placeholder="password" type="password" name="password"/>
             </div>
             <div>
-                <Field component="input" type="checkbox" name="remember me"/> remember me
+                <Field component="input" type="checkbox" name="rememberMe"/> remember me
                 </div>
             <div>
                 <button>Log In</button>

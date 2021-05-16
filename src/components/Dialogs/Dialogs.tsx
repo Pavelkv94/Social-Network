@@ -9,7 +9,7 @@ export type DialogsType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
     newMessageBody: string
-    isAuth:boolean
+    isAuth: boolean
     sendMessageCreator: () => void
     updateNewMessageBodyCreator: (body: string) => void
 }
@@ -21,7 +21,7 @@ export function Dialogs(props: DialogsType) {
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => { props.updateNewMessageBodyCreator(e.currentTarget.value) }
 
     //todo если мы не залогинены то редирект происходит на страницу логина
-//if (!props.isAuth) return <Redirect to={'/login'} />
+    //if (!props.isAuth) return <Redirect to={'/login'} />
 
 
     return (
@@ -33,12 +33,18 @@ export function Dialogs(props: DialogsType) {
 
             <div className={d.messageItems}>
                 <div>{messageElements}</div>
-                <div>
-                    <div><textarea placeholder="Enter your message" value={props.newMessageBody} onChange={onNewMessageChange}></textarea> </div>
-                    <div><button onClick={onSendMessageClick}>Send</button></div>
-                </div>
+                <AddMessageForm />
             </div>
 
         </div>
+    )
+}
+
+const AddMessageForm = (props: any) => {
+    return (
+        <form>
+            <div><textarea placeholder="Enter your message" value={props.newMessageBody} onChange={onNewMessageChange}></textarea> </div>
+            <div><button onClick={onSendMessageClick}>Send</button></div>
+        </form>
     )
 }

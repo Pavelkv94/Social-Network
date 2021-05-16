@@ -1,9 +1,9 @@
 import { reduxForm } from "redux-form"
-import { LoginForm } from "./LoginForm/LoginForm"
+import { FormDataType, LoginForm } from "./LoginForm/LoginForm"
 
-export const Login = (props: any) => {
+export const Login = () => {
 
-const onSubmit = (formData:any)=>{
+const onSubmit = (formData:FormDataType)=>{
     console.log(formData)
 }
     return (
@@ -14,7 +14,7 @@ const onSubmit = (formData:any)=>{
     )
 }
 
-const LoginReduxForm = reduxForm({
+const LoginReduxForm = reduxForm<FormDataType>({
     //a unique name
     form: 'login'
 }) (LoginForm)
