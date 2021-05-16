@@ -12,3 +12,15 @@ export const Textarea = ({ input, meta, ...props }: any) => {
         </div>
     )
 };
+
+export const Input = ({ input, meta, ...props }: any) => {
+    const validationError = meta.touched && meta.error;
+    return (
+        <div className={style.formControl + " " + (validationError ? style.error : "")}>
+            <div>
+                <input {...input} {...props} />
+            </div>
+            {validationError && <span>{meta.error}</span>}
+        </div>
+    )
+};
