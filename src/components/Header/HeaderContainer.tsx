@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Header } from './Header';
-import { getAuthUserDataThunkCreator } from '../../redux/authReducer'
+import { getAuthUserDataThunkCreator, logout } from '../../redux/authReducer'
 
 type HeaderContainerType = {
     isAuth: boolean
@@ -23,4 +23,4 @@ const mapStateToProps = (state: any) => ({
     email: state.auth.email,
 });
 
-export default connect(mapStateToProps, { getAuthUserDataThunkCreator })(HeaderContainer)
+export default connect(mapStateToProps, { getAuthUserDataThunkCreator, logout })(HeaderContainer)
