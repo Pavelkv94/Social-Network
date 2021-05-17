@@ -3,7 +3,7 @@ import { requiredField } from "../../../utils/validators/validators"
 import { Input } from "../../common/FormsControl/FormControl"
 
 export type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -17,9 +17,9 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 
                 <Field
                     component={Input}
-                    placeholder="login"
+                    placeholder="Email"
                     type="text"
-                    name="login"
+                    name="email"
                     validate={[requiredField]}
                 />
             </div>
