@@ -4,7 +4,7 @@ import { ActionTypes, DispatchType } from "./redux-store";
 
 
 export type InitialAuthType = {
-    id: null | number
+    id: string | null
     login: null | string
     email: null | string
     isAuth: boolean
