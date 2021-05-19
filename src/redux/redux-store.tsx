@@ -5,7 +5,7 @@ import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, ToggleIsFollowingProgressType, TotalCountType, UnFollowType, usersReducer, UsersStateType } from "./usersReducer";
 import { authReducer, setAuthUserDataType, InitialAuthType } from "./authReducer";
 import thunkMiddleware from "redux-thunk";
-import { reducer as formReducer } from 'redux-form';
+import { FormAction, reducer as formReducer } from 'redux-form';
 
 export type ActionTypes =
     AddPostActionType
@@ -21,6 +21,7 @@ export type ActionTypes =
     | setAuthUserDataType
     | ToggleIsFollowingProgressType
     | SetStatusType
+    //| FormAction
 
 
 export type DispatchType = (action: ActionTypes) => void

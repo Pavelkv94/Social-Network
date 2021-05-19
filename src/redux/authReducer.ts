@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
 import { ActionTypes, DispatchType } from "./redux-store";
 
@@ -46,10 +47,22 @@ export const getAuthUserDataThunkCreator = () => (dispatch: DispatchType) => {
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: DispatchType) => {
+
+    //todo-----------------
+    // let action = stopSubmit("login", { _error: "Entered data is wrong." });
+    // dispatch(action)
+    //? равноценно коду ниже
+    //dispatch(stopSubmit("login", { _error: "Entered data is wrong." }));
+    //todo-----------------
+
     authAPI.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
             //@ts-ignore    //!<<<<<<<<<<---------------------------
             dispatch(getAuthUserDataThunkCreator())
+        } else {
+            let message = response.data.messages.length > 0 ? response.data.messages[0] : "Entered data is wrong."
+            //@ts-ignore    //!<<<<<<<<<<---------------------------
+            dispatch(stopSubmit("login", { _error: message }));
         }
     });
 }

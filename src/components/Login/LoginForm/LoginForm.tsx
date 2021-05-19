@@ -1,6 +1,7 @@
 import { Field, InjectedFormProps } from "redux-form"
 import { requiredField } from "../../../utils/validators/validators"
 import { Input } from "../../common/FormsControl/FormControl"
+import s from "./../../common/FormsControl/FormControl.module.css"
 
 export type FormDataType = {
     email: string
@@ -38,6 +39,9 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                     name="rememberMe"
                 /> remember me
                 </div>
+               {props.error && <div className={s.formSummaryError}>
+                   {props.error}
+                </div>}
             <div>
                 <button>Log In</button>
             </div>
