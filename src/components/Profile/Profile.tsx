@@ -5,8 +5,8 @@ import { ProfileInfo } from './ProfileInfo/ProfileInfo';
 export type ProfileType = {
   profile: ProfileDataType
   status: string
-  getUserProfileThunkCreator: (userId: string) => void
-  updateStatus: (userId: string) => void
+  getUserProfileThunkCreator: (userId: number | null) => void
+  updateStatus: (status: string) => void
 }
 
 export function Profile(props: ProfileType) {

@@ -110,7 +110,7 @@ export const setStatus = (status: string): SetStatusType => {
 
 //TODO----------------------создаем Thunk-CREATORS----------
 
-export const getUserProfileThunkCreator = (userId: string) =>
+export const getUserProfileThunkCreator = (userId: number | null) =>
     (dispatch: DispatchType) => {
         usersAPI.getProfile(userId)
             .then(response => {
@@ -118,7 +118,7 @@ export const getUserProfileThunkCreator = (userId: string) =>
             });
     }
 
-export const getUserStatus = (userId: string) =>
+export const getUserStatus = (userId: number | null) =>
     (dispatch: DispatchType) => {
         profileAPI.getStatus(userId)
             .then(response => {
@@ -126,13 +126,12 @@ export const getUserStatus = (userId: string) =>
             });
     }
 
-export const updateUserStatus = (userId: string) =>
+export const updateUserStatus = (status: string) =>
     (dispatch: DispatchType) => {
-        profileAPI.updateStatus(userId)
+        profileAPI.updateStatus(status)
             .then(response => {
                 if (response.data.resultCode === 0) {
-                    dispatch(setStatus(response.data));
+                    dispatch(setStatus(status));
                 }
-
             });
     }

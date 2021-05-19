@@ -9,7 +9,12 @@ export type InitialAuthType = {
     email: null | string
     isAuth: boolean
 }
-
+type PayloadType = {
+    id: null | number
+    login: null | string
+    email: null | string
+    isAuth: boolean
+}
 let initialState: InitialAuthType = {
     id: null,
     login: null,
@@ -18,7 +23,7 @@ let initialState: InitialAuthType = {
 }
 export type setAuthUserDataType = {
     type: "SET-USER-DATA",
-    payload: any              //!<<<<<<<<<<---------------------------
+    payload: PayloadType
 }
 
 export const authReducer = (state: InitialAuthType = initialState, action: ActionTypes) => {
@@ -47,13 +52,6 @@ export const getAuthUserDataThunkCreator = () => (dispatch: DispatchType) => {
 }
 
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: DispatchType) => {
-
-    //todo-----------------
-    // let action = stopSubmit("login", { _error: "Entered data is wrong." });
-    // dispatch(action)
-    //? равноценно коду ниже
-    //dispatch(stopSubmit("login", { _error: "Entered data is wrong." }));
-    //todo-----------------
 
     authAPI.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {

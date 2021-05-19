@@ -33,7 +33,7 @@ import React, { ChangeEvent } from 'react';
 
 type ProfileStatusType = {
     status: string
-    updateStatus: (userId: string) => void
+    updateStatus: (status: string) => void
 }
 
 type StateType = {

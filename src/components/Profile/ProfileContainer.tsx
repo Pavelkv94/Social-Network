@@ -6,6 +6,7 @@ import { ReduxStateType } from '../../redux/redux-store';
 import { getUserProfileThunkCreator, ProfileDataType, getUserStatus, updateUserStatus } from '../../redux/profileReducer'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
+
 type MapStatePropsType = {
     profile: ProfileDataType
     status: string
@@ -13,9 +14,9 @@ type MapStatePropsType = {
     isAuth: boolean
 }
 type MapDispatchPropsType = {
-    getUserProfileThunkCreator: (userId: string) => void
-    getUserStatus: (userId: string) => void
-    updateUserStatus: (userId: string) => void
+    getUserProfileThunkCreator: (userId: number | null) => void
+    getUserStatus: (userId: number | null) => void
+    updateUserStatus: (status: string) => void
 }
 type PathParamsType = {
     userId: string
@@ -26,18 +27,16 @@ type ProfileContainerType = MapStatePropsType & MapDispatchPropsType
 class ProfileContainer extends React.Component<CommonPropsType>{
 
     componentDidMount() {
-        console.log(typeof this.props.authUserId)
-        let userId = this.props.match.params.userId;
-        //console.log(this.props.match.params.userId.slice(3))
-        console.log(this.props.status)
+        //! ошибка с отображением пользователей
+        console.log(this.props.authUserId) 
+        let userId: number | null = Number(this.props.match.params.userId);
+        console.log(this.props)
+        console.log(userId)
         if (!userId) {
-            //@ts-ignore
-            //userId = this.props.authUserId
-            userId = " + 16082"
+            userId = Number(this.props.authUserId);
         }
-
-        this.props.getUserProfileThunkCreator(userId.slice(3));
-        this.props.getUserStatus(userId.slice(3));
+        this.props.getUserProfileThunkCreator(userId);
+        this.props.getUserStatus(userId);
     }
     render() {
         return (
