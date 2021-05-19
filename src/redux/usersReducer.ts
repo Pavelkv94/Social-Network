@@ -5,15 +5,13 @@ export type LocationType = {
   city: string;
   country: string;
 };
-
 export type UserOfSearchType = {
   id: number;
   photos: any
   followed: boolean;
   name: string;
   status: string;
-  //location: LocationType;
-};
+ };
 export type UsersOfSearchType = Array<UserOfSearchType>;
 export type UsersStateType = {
   users: UsersOfSearchType
@@ -23,7 +21,6 @@ export type UsersStateType = {
   isFetching: boolean
   followingInProgress: Array<number | null>
 };
-
 export type FollowType = {
   type: "FOLLOW";
   userId: number;
@@ -32,7 +29,6 @@ export type UnFollowType = {
   type: "UNFOLLOW";
   userId: number;
 };
-
 export type SetUsersType = {
   type: "SET-USERS";
   users: UsersOfSearchType;
@@ -184,7 +180,7 @@ export const getUsersThunkCreator = (currentPage:number, pageSize:number)=>{
   });
 }}
 
-export const followThunkCreator = (userId:any)=>{
+export const followThunkCreator = (userId:number)=>{
   
   return (dispatch:DispatchType) => {
     dispatch(toggleIsFollowingProgress(true, userId ));
@@ -198,7 +194,7 @@ export const followThunkCreator = (userId:any)=>{
         });
 }}
 
-export const unFollowThunkCreator = (userId:any)=>{
+export const unFollowThunkCreator = (userId:number)=>{
   
   return (dispatch:DispatchType) => {
     dispatch(toggleIsFollowingProgress(true, userId ));

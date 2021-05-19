@@ -38,7 +38,6 @@ export type AddPostActionType = {
     type: "ADD-POST"
     postMessage: string
 }
-// export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type SetUserProfileType = {
     type: "SET-USER-PROFILE",
     profile: ProfileDataType
@@ -57,7 +56,6 @@ let initialState: ProfileStateType = {
     ],
     profileData: null,
     status: "Мой статус",
-
 }
 
 export const profileReducer = (state: ProfileStateType = initialState, action: ActionTypes): ProfileStateType => {
@@ -94,12 +92,14 @@ export const addPostActionCreator = (newPostText: string): AddPostActionType => 
         postMessage: newPostText
     }
 }
-const setUserProfile = (profile: ProfileDataType): SetUserProfileType => {
+
+export const setUserProfile = (profile: ProfileDataType): SetUserProfileType => {
     return {
         type: "SET-USER-PROFILE",
         profile,
     }
 }
+
 export const setStatus = (status: string): SetStatusType => {
     return {
         type: "SET-STATUS",

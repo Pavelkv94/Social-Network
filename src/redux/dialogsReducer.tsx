@@ -12,10 +12,7 @@ export type DialogsStateType = {
     dialogsData: Array<UserType>
     messagesData: Array<UserMessageType>
 }
-// export type UpdateNewMessageType = {
-//     type: "UPDATE-NEW-MESSAGE-BODY"
-//     body: string
-// }
+
 export type SendMessageType = {
     type: "SEND-MESSAGE"
     newMessageBody: string
@@ -49,17 +46,14 @@ export const dialogsReducer = (state: DialogsStateType = initialState, action: A
                 ...state,
                 messagesData: [...state.messagesData, { id: "7", message: body }] //используем спрэд-оператор вместо push
             }
-
         default: return state;
     }
 }
 
 //TODO----------------------создаем ACTION-CREATORS----------
-
 export const sendMessageCreator = (newMessageBody: string): SendMessageType => {
     return {
         type: "SEND-MESSAGE",
         newMessageBody
-
     }
 }

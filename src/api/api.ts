@@ -13,11 +13,11 @@ export const usersAPI = {
     },
     getUnFollow(userId: number | null) {
         return instance.delete(`follow/${userId}`
-        ).then(response => response.data)
+        )//.then(response => response.data)
     },
     getFollow(userId: number | null) {
         return instance.post(`follow/${userId}`, {}
-        ).then(response => response.data)
+        )//.then(response => response.data)
     },
     getProfile(userId: number | null) {
         console.warn('Obsolete method. Please use profileAPI object.')

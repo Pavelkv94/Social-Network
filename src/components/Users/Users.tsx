@@ -46,15 +46,13 @@ export function Users(props: UsersType) {
                                 ? <button
                                     disabled={props.followingProgress.some(id => id === u.id)}
                                     onClick={() => {
-                                        props.followThunkCreator(u.id)
+                                        props.unFollowThunkCreator(u.id)
 
                                     }}>UNFOLLOW</button>
                                 : <button
                                     disabled={props.followingProgress.some(id => id === u.id)}
                                     onClick={() => {
-                                        props.unFollowThunkCreator(u.id)
-
-
+                                        props.followThunkCreator(u.id)
                                     }}>FOLLOW</button>
                             }
                         </div>
