@@ -111,8 +111,8 @@ export const setStatus = (status: string): SetStatusType => {
 //TODO----------------------создаем Thunk-CREATORS----------
 
 export const getUserProfileThunkCreator = (userId: number | null): ThunkType =>
-    (dispatch: DispatchType) => {
-        usersAPI.getProfile(userId)
+     (dispatch: DispatchType) => {
+         profileAPI.getProfile(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data));
             });
@@ -130,7 +130,7 @@ export const updateUserStatus = (status: string): ThunkType =>
     (dispatch: DispatchType) => {
         profileAPI.updateStatus(status)
             .then(response => {
-                if (response.data.resultCode ===  ResultCodeENum.Success) {
+                if (response.data.resultCode === ResultCodeENum.Success) {
                     dispatch(setStatus(status));
                 }
             });

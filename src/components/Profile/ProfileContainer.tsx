@@ -4,7 +4,6 @@ import { Profile } from './Profile';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { ReduxStateType } from '../../redux/redux-store';
 import { getUserProfileThunkCreator, ProfileDataType, getUserStatus, updateUserStatus } from '../../redux/profileReducer'
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
 type MapStatePropsType = {
@@ -28,8 +27,11 @@ class ProfileContainer extends React.Component<CommonPropsType>{
 
     componentDidMount() {
         let userId: number | null = +this.props.match.params.userId;
+        console.log(this.props)
+        console.log(this.props.match.params)
         if (!userId) {
             userId = this.props.authUserId;
+            console.log(userId)
             if (!userId) {
                 // todo: may be replace push with Redirect??
                 this.props.history.push("/login");
@@ -66,5 +68,4 @@ let mapStateToProps = (state: ReduxStateType): MapStatePropsType => ({
 export default compose<React.ComponentType>(
     connect(mapStateToProps, { getUserProfileThunkCreator, getUserStatus, updateUserStatus }),
     withRouter,
-    withAuthRedirect
 )(ProfileContainer)
