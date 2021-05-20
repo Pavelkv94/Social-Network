@@ -38,7 +38,7 @@ export const setAuthUserData = (id: null | number, login: null | string, email: 
 })
 
 export const getAuthUserDataThunkCreator = (): ThunkType => (dispatch: DispatchType) => {
-    authAPI.me().then(data => {
+   return  authAPI.me().then(data => {
         if (data.resultCode === ResultCodeENum.Success) {
             let { id, login, email } = data.data;
             dispatch(setAuthUserData(id, login, email, true));

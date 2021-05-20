@@ -1,11 +1,12 @@
 import { applyMiddleware, combineReducers, createStore, Store } from "redux";
 import { dialogsReducer, SendMessageType } from "./dialogsReducer";
-import { AddPostActionType, profileReducer,  SetStatusType, SetUserProfileType } from "./profileReducer";
+import { AddPostActionType, profileReducer, SetStatusType, SetUserProfileType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, ToggleIsFollowingProgressType, TotalCountType, UnFollowType, usersReducer } from "./usersReducer";
 import { authReducer, setAuthUserDataType } from "./authReducer";
 import thunkMiddleware, { ThunkAction } from "redux-thunk";
 import { FormAction, reducer as formReducer } from 'redux-form';
+import { appReducer, InitializedSuccessType } from "./appReducer";
 
 export type ThunkType = ThunkAction<void, ReduxStateType, unknown, ActionTypes>
 export type ActionTypes =
@@ -21,6 +22,7 @@ export type ActionTypes =
     | setAuthUserDataType
     | ToggleIsFollowingProgressType
     | SetStatusType
+    | InitializedSuccessType
 //| FormAction
 
 
@@ -32,11 +34,12 @@ let rootReducer = combineReducers({
     sidebarPage: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 });
 
 export type RootReducerType = typeof rootReducer;
-export type ReduxStateType = ReturnType<RootReducerType> ;//AppStateType
+export type ReduxStateType = ReturnType<RootReducerType>;//AppStateType
 
 export type ReduxStoreType = {
     getState: () => ReduxStateType

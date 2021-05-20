@@ -28,12 +28,15 @@ class ProfileContainer extends React.Component<CommonPropsType>{
 
     componentDidMount() {
         //! ошибка с отображением пользователей
-        console.log(this.props.authUserId) 
+        console.log(this.props.authUserId)
         let userId: number | null = Number(this.props.match.params.userId);
         console.log(this.props)
         console.log(userId)
         if (!userId) {
             userId = Number(this.props.authUserId);
+            if (!userId) {
+                this.props.history.push("/login");
+            }
         }
         this.props.getUserProfileThunkCreator(userId);
         this.props.getUserStatus(userId);
