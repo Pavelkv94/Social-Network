@@ -1,5 +1,5 @@
 import { ThunkAction } from "redux-thunk";
-import { usersAPI } from "../api/api";
+import { ResultCodeENum, usersAPI } from "../api/api";
 import { ActionTypes, DispatchType, ReduxStateType, ThunkType } from "./redux-store";
 
 export type LocationType = {
@@ -193,7 +193,7 @@ export const followThunkCreator = (userId: number): ThunkType => {
 
     usersAPI.getFollow(userId)
       .then(response => {
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResultCodeENum.Success) {
           dispatch(followSuccess(userId));
         }
         dispatch(toggleIsFollowingProgress(false, userId));
@@ -208,7 +208,7 @@ export const unFollowThunkCreator = (userId: number): ThunkType => {
 
     usersAPI.getUnFollow(userId)
       .then(response => {
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResultCodeENum.Success) {
           dispatch(unfollowSuccess(userId));
         }
         dispatch(toggleIsFollowingProgress(false, userId));

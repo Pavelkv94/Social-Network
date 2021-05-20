@@ -1,23 +1,23 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
-    //headers: { "API-KEY": "92cf59a3-3b12-407b-a573-626b86aed9d2" }
+    headers: { "API-KEY": "92cf59a3-3b12-407b-a573-626b86aed9d2" }
 });
 
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`
-        ).then(response => response.data)
+        ).then((response: AxiosResponse<any>) => response.data)
     },
     getUnFollow(userId: number | null) {
         return instance.delete(`follow/${userId}`
-        )//.then(response => response.data)
+        ).then(response => response.data)
     },
     getFollow(userId: number | null) {
         return instance.post(`follow/${userId}`, {}
-        )//.then(response => response.data)
+        ).then(response => response.data)
     },
     getProfile(userId: number | null) {
         console.warn('Obsolete method. Please use profileAPI object.')
@@ -39,15 +39,37 @@ export const profileAPI = {
 }
 
 //авторизация
+export enum ResultCodeENum {
+    Success = 0,
+    Error = 1,
+}
+export enum ResultCodeForCaptcha {
+    CaptchaIsRequired = 10
+}
+//generyc
+type MeResponseTypes<T> = {
+    resultCode: ResultCodeENum | ResultCodeForCaptcha
+    messages: Array<string>
+    data: T
+}
+type DataMeResponseType = {
+    id: number,
+    email: string
+    login: string
+}
+type DataLoginResponseType = {
+    userId: number
+}
+type DataLogoutResponseType = {}
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`);
+        return instance.get<MeResponseTypes<DataMeResponseType>>(`auth/me`).then(res => res.data);
     },
     login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post(`auth/login`, { email, password, rememberMe });
+        return instance.post<MeResponseTypes<DataLoginResponseType>>(`auth/login`, { email, password, rememberMe }).then(res => res.data);
     },
     logout() {
-        return instance.delete(`auth/login`);
+        return instance.delete<MeResponseTypes<DataLogoutResponseType>>(`auth/login`).then(res => res.data);;
     }
 }
 

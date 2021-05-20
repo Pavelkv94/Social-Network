@@ -1,4 +1,4 @@
-import { profileAPI, usersAPI } from "../api/api";
+import { profileAPI, ResultCodeENum, usersAPI } from "../api/api";
 import { ActionTypes, DispatchType, ThunkType } from "./redux-store";
 type ContactsType = {
     "facebook": string | null
@@ -130,7 +130,7 @@ export const updateUserStatus = (status: string): ThunkType =>
     (dispatch: DispatchType) => {
         profileAPI.updateStatus(status)
             .then(response => {
-                if (response.data.resultCode === 0) {
+                if (response.data.resultCode ===  ResultCodeENum.Success) {
                     dispatch(setStatus(status));
                 }
             });

@@ -1,5 +1,5 @@
 import { stopSubmit } from "redux-form";
-import { authAPI } from "../api/api";
+import { authAPI, ResultCodeENum } from "../api/api";
 import { ActionTypes, DispatchType, ThunkType } from "./redux-store";
 
 type PayloadType = {
@@ -38,9 +38,9 @@ export const setAuthUserData = (id: null | number, login: null | string, email: 
 })
 
 export const getAuthUserDataThunkCreator = (): ThunkType => (dispatch: DispatchType) => {
-    authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
-            let { id, login, email } = response.data.data;
+    authAPI.me().then(data => {
+        if (data.resultCode === ResultCodeENum.Success) {
+            let { id, login, email } = data.data;
             dispatch(setAuthUserData(id, login, email, true));
         }
     });
@@ -48,12 +48,12 @@ export const getAuthUserDataThunkCreator = (): ThunkType => (dispatch: DispatchT
 
 export const login = (email: string, password: string, rememberMe: boolean): ThunkType => (dispatch: DispatchType) => {
 
-    authAPI.login(email, password, rememberMe).then(response => {
-        if (response.data.resultCode === 0) {
+    authAPI.login(email, password, rememberMe).then(data => {
+        if (data.resultCode === ResultCodeENum.Success) {
             //@ts-ignore    //!<<<<<<<<<<---------------------------
             dispatch(getAuthUserDataThunkCreator())
         } else {
-            let message = response.data.messages.length > 0 ? response.data.messages[0] : "Entered data is wrong."
+            let message = data.messages.length > 0 ? data.messages[0] : "Entered data is wrong."
             //@ts-ignore    //!<<<<<<<<<<---------------------------
             dispatch(stopSubmit("login", { _error: message }));
         }
@@ -61,8 +61,8 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
 }
 
 export const logout = (): ThunkType => (dispatch: DispatchType) => {
-    authAPI.logout().then(response => {
-        if (response.data.resultCode === 0) {
+    authAPI.logout().then(data => {
+        if (data.resultCode === ResultCodeENum.Success) {
             dispatch(setAuthUserData(null, null, null, false));
         }
     });
