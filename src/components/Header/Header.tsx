@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import hed from './Header.module.css';
+import { HeaderPropsType } from './HeaderContainer';
 
-export function Header(props: any) { //!<<<<<<<<<<<<<<_______________________________________
+export function Header(props: HeaderPropsType) {
     return (
         <header className={hed.header}>
             <img src="https://i.ibb.co/yV486Q1/logo.png" alt="Logo" />

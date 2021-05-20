@@ -15,7 +15,6 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-
                 <Field
                     component={Input}
                     placeholder="Email"
