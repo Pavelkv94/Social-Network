@@ -27,17 +27,25 @@ type ProfileContainerType = MapStatePropsType & MapDispatchPropsType
 class ProfileContainer extends React.Component<CommonPropsType>{
 
     componentDidMount() {
-        //! ошибка с отображением пользователей
-        console.log(this.props.authUserId)
-        let userId: number | null = Number(this.props.match.params.userId);
-        console.log(this.props)
-        console.log(userId)
+        let userId: number | null = +this.props.match.params.userId;
         if (!userId) {
-            userId = Number(this.props.authUserId);
+            userId = this.props.authUserId;
             if (!userId) {
+                // todo: may be replace push with Redirect??
                 this.props.history.push("/login");
             }
         }
+        //! ошибка с отображением пользователей
+        // console.log(this.props.authUserId)
+        // let userId: number | null = Number(this.props.match.params.userId.slice(3));
+        // console.log(this.props)
+        // console.log(userId)
+        // if (!userId) {
+        //     userId = Number(this.props.authUserId);
+        //     if (!userId) {
+        //         this.props.history.push("/login");
+        //     }
+        // }
         this.props.getUserProfileThunkCreator(userId);
         this.props.getUserStatus(userId);
     }

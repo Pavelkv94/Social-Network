@@ -2,7 +2,6 @@ import { UsersOfSearchType } from '../../redux/usersReducer';
 import profileLogo from '../../assets/images/profileLogo.png'
 import style from './Users.module.css'
 import { NavLink } from 'react-router-dom';
-import { v1 } from 'uuid';
 
 
 type UsersType = {

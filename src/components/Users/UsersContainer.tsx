@@ -27,8 +27,6 @@ type UsersAPIType = {
     users: UsersOfSearchType
     isFetching: boolean
     followingProgress: Array<number | null>
-    //setCurrentPage: (currentPage: number) => void
-    //toggleIsFollowingProgress: (isFollowing: boolean, userId: number) => void
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
     followThunkCreator: (userId: number) => void
     unFollowThunkCreator: (userId: number) => void
@@ -75,11 +73,7 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 };
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
-    connect(mapStateToProps, {
-        //setCurrentPage,
-        //toggleIsFollowingProgress,
-        //?--thunk
+       connect(mapStateToProps, {
         getUsersThunkCreator,
         followThunkCreator,
         unFollowThunkCreator,
