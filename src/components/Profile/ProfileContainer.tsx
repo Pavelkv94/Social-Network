@@ -10,7 +10,7 @@ import { compose } from 'redux';
 type MapStatePropsType = {
     profile: ProfileDataType
     status: string
-    authUserId: string | null
+    authUserId: number | null
     isAuth: boolean
 }
 type MapDispatchPropsType = {

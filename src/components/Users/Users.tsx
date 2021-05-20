@@ -12,8 +12,8 @@ type UsersType = {
     users: UsersOfSearchType
     followingProgress: Array<number | null>
     onPageChanged: (pageNumber: number) => void
-    followThunkCreator: (userId: any) => void
-    unFollowThunkCreator: (userId: any) => void
+    followThunkCreator: (userId: number) => void
+    unFollowThunkCreator: (userId: number) => void
 
 }
 export function Users(props: UsersType) {

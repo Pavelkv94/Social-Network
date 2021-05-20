@@ -2,31 +2,26 @@ import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
 import { ActionTypes, DispatchType } from "./redux-store";
 
-
-export type InitialAuthType = {
-    id: string | null
-    login: null | string
-    email: null | string
-    isAuth: boolean
-}
 type PayloadType = {
     id: null | number
     login: null | string
     email: null | string
     isAuth: boolean
 }
-let initialState: InitialAuthType = {
-    id: null,
-    login: null,
-    email: null,
+let initialState = {
+    id: null as (number | null),
+    login: null as string | null,
+    email: null as string | null,
     isAuth: false
 }
+export type InitialAuthType = typeof initialState;
+
 export type setAuthUserDataType = {
     type: "SET-USER-DATA",
     payload: PayloadType
 }
 
-export const authReducer = (state: InitialAuthType = initialState, action: ActionTypes) => {
+export const authReducer = (state: InitialAuthType = initialState, action: ActionTypes): InitialAuthType => {
     switch (action.type) {
         case "SET-USER-DATA":
             return {

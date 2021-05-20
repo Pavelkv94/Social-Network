@@ -7,7 +7,6 @@ import {
 import React from 'react';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
-import { usersAPI } from '../../api/api';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
@@ -28,11 +27,11 @@ type UsersAPIType = {
     users: UsersOfSearchType
     isFetching: boolean
     followingProgress: Array<number | null>
-    setCurrentPage: (currentPage: number) => void
-    toggleIsFollowingProgress: (isFollowing: boolean, userId: number) => void
+    //setCurrentPage: (currentPage: number) => void
+    //toggleIsFollowingProgress: (isFollowing: boolean, userId: number) => void
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
-    followThunkCreator: (userId: any) => void
-    unFollowThunkCreator: (userId: any) => void
+    followThunkCreator: (userId: number) => void
+    unFollowThunkCreator: (userId: number) => void
 
 }
 export class UsersAPiComponent extends React.Component<UsersAPIType>{
@@ -78,8 +77,8 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
 export default compose<React.ComponentType>(
     withAuthRedirect,
     connect(mapStateToProps, {
-        setCurrentPage,
-        toggleIsFollowingProgress,
+        //setCurrentPage,
+        //toggleIsFollowingProgress,
         //?--thunk
         getUsersThunkCreator,
         followThunkCreator,
