@@ -41,7 +41,7 @@ type StateType = {
     status: string
 }
 class ProfileStatus extends React.Component<ProfileStatusType> {
-    state:StateType = {
+    state: StateType = {
         editMode: false,
         status: this.props.status
     }
@@ -65,18 +65,14 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
     }
 
     componentDidUpdate(prevProps: ProfileStatusType, prevState: StateType) {
-
         if (prevProps.status !== this.props.status) {
             this.setState({
                 status: this.props.status
             });
         }
-
-        console.log("componentDidUpdate")
     }
 
     render() {
-        console.log("render")
         return (
             <div>
                 {!this.state.editMode &&

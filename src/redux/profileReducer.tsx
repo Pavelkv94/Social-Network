@@ -1,5 +1,5 @@
 import { profileAPI, usersAPI } from "../api/api";
-import { ActionTypes, DispatchType } from "./redux-store";
+import { ActionTypes, DispatchType, ThunkType } from "./redux-store";
 type ContactsType = {
     "facebook": string | null
     "website": string | null
@@ -110,7 +110,7 @@ export const setStatus = (status: string): SetStatusType => {
 
 //TODO----------------------создаем Thunk-CREATORS----------
 
-export const getUserProfileThunkCreator = (userId: number | null) =>
+export const getUserProfileThunkCreator = (userId: number | null): ThunkType =>
     (dispatch: DispatchType) => {
         usersAPI.getProfile(userId)
             .then(response => {
@@ -118,7 +118,7 @@ export const getUserProfileThunkCreator = (userId: number | null) =>
             });
     }
 
-export const getUserStatus = (userId: number | null) =>
+export const getUserStatus = (userId: number | null): ThunkType =>
     (dispatch: DispatchType) => {
         profileAPI.getStatus(userId)
             .then(response => {
@@ -126,7 +126,7 @@ export const getUserStatus = (userId: number | null) =>
             });
     }
 
-export const updateUserStatus = (status: string) =>
+export const updateUserStatus = (status: string): ThunkType =>
     (dispatch: DispatchType) => {
         profileAPI.updateStatus(status)
             .then(response => {

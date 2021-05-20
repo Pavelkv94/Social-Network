@@ -1,6 +1,6 @@
 import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
-import { ActionTypes, DispatchType } from "./redux-store";
+import { ActionTypes, DispatchType, ThunkType } from "./redux-store";
 
 type PayloadType = {
     id: null | number
@@ -37,7 +37,7 @@ export const setAuthUserData = (id: null | number, login: null | string, email: 
     payload: { id, login, email, isAuth }
 })
 
-export const getAuthUserDataThunkCreator = () => (dispatch: DispatchType) => {
+export const getAuthUserDataThunkCreator = (): ThunkType => (dispatch: DispatchType) => {
     authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             let { id, login, email } = response.data.data;
@@ -46,7 +46,7 @@ export const getAuthUserDataThunkCreator = () => (dispatch: DispatchType) => {
     });
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: DispatchType) => {
+export const login = (email: string, password: string, rememberMe: boolean): ThunkType => (dispatch: DispatchType) => {
 
     authAPI.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
@@ -60,7 +60,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
     });
 }
 
-export const logout = () => (dispatch: DispatchType) => {
+export const logout = (): ThunkType => (dispatch: DispatchType) => {
     authAPI.logout().then(response => {
         if (response.data.resultCode === 0) {
             dispatch(setAuthUserData(null, null, null, false));

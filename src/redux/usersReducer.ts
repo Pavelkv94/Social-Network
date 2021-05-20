@@ -1,17 +1,22 @@
+import { ThunkAction } from "redux-thunk";
 import { usersAPI } from "../api/api";
-import { ActionTypes, DispatchType } from "./redux-store";
+import { ActionTypes, DispatchType, ReduxStateType, ThunkType } from "./redux-store";
 
 export type LocationType = {
   city: string;
   country: string;
 };
+export type PhotosType = {
+  small: string | null
+  large: string | null
+}
 export type UserOfSearchType = {
   id: number;
-  photos: any
+  photos: PhotosType
   followed: boolean;
   name: string;
   status: string;
- };
+};
 export type UsersOfSearchType = Array<UserOfSearchType>;
 export type UsersStateType = {
   users: UsersOfSearchType
@@ -168,42 +173,45 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number): 
 
 //todo Создаем ThunkCreator
 
-export const getUsersThunkCreator = (currentPage:number, pageSize:number)=>{
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunkType => {
   //через замыкание
-  return (dispatch:DispatchType) => {
-  dispatch(toggleIsFetching(true))
+  return async (dispatch: DispatchType) => {
+    dispatch(toggleIsFetching(true))
 
-  usersAPI.getUsers(currentPage, pageSize).then(data => {
-       dispatch(toggleIsFetching(false));
-       dispatch(setUsers(data.items));
-       dispatch(setTotalCount(data.totalCount));
-  });
-}}
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setTotalCount(data.totalCount));
+    });
+  }
+}
 
-export const followThunkCreator = (userId:number)=>{
-  
-  return (dispatch:DispatchType) => {
-    dispatch(toggleIsFollowingProgress(true, userId ));
+export const followThunkCreator = (userId: number): ThunkType => {
+
+  return async (dispatch: DispatchType) => {
+    dispatch(toggleIsFollowingProgress(true, userId));
 
     usersAPI.getFollow(userId)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-              dispatch(followSuccess(userId));
-            }
-            dispatch(toggleIsFollowingProgress(false, userId));
-        });
-}}
+      .then(response => {
+        if (response.data.resultCode === 0) {
+          dispatch(followSuccess(userId));
+        }
+        dispatch(toggleIsFollowingProgress(false, userId));
+      });
+  }
+}
 
-export const unFollowThunkCreator = (userId:number)=>{
-  
-  return (dispatch:DispatchType) => {
-    dispatch(toggleIsFollowingProgress(true, userId ));
+export const unFollowThunkCreator = (userId: number): ThunkType => {
+
+  return async (dispatch: DispatchType) => {
+    dispatch(toggleIsFollowingProgress(true, userId));
 
     usersAPI.getUnFollow(userId)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-              dispatch(unfollowSuccess(userId));
-            }
-            dispatch(toggleIsFollowingProgress(false, userId));
-        });
-}}
+      .then(response => {
+        if (response.data.resultCode === 0) {
+          dispatch(unfollowSuccess(userId));
+        }
+        dispatch(toggleIsFollowingProgress(false, userId));
+      });
+  }
+}

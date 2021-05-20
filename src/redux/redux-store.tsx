@@ -4,9 +4,10 @@ import { AddPostActionType, profileReducer,  SetStatusType, SetUserProfileType }
 import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, ToggleIsFollowingProgressType, TotalCountType, UnFollowType, usersReducer } from "./usersReducer";
 import { authReducer, setAuthUserDataType } from "./authReducer";
-import thunkMiddleware from "redux-thunk";
+import thunkMiddleware, { ThunkAction } from "redux-thunk";
 import { FormAction, reducer as formReducer } from 'redux-form';
 
+export type ThunkType = ThunkAction<void, ReduxStateType, unknown, ActionTypes>
 export type ActionTypes =
     AddPostActionType
     | SendMessageType
