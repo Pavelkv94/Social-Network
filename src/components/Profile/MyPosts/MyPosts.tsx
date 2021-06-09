@@ -16,26 +16,6 @@ type NewPostType = {
     newPost: string
 }
 
-
-export function MyPosts(props: MyPostType) {
-
-    const postElement = props.posts.map(p => <Post message={p.message} src={p.src} likeCount={p.likeCount} key={p.id} />)
-
-    //const newPostElement = React.createRef<HTMLTextAreaElement>();
-    const addPost = (values: NewPostType) => {
-        props.addPost(values.newPost)
-    }
-
-
-    return (
-        <div className={mypost.block}>
-            <h3>My posts</h3>
-            <AddNewPostFormRedux onSubmit={addPost} />
-            {postElement}
-        </div>
-    )
-}
-
 const maxLength10 = maxLengthCreator(10);
 
 const AddNewPostForm = (props: InjectedFormProps<NewPostType>) => {
@@ -52,3 +32,21 @@ const AddNewPostForm = (props: InjectedFormProps<NewPostType>) => {
 }
 
 const AddNewPostFormRedux = reduxForm<NewPostType>({ form: "addNewPost" })(AddNewPostForm)
+
+export const MyPosts = React.memo((props: MyPostType) => {
+    console.log("RENDER YO");
+    const postElement = props.posts.map(p => <Post message={p.message} src={p.src} likeCount={p.likeCount} key={p.id} />)
+
+    //const newPostElement = React.createRef<HTMLTextAreaElement>();
+    const addPost = (values: NewPostType) => {
+        props.addPost(values.newPost)
+    }
+
+    return (
+        <div className={mypost.block}>
+            <h3>My posts</h3>
+            <AddNewPostFormRedux onSubmit={addPost} />
+            {postElement}
+        </div>
+    )
+})
