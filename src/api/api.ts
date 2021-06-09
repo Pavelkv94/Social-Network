@@ -11,14 +11,15 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`
         ).then((response: AxiosResponse<any>) => response.data)
     },
-    getUnFollow(userId: number | null) {
-        return instance.delete(`follow/${userId}`
-        ).then(response => response.data)
-    },
     getFollow(userId: number | null) {
         return instance.post(`follow/${userId}`, {}
-        ).then(response => response.data)
+        )
     },
+    getUnFollow(userId: number | null) {
+        return instance.delete(`follow/${userId}`
+        )
+    },
+
 }
 
 
