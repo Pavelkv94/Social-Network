@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { profileAPI } from '../../../api/api';
 
 type ProfileStatusType = {
     status: string
@@ -7,17 +9,18 @@ type ProfileStatusType = {
 export const ProfileStatus = (props: ProfileStatusType) => {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status);
-    console.log(props.status)
 
-    useEffect(()=>{
+    useEffect(() => {
         setStatus(props.status);
-    },[props.status]);
+
+    }, [props.status]);
 
     const activateMode = () => { setEditMode(true) }
 
     const deactivateMode = () => {
         setEditMode(false);
         props.updateStatus(status)
+
     }
 
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -27,8 +27,6 @@ class ProfileContainer extends React.Component<CommonPropsType>{
 
     componentDidMount() {
         let userId: number | null = +this.props.match.params.userId;
-        console.log(this.props)
-        console.log(this.props.status)
         if (!userId) {
             userId = this.props.authUserId;
             if (!userId) {
