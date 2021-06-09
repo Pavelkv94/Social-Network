@@ -55,7 +55,7 @@ let initialState: ProfileStateType = {
         { id: "5", message: "My second post", src: "https://www.meme-arsenal.com/memes/be50e6ba99654b5455027dcc82beb5b3.jpg", likeCount: "4" },
     ],
     profileData: null,
-    status: "Мой статус",
+    status: "",
 }
 
 export const profileReducer = (state: ProfileStateType = initialState, action: ActionTypes): ProfileStateType => {
@@ -103,7 +103,7 @@ export const setUserProfile = (profile: ProfileDataType): SetUserProfileType => 
 export const setStatus = (status: string): SetStatusType => {
     return {
         type: "SET-STATUS",
-        status: status
+        status,
     }
 }
 
@@ -130,8 +130,11 @@ export const updateUserStatus = (status: string): ThunkType =>
     (dispatch: DispatchType) => {
         profileAPI.updateStatus(status)
             .then(response => {
+                console.log(response)
                 if (response.data.resultCode === ResultCodeENum.Success) {
                     dispatch(setStatus(status));
                 }
-            });
+            })
+            //!test
+            .catch(rej=>console.log('ERROR'));
     }
