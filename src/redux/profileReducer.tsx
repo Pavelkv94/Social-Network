@@ -93,6 +93,7 @@ export const addPostActionCreator = (newPostText: string): AddPostActionType => 
     }
 }
 
+
 export const setUserProfile = (profile: ProfileDataType): SetUserProfileType => {
     return {
         type: "SET-USER-PROFILE",
@@ -111,8 +112,8 @@ export const setStatus = (status: string): SetStatusType => {
 //TODO----------------------создаем Thunk-CREATORS----------
 
 export const getUserProfileThunkCreator = (userId: number | null): ThunkType =>
-     (dispatch: DispatchType) => {
-         profileAPI.getProfile(userId)
+    (dispatch: DispatchType) => {
+        profileAPI.getProfile(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data));
             });
@@ -136,5 +137,5 @@ export const updateUserStatus = (status: string): ThunkType =>
                 }
             })
             //!test
-            .catch(rej=>console.log('ERROR'));
+            .catch(rej => console.log('ERROR'));
     }
