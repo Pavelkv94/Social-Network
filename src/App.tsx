@@ -13,7 +13,7 @@ import Login from './components/Login/Login';
 import { connect, Provider } from 'react-redux';
 import { initializeApp } from './redux/appReducer'
 import { compose } from 'redux';
-import { store, ReduxStateType } from './redux/redux-store';
+import { stores, ReduxStateType } from './redux/redux-store';
 import { Preloader } from './components/common/Preloader/Preloader';
 
 type AppPropsType = {
@@ -64,7 +64,7 @@ let AppContainer = compose<React.ComponentType>(
 
 const SamuraiJSApp: React.FC = () => {
   return <BrowserRouter>
-    <Provider store={store}>
+    <Provider store={stores}>
       <AppContainer />
     </Provider>
   </BrowserRouter>
