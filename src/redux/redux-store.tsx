@@ -40,9 +40,6 @@ let rootReducer = combineReducers({
 
 
 
-export const composeEnhancers =
-    (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-export const stores: Store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 
 export type RootReducerType = typeof rootReducer;
@@ -53,8 +50,14 @@ export type ReduxStoreType = {
     subscribe: (observer: () => void) => void
     dispatch: DispatchType
 };
-//отдаем редьюсеры стору
-export let store: Store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+//todo старый стор
+// export let store: Store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
+//todo новый стор с REDUX_DEVTOOLS
+export const composeEnhancers =
+    (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+    //отдаем редьюсеры стору
+export const store: Store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 //@ts-ignore
 window.store = store;
