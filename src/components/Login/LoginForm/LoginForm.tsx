@@ -1,6 +1,6 @@
 import { Field, InjectedFormProps } from "redux-form"
 import { requiredField } from "../../../utils/validators/validators"
-import { Input } from "../../common/FormsControl/FormControl"
+import { CreateField, Input } from "../../common/FormsControl/FormControl"
 import s from "./../../common/FormsControl/FormControl.module.css"
 
 export type FormDataType = {
@@ -14,6 +14,10 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
+            {CreateField("Email", "text", "email", [requiredField])}
+            {CreateField("password", "password", "password", [requiredField])}
+            {CreateField("", "checkbox", "rememberMe", "", "remember me")}
+{/*             
             <div>
                 <Field
                     component={Input}
@@ -24,7 +28,8 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                 />
             </div>
             <div>
-                <Field component={Input}
+                <Field
+                    component={Input}
                     placeholder="password"
                     type="password"
                     name="password"
@@ -34,13 +39,14 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
             <div>
                 <Field
                     component={Input}
+                    placeholder=""
                     type="checkbox"
                     name="rememberMe"
                 /> remember me
-                </div>
-               {props.error && <div className={s.formSummaryError}>
-                   {props.error}
-                </div>}
+            </div> */}
+            {props.error && <div className={s.formSummaryError}>
+                {props.error}
+            </div>}
             <div>
                 <button>Log In</button>
             </div>

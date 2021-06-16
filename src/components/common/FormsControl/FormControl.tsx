@@ -1,5 +1,7 @@
 import React from 'react';
 import { WrappedFieldMetaProps, WrappedFieldProps } from 'redux-form';
+import { FieldValidatorType } from '../../../utils/validators/validators';
+import { Field } from "redux-form"
 import style from './FormControl.module.css';
 
 type FormControlPropsType = {
@@ -52,3 +54,21 @@ export const Input = (props: WrappedFieldProps) => {
 //         </div>
 //     )
 // };
+
+
+export const CreateField = (
+    placeholder: "password" | "Email" | "",
+    type: "password" | "text" | "checkbox",
+    name: "password" | "email" | "rememberMe",
+    validators: FieldValidatorType[] | "",
+    title?: string) => (
+    <div>
+        <Field
+            component={Input}
+            placeholder={placeholder}
+            type={type}
+            name={name}
+            validate={validators}
+        />{title}
+    </div>
+)
