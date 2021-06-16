@@ -9,6 +9,7 @@ type StateType = {
     editMode: boolean
     status: string
 }
+//! COMPONENT NOT USE
 class ProfileStatuss extends React.Component<ProfileStatusType> {
     state: StateType = {
         editMode: false,
