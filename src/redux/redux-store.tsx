@@ -25,8 +25,6 @@ export type ActionTypes =
     | InitializedSuccessType
 //| FormAction
 
-
-
 //Обьединяем наши редьюсеры
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -37,10 +35,6 @@ let rootReducer = combineReducers({
     form: formReducer,
     app: appReducer
 });
-
-
-
-
 
 export type RootReducerType = typeof rootReducer;
 export type ReduxStateType = ReturnType<RootReducerType>;//AppStateType
