@@ -27,31 +27,31 @@ export type UsersStateType = {
   followingInProgress: Array<number | null>
 };
 export type FollowType = {
-  type: "FOLLOW";
+  type: "SOCIAL-NETWORK/USERS/FOLLOW";
   userId: number;
 };
 export type UnFollowType = {
-  type: "UNFOLLOW";
+  type: "SOCIAL-NETWORK/USERS/UNFOLLOW";
   userId: number;
 };
 export type SetUsersType = {
-  type: "SET-USERS";
+  type: "SOCIAL-NETWORK/USERS/SET-USERS";
   users: UsersOfSearchType;
 };
 export type CurrentPageType = {
-  type: "SET-CURRENT-PAGE"
+  type: "SOCIAL-NETWORK/USERS/SET-CURRENT-PAGE"
   currentPage: number
 }
 export type TotalCountType = {
-  type: "SET-TOTAL-COUNT",
+  type: "SOCIAL-NETWORK/USERS/SET-TOTAL-COUNT",
   totalUsersCount: number
 }
 export type ToggleIsFetchingType = {
-  type: "TOGGLE-IS-FETCHING",
+  type: "SOCIAL-NETWORK/USERS/TOGGLE-IS-FETCHING",
   isFetching: boolean
 };
 export type ToggleIsFollowingProgressType = {
-  type: "TOGGLE-IS-FOLLOWING-PROGRESS",
+  type: "SOCIAL-NETWORK/USERS/TOGGLE-IS-FOLLOWING-PROGRESS",
   isFetching: boolean
   userId: number
 };
@@ -69,7 +69,7 @@ export const usersReducer = (
   action: ActionTypes
 ): UsersStateType => {
   switch (action.type) {
-    case "FOLLOW":
+    case "SOCIAL-NETWORK/USERS/FOLLOW":
       return {
         ...state,
         users: state.users.map((u) => {
@@ -81,7 +81,7 @@ export const usersReducer = (
         }),
       };
 
-    case "UNFOLLOW":
+    case "SOCIAL-NETWORK/USERS/UNFOLLOW":
       return {
         ...state,
         users: state.users.map((u) => {
@@ -93,19 +93,19 @@ export const usersReducer = (
         }),
       };
 
-    case "SET-USERS": {
+    case "SOCIAL-NETWORK/USERS/SET-USERS": {
       return { ...state, users: action.users };
     };
-    case "SET-CURRENT-PAGE": {
+    case "SOCIAL-NETWORK/USERS/SET-CURRENT-PAGE": {
       return { ...state, currentPage: action.currentPage };
     }
-    case "SET-TOTAL-COUNT": {
+    case "SOCIAL-NETWORK/USERS/SET-TOTAL-COUNT": {
       return { ...state, totalUsersCount: action.totalUsersCount };
     }
-    case "TOGGLE-IS-FETCHING": {
+    case "SOCIAL-NETWORK/USERS/TOGGLE-IS-FETCHING": {
       return { ...state, isFetching: action.isFetching }
     }
-    case "TOGGLE-IS-FOLLOWING-PROGRESS": {
+    case "SOCIAL-NETWORK/USERS/TOGGLE-IS-FOLLOWING-PROGRESS": {
       return {
         ...state,
         followingInProgress: action.isFetching
@@ -123,49 +123,49 @@ export const usersReducer = (
 //follow friends
 export const followSuccess = (userId: number): FollowType => {
   return {
-    type: "FOLLOW",
+    type: "SOCIAL-NETWORK/USERS/FOLLOW",
     userId: userId,
   };
 };
 //unfollow friends
 export const unfollowSuccess = (userId: number): UnFollowType => {
   return {
-    type: "UNFOLLOW",
+    type: "SOCIAL-NETWORK/USERS/UNFOLLOW",
     userId: userId,
   };
 };
 //засунуть пользователей которых мы найдем в стейт
 export const setUsers = (users: UsersOfSearchType): SetUsersType => {
   return {
-    type: "SET-USERS",
+    type: "SOCIAL-NETWORK/USERS/SET-USERS",
     users: users,
   };
 };
 //установить текущую страницу
 export const setCurrentPage = (currentPage: number): CurrentPageType => {
   return {
-    type: "SET-CURRENT-PAGE",
+    type: "SOCIAL-NETWORK/USERS/SET-CURRENT-PAGE",
     currentPage: currentPage
   };
 };
 //установить общее кол-во пользователей с сервера
 export const setTotalCount = (totalUsersCount: number): TotalCountType => {
   return {
-    type: "SET-TOTAL-COUNT",
+    type: "SOCIAL-NETWORK/USERS/SET-TOTAL-COUNT",
     totalUsersCount: totalUsersCount
   };
 };
 //создаем прелоадер
 export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingType => {
   return {
-    type: "TOGGLE-IS-FETCHING",
+    type: "SOCIAL-NETWORK/USERS/TOGGLE-IS-FETCHING",
     isFetching: isFetching
   };
 };
 //отключаем кнопку фоловинга при нажатии
 export const toggleIsFollowingProgress = (isFetching: boolean, userId: number): ToggleIsFollowingProgressType => {
   return {
-    type: "TOGGLE-IS-FOLLOWING-PROGRESS",
+    type: "SOCIAL-NETWORK/USERS/TOGGLE-IS-FOLLOWING-PROGRESS",
     isFetching,
     userId
   };

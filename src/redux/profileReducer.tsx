@@ -35,15 +35,15 @@ export type ProfileStateType = {
     status: string
 }
 export type AddPostActionType = {
-    type: "ADD-POST"
+    type: "SOCIAL-NETWORK/PROFILE/ADD-POST"
     postMessage: string
 }
 export type SetUserProfileType = {
-    type: "SET-USER-PROFILE",
+    type: "SOCIAL-NETWORK/PROFILE/SET-USER-PROFILE",
     profile: ProfileDataType
 }
 export type SetStatusType = {
-    type: "SET-STATUS"
+    type: "SOCIAL-NETWORK/PROFILE/SET-STATUS"
     status: string
 }
 
@@ -60,7 +60,7 @@ let initialState: ProfileStateType = {
 
 export const profileReducer = (state: ProfileStateType = initialState, action: ActionTypes): ProfileStateType => {
     switch (action.type) {
-        case "ADD-POST":
+        case "SOCIAL-NETWORK/PROFILE/ADD-POST":
             let newPost: PostDataType = {
                 id: "5",
                 message: action.postMessage,
@@ -71,12 +71,12 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
                 ...state,
                 postData: [...state.postData, newPost], //используем спрэд-оператор вместо push
             }
-        case "SET-USER-PROFILE":
+        case "SOCIAL-NETWORK/PROFILE/SET-USER-PROFILE":
             return {
                 ...state,
                 profileData: action.profile
             }
-        case "SET-STATUS":
+        case "SOCIAL-NETWORK/PROFILE/SET-STATUS":
             return {
                 ...state,
                 status: action.status
@@ -88,7 +88,7 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
 //TODO----------------------создаем ACTION-CREATORS----------
 export const addPostActionCreator = (newPostText: string): AddPostActionType => {
     return {
-        type: "ADD-POST",
+        type: "SOCIAL-NETWORK/PROFILE/ADD-POST",
         postMessage: newPostText
     }
 }
@@ -96,14 +96,14 @@ export const addPostActionCreator = (newPostText: string): AddPostActionType => 
 
 export const setUserProfile = (profile: ProfileDataType): SetUserProfileType => {
     return {
-        type: "SET-USER-PROFILE",
+        type: "SOCIAL-NETWORK/PROFILE/SET-USER-PROFILE",
         profile,
     }
 }
 
 export const setStatus = (status: string): SetStatusType => {
     return {
-        type: "SET-STATUS",
+        type: "SOCIAL-NETWORK/PROFILE/SET-STATUS",
         status,
     }
 }

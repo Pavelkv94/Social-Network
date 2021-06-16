@@ -17,13 +17,13 @@ let initialState = {
 export type InitialAuthType = typeof initialState;
 
 export type setAuthUserDataType = {
-    type: "SET-USER-DATA",
+    type: "SOCIAL-NETWORK/AUTH/SET-USER-DATA",
     payload: PayloadType
 }
 
 export const authReducer = (state: InitialAuthType = initialState, action: ActionTypes): InitialAuthType => {
     switch (action.type) {
-        case "SET-USER-DATA":
+        case "SOCIAL-NETWORK/AUTH/SET-USER-DATA":
             return {
                 ...state,
                 ...action.payload,
@@ -33,7 +33,7 @@ export const authReducer = (state: InitialAuthType = initialState, action: Actio
 }
 
 export const setAuthUserData = (id: null | number, login: null | string, email: null | string, isAuth: boolean): setAuthUserDataType => ({
-    type: "SET-USER-DATA",
+    type: "SOCIAL-NETWORK/AUTH/SET-USER-DATA",
     payload: { id, login, email, isAuth }
 })
 

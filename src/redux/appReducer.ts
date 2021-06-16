@@ -7,13 +7,13 @@ let initialState = {
 export type InitialAuthType = typeof initialState;
 
 export type InitializedSuccessType = {
-    type: "SET-INITIALIZED",
+    type: "SOCIAL-NETWORK/APP/SET-INITIALIZED",
 }
 
 
 export const appReducer = (state: InitialAuthType = initialState, action: ActionTypes): InitialAuthType => {
     switch (action.type) {
-        case "SET-INITIALIZED":
+        case "SOCIAL-NETWORK/APP/SET-INITIALIZED":
             return {
                 ...state,
                 initialized: true
@@ -23,7 +23,7 @@ export const appReducer = (state: InitialAuthType = initialState, action: Action
 }
 
 export const initializedSuccess = (): InitializedSuccessType => ({
-    type: "SET-INITIALIZED"
+    type: "SOCIAL-NETWORK/APP/SET-INITIALIZED"
 })
 
 export const initializeApp = (): ThunkType => (dispatch: DispatchType) => {

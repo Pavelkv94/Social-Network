@@ -14,7 +14,7 @@ export type DialogsStateType = {
 }
 
 export type SendMessageType = {
-    type: "SEND-MESSAGE"
+    type: "SOCIAL-NETWORK/DIALOGS/SEND-MESSAGE"
     newMessageBody: string
 }
 
@@ -40,7 +40,7 @@ let initialState: DialogsStateType = {
 export const dialogsReducer = (state: DialogsStateType = initialState, action: ActionTypes): DialogsStateType => {
 
     switch (action.type) {
-        case "SEND-MESSAGE":
+        case "SOCIAL-NETWORK/DIALOGS/SEND-MESSAGE":
             let body = action.newMessageBody;
             return {
                 ...state,
@@ -53,7 +53,7 @@ export const dialogsReducer = (state: DialogsStateType = initialState, action: A
 //TODO----------------------создаем ACTION-CREATORS----------
 export const sendMessageCreator = (newMessageBody: string): SendMessageType => {
     return {
-        type: "SEND-MESSAGE",
+        type: "SOCIAL-NETWORK/DIALOGS/SEND-MESSAGE",
         newMessageBody
     }
 }
