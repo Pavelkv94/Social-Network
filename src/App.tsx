@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { HashRouter, Route, withRouter } from 'react-router-dom';
 import './App.css';
 import { Navbar } from './components/Navbar/Navbar';
 import { Music } from './components/Music/Music';
@@ -33,24 +33,22 @@ class App extends React.Component<AppPropsType> {
     }
 
     return (
-      <BrowserRouter>
-        <div className='app-wrapper'>
-          <HeaderContainer />
-          <Navbar />
-          <div className="app-wrapper-content">
-            <Route render={() => <DialogsContainer
-            />} path="/dialogs" />
-            <Route render={() => <ProfileContainer
-            />} path="/profile/:userId?" />
-            <Route render={() => <News />} path="/news" />
-            <Route render={() => <Music />} path="/music" />
-            <Route render={() => <UsersContainer
-            />} path="/users" />
-            <Route render={() => <Setting />} path="/setting" />
-            <Route render={() => <Login />} path="/login" />
-          </div>
+      <div className='app-wrapper'>
+        <HeaderContainer />
+        <Navbar />
+        <div className="app-wrapper-content">
+          <Route render={() => <DialogsContainer
+          />} path="/dialogs" />
+          <Route render={() => <ProfileContainer
+          />} path="/profile/:userId?" />
+          <Route render={() => <News />} path="/news" />
+          <Route render={() => <Music />} path="/music" />
+          <Route render={() => <UsersContainer
+          />} path="/users" />
+          <Route render={() => <Setting />} path="/setting" />
+          <Route render={() => <Login />} path="/login" />
         </div>
-      </BrowserRouter>
+      </div>
     );
   }
 }
@@ -61,12 +59,14 @@ const mapStateToProps = (state: ReduxStateType) => ({
 let AppContainer = compose<React.ComponentType>(
   withRouter,
   connect(mapStateToProps, { initializeApp }))(App)
-
+//HashRouter  идет отсчет от корня
 const SamuraiJSApp: React.FC = () => {
-  return <BrowserRouter>
+  return <HashRouter 
+  //BrowserRouter   basename={process.env.PUBLIC_URL}
+  >
     <Provider store={store}>
       <AppContainer />
     </Provider>
-  </BrowserRouter>
+  </HashRouter>
 }
 export default SamuraiJSApp;
