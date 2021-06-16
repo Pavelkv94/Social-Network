@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, compose, createStore, Store } from "redux";
+import { applyMiddleware, combineReducers, compose, createStore, Dispatch, Store } from "redux";
 import { dialogsReducer, SendMessageType } from "./dialogsReducer";
 import { AddPostActionType, profileReducer, SetStatusType, SetUserProfileType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
@@ -26,7 +26,7 @@ export type ActionTypes =
 //| FormAction
 
 
-export type DispatchType = (action: ActionTypes) => void;
+
 //Обьединяем наши редьюсеры
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -48,7 +48,7 @@ export type ReduxStateType = ReturnType<RootReducerType>;//AppStateType
 export type ReduxStoreType = {
     getState: () => ReduxStateType
     subscribe: (observer: () => void) => void
-    dispatch: DispatchType
+    dispatch: Dispatch<ActionTypes>
 };
 //todo старый стор
 // export let store: Store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
@@ -56,7 +56,7 @@ export type ReduxStoreType = {
 //todo новый стор с REDUX_DEVTOOLS
 export const composeEnhancers =
     (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-    //отдаем редьюсеры стору
+//отдаем редьюсеры стору
 export const store: Store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 //@ts-ignore

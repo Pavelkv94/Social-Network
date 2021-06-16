@@ -1,5 +1,6 @@
+import { Dispatch } from "redux";
 import { profileAPI, ResultCodeENum, usersAPI } from "../api/api";
-import { ActionTypes, DispatchType, ThunkType } from "./redux-store";
+import { ActionTypes, ThunkType } from "./redux-store";
 type ContactsType = {
     "facebook": string | null
     "website": string | null
@@ -112,30 +113,26 @@ export const setStatus = (status: string): SetStatusType => {
 //TODO----------------------создаем Thunk-CREATORS----------
 
 export const getUserProfileThunkCreator = (userId: number | null): ThunkType =>
-    (dispatch: DispatchType) => {
-        profileAPI.getProfile(userId)
-            .then(response => {
-                dispatch(setUserProfile(response.data));
-            });
+    async (dispatch: Dispatch<ActionTypes>) => {
+        let response = await profileAPI.getProfile(userId)
+        dispatch(setUserProfile(response.data));
     }
-
 export const getUserStatus = (userId: number | null): ThunkType =>
-    (dispatch: DispatchType) => {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setStatus(response.data));
-            });
+    async (dispatch: Dispatch<ActionTypes>) => {
+        let response = await profileAPI.getStatus(userId)
+        dispatch(setStatus(response.data));
     }
 
 export const updateUserStatus = (status: string): ThunkType =>
-    (dispatch: DispatchType) => {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                console.log(response)
-                if (response.data.resultCode === ResultCodeENum.Success) {
-                    dispatch(setStatus(status));
-                }
-            })
-            //!test
-            .catch(rej => console.log('ERROR'));
+    async (dispatch: Dispatch<ActionTypes>) => {
+        try {
+            let response = await profileAPI.updateStatus(status)
+            if (response.data.resultCode === ResultCodeENum.Success) {
+                dispatch(setStatus(status));
+            }
+        }
+        //!test
+        catch {
+            console.log('ERROR')
+        }
     }

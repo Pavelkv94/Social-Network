@@ -1,6 +1,7 @@
+import { Dispatch } from "react";
 import { stopSubmit } from "redux-form";
 import { authAPI, ResultCodeENum } from "../api/api";
-import { ActionTypes, DispatchType, ThunkType } from "./redux-store";
+import { ActionTypes, ThunkType } from "./redux-store";
 
 type PayloadType = {
     id: null | number
@@ -37,33 +38,33 @@ export const setAuthUserData = (id: null | number, login: null | string, email: 
     payload: { id, login, email, isAuth }
 })
 
-export const getAuthUserDataThunkCreator = (): ThunkType => (dispatch: DispatchType) => {
-   return  authAPI.me().then(data => {
-        if (data.resultCode === ResultCodeENum.Success) {
-            let { id, login, email } = data.data;
+//todo TC
+export const getAuthUserDataThunkCreator = (): ThunkType => async (dispatch: Dispatch<ActionTypes>) => {
+    let response = await authAPI.me()
+        if (response.resultCode === ResultCodeENum.Success) {
+            let { id, login, email } = response.data;
             dispatch(setAuthUserData(id, login, email, true));
         }
-    });
+    
 }
 
-export const login = (email: string, password: string, rememberMe: boolean): ThunkType => (dispatch: DispatchType) => {
+export const login = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch: Dispatch<ActionTypes>) => {
 
-    authAPI.login(email, password, rememberMe).then(data => {
-        if (data.resultCode === ResultCodeENum.Success) {
-            //@ts-ignore    //!<<<<<<<<<<---------------------------
+    let response = await authAPI.login(email, password, rememberMe)
+        if (response.resultCode === ResultCodeENum.Success) {
+            //@ts-ignore  //!<<<<=================================================== 
             dispatch(getAuthUserDataThunkCreator())
         } else {
-            let message = data.messages.length > 0 ? data.messages[0] : "Entered data is wrong."
-            //@ts-ignore    //!<<<<<<<<<<---------------------------
-            dispatch(stopSubmit("login", { _error: message }));
+            let message = response.messages.length > 0 ? response.messages[0] : "Entered data is wrong."
+                       dispatch(stopSubmit("login", { _error: message }));
         }
-    });
+   
 }
 
-export const logout = (): ThunkType => (dispatch: DispatchType) => {
-    authAPI.logout().then(data => {
-        if (data.resultCode === ResultCodeENum.Success) {
+export const logout = (): ThunkType => async(dispatch: Dispatch<ActionTypes>) => {
+    let response = await authAPI.logout()
+        if (response.resultCode === ResultCodeENum.Success) {
             dispatch(setAuthUserData(null, null, null, false));
         }
-    });
+    
 }

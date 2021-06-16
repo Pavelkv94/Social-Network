@@ -1,6 +1,7 @@
+import { Dispatch } from "react";
 import { ThunkAction } from "redux-thunk";
 import { ResultCodeENum, usersAPI } from "../api/api";
-import { ActionTypes, DispatchType, ReduxStateType, ThunkType } from "./redux-store";
+import { ActionTypes, ThunkType } from "./redux-store";
 
 export type LocationType = {
   city: string;
@@ -175,44 +176,39 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number): 
 
 export const getUsersThunkCreator = (page: number, pageSize: number): ThunkType => {
   //через замыкание
-  return async (dispatch: DispatchType) => {
+  return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(page));
 
-    usersAPI.getUsers(page, pageSize).then(data => {
-      dispatch(toggleIsFetching(false));
-      dispatch(setUsers(data.items));
-      dispatch(setTotalCount(data.totalCount));
-    });
+    let data = await usersAPI.getUsers(page, pageSize)
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalCount(data.totalCount));
   }
 }
 
 export const followThunkCreator = (userId: number): ThunkType => {
 
-  return async (dispatch: DispatchType) => {
+  return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(toggleIsFollowingProgress(true, userId));
 
-    usersAPI.getFollow(userId)
-      .then(response => {
-        if (response.data.resultCode === ResultCodeENum.Success) {
-          dispatch(followSuccess(userId));
-        }
-        dispatch(toggleIsFollowingProgress(false, userId));
-      });
+    let response = await usersAPI.getFollow(userId)
+    if (response.data.resultCode === ResultCodeENum.Success) {
+      dispatch(followSuccess(userId));
+    }
+    dispatch(toggleIsFollowingProgress(false, userId));
   }
 }
 
 export const unFollowThunkCreator = (userId: number): ThunkType => {
 
-  return async (dispatch: DispatchType) => {
+  return async (dispatch: Dispatch<ActionTypes>) => {
     dispatch(toggleIsFollowingProgress(true, userId));
 
-    usersAPI.getUnFollow(userId)
-      .then(response => {
-        if (response.data.resultCode === ResultCodeENum.Success) {
-          dispatch(unfollowSuccess(userId));
-        }
-        dispatch(toggleIsFollowingProgress(false, userId));
-      });
+    let response = await usersAPI.getUnFollow(userId)
+    if (response.data.resultCode === ResultCodeENum.Success) {
+      dispatch(unfollowSuccess(userId));
+    }
+    dispatch(toggleIsFollowingProgress(false, userId));
   }
 }

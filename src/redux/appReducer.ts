@@ -1,5 +1,6 @@
+import { Dispatch } from "redux";
 import { getAuthUserDataThunkCreator } from "./authReducer";
-import { ActionTypes, DispatchType, ThunkType } from "./redux-store";
+import { ActionTypes, ThunkType } from "./redux-store";
 
 let initialState = {
     initialized: false
@@ -26,7 +27,7 @@ export const initializedSuccess = (): InitializedSuccessType => ({
     type: "SOCIAL-NETWORK/APP/SET-INITIALIZED"
 })
 
-export const initializeApp = (): ThunkType => (dispatch: DispatchType) => {
+export const initializeApp = (): ThunkType => (dispatch: Dispatch<ActionTypes>) => {
     //@ts-ignore  //!<<<<=================================================== 
     let promise = dispatch(getAuthUserDataThunkCreator());
 

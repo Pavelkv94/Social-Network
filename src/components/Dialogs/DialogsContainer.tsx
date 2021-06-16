@@ -1,9 +1,9 @@
 import { sendMessageCreator, UserMessageType, UserType } from '../../redux/dialogsReducer';
-import { DispatchType, ReduxStateType } from '../../redux/redux-store';
+import { ActionTypes, ReduxStateType } from '../../redux/redux-store';
 import { Dialogs } from './Dialogs';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { compose } from 'redux';
+import { compose, Dispatch } from 'redux';
 
 type MapStateToPropsType = {
     dialogsData: Array<UserType>
@@ -19,7 +19,7 @@ let mapStateToProps = (state: ReduxStateType): MapStateToPropsType => {
         messagesData: state.dialogsPage.messagesData,
     }
 }
-let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
+let mapDispatchToProps = (dispatch: Dispatch<ActionTypes>): MapDispatchToPropsType => {
     return {
         sendMessageCreator: (newMessageBody: string) => { dispatch(sendMessageCreator(newMessageBody)) },
     }
