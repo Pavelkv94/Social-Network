@@ -15,7 +15,7 @@ type MapStateToPropsType = {
 const Login = (props: LoginPropsType) => {
 
     const onSubmit = (formData: FormDataType) => {
-        // console.log(formData)
+       
         props.login(formData.email, formData.password, formData.rememberMe)
     }
 

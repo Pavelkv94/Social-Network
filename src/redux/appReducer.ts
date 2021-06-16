@@ -7,9 +7,7 @@ let initialState = {
 }
 export type InitialAuthType = typeof initialState;
 
-export type InitializedSuccessType = {
-    type: "SOCIAL-NETWORK/APP/SET-INITIALIZED",
-}
+export type InitializedSuccessType = ReturnType<typeof initializedSuccess>
 
 
 export const appReducer = (state: InitialAuthType = initialState, action: ActionTypes): InitialAuthType => {
@@ -23,9 +21,9 @@ export const appReducer = (state: InitialAuthType = initialState, action: Action
     }
 }
 
-export const initializedSuccess = (): InitializedSuccessType => ({
+export const initializedSuccess = () => ({
     type: "SOCIAL-NETWORK/APP/SET-INITIALIZED"
-})
+} as const)
 
 export const initializeApp = (): ThunkType => (dispatch: Dispatch<ActionTypes>) => {
     //@ts-ignore  //!<<<<=================================================== 

@@ -28,35 +28,14 @@ export type UsersStateType = {
   isFetching: boolean
   followingInProgress: Array<number | null>
 };
-export type FollowType = {
-  type: "SOCIAL-NETWORK/USERS/FOLLOW";
-  userId: number;
-};
-export type UnFollowType = {
-  type: "SOCIAL-NETWORK/USERS/UNFOLLOW";
-  userId: number;
-};
-export type SetUsersType = {
-  type: "SOCIAL-NETWORK/USERS/SET-USERS";
-  users: UsersOfSearchType;
-};
-export type CurrentPageType = {
-  type: "SOCIAL-NETWORK/USERS/SET-CURRENT-PAGE"
-  currentPage: number
-}
-export type TotalCountType = {
-  type: "SOCIAL-NETWORK/USERS/SET-TOTAL-COUNT",
-  totalUsersCount: number
-}
-export type ToggleIsFetchingType = {
-  type: "SOCIAL-NETWORK/USERS/TOGGLE-IS-FETCHING",
-  isFetching: boolean
-};
-export type ToggleIsFollowingProgressType = {
-  type: "SOCIAL-NETWORK/USERS/TOGGLE-IS-FOLLOWING-PROGRESS",
-  isFetching: boolean
-  userId: number
-};
+export type FollowType = ReturnType<typeof followSuccess>
+export type UnFollowType = ReturnType<typeof unfollowSuccess>
+export type SetUsersType = ReturnType<typeof setUsers>
+export type CurrentPageType = ReturnType<typeof setCurrentPage>
+export type TotalCountType = ReturnType<typeof setTotalCount>
+export type ToggleIsFetchingType =ReturnType<typeof toggleIsFetching>
+export type ToggleIsFollowingProgressType = ReturnType<typeof toggleIsFollowingProgress>
+
 let initialState: UsersStateType = {
   users: [],
   pageSize: 25,
@@ -123,56 +102,55 @@ export const usersReducer = (
 };
 
 //TODO----------------------создаем ACTION-CREATORS----------
-//! переписать под payload {}
 //follow friends
-export const followSuccess = (userId: number): FollowType => {
+export const followSuccess = (userId: number) => {
   return {
     type: "SOCIAL-NETWORK/USERS/FOLLOW",
     userId: userId,
-  };
+  } as const;
 };
 //unfollow friends
-export const unfollowSuccess = (userId: number): UnFollowType => {
+export const unfollowSuccess = (userId: number) => {
   return {
     type: "SOCIAL-NETWORK/USERS/UNFOLLOW",
     userId: userId,
-  };
+  } as const;
 };
 //засунуть пользователей которых мы найдем в стейт
-export const setUsers = (users: UsersOfSearchType): SetUsersType => {
+export const setUsers = (users: UsersOfSearchType) => {
   return {
     type: "SOCIAL-NETWORK/USERS/SET-USERS",
     users: users,
-  };
+  } as const;
 };
 //установить текущую страницу
-export const setCurrentPage = (currentPage: number): CurrentPageType => {
+export const setCurrentPage = (currentPage: number) => {
   return {
     type: "SOCIAL-NETWORK/USERS/SET-CURRENT-PAGE",
     currentPage: currentPage
-  };
+  } as const;
 };
 //установить общее кол-во пользователей с сервера
-export const setTotalCount = (totalUsersCount: number): TotalCountType => {
+export const setTotalCount = (totalUsersCount: number) => {
   return {
     type: "SOCIAL-NETWORK/USERS/SET-TOTAL-COUNT",
     totalUsersCount: totalUsersCount
-  };
+  } as const;
 };
 //создаем прелоадер
-export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingType => {
+export const toggleIsFetching = (isFetching: boolean) => {
   return {
     type: "SOCIAL-NETWORK/USERS/TOGGLE-IS-FETCHING",
     isFetching: isFetching
-  };
+  } as const;
 };
 //отключаем кнопку фоловинга при нажатии
-export const toggleIsFollowingProgress = (isFetching: boolean, userId: number): ToggleIsFollowingProgressType => {
+export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) => {
   return {
     type: "SOCIAL-NETWORK/USERS/TOGGLE-IS-FOLLOWING-PROGRESS",
     isFetching,
     userId
-  };
+  } as const;
 };
 
 //todo Создаем ThunkCreator

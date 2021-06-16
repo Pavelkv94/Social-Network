@@ -35,18 +35,9 @@ export type ProfileStateType = {
     profileData: ProfileDataType
     status: string
 }
-export type AddPostActionType = {
-    type: "SOCIAL-NETWORK/PROFILE/ADD-POST"
-    postMessage: string
-}
-export type SetUserProfileType = {
-    type: "SOCIAL-NETWORK/PROFILE/SET-USER-PROFILE",
-    profile: ProfileDataType
-}
-export type SetStatusType = {
-    type: "SOCIAL-NETWORK/PROFILE/SET-STATUS"
-    status: string
-}
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type SetUserProfileType = ReturnType<typeof setUserProfile>
+export type SetStatusType = ReturnType<typeof setStatus>
 
 let initialState: ProfileStateType = {
     postData: [
@@ -87,26 +78,26 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
 }
 
 //TODO----------------------создаем ACTION-CREATORS----------
-export const addPostActionCreator = (newPostText: string): AddPostActionType => {
+export const addPostActionCreator = (newPostText: string) => {
     return {
         type: "SOCIAL-NETWORK/PROFILE/ADD-POST",
         postMessage: newPostText
-    }
+    } as const
 }
 
 
-export const setUserProfile = (profile: ProfileDataType): SetUserProfileType => {
+export const setUserProfile = (profile: ProfileDataType) => {
     return {
         type: "SOCIAL-NETWORK/PROFILE/SET-USER-PROFILE",
         profile,
-    }
+    } as const
 }
 
-export const setStatus = (status: string): SetStatusType => {
+export const setStatus = (status: string) => {
     return {
         type: "SOCIAL-NETWORK/PROFILE/SET-STATUS",
         status,
-    }
+    } as const
 }
 
 

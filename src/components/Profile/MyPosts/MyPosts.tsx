@@ -34,7 +34,7 @@ const AddNewPostForm = (props: InjectedFormProps<NewPostType>) => {
 const AddNewPostFormRedux = reduxForm<NewPostType>({ form: "addNewPost" })(AddNewPostForm)
 
 export const MyPosts = React.memo((props: MyPostType) => {
-    console.log("RENDER YO");
+
     const postElement = props.posts.map(p => <Post message={p.message} src={p.src} likeCount={p.likeCount} key={p.id} />)
 
     //const newPostElement = React.createRef<HTMLTextAreaElement>();
