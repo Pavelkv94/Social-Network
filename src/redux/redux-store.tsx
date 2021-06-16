@@ -5,7 +5,7 @@ import { sidebarReducer } from "./sidebarReducer";
 import { CurrentPageType, FollowType, SetUsersType, ToggleIsFetchingType, ToggleIsFollowingProgressType, TotalCountType, UnFollowType, usersReducer } from "./usersReducer";
 import { authReducer, setAuthUserDataType } from "./authReducer";
 import thunkMiddleware, { ThunkAction } from "redux-thunk";
-import { FormAction, reducer as formReducer } from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 import { appReducer, InitializedSuccessType } from "./appReducer";
 
 export type ThunkType = ThunkAction<void, ReduxStateType, unknown, ActionTypes>
