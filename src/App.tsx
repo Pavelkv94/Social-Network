@@ -5,9 +5,6 @@ import { Navbar } from './components/Navbar/Navbar';
 import { Music } from './components/Music/Music';
 import { News } from './components/News/News';
 import { Setting } from './components/Setting/Setting';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { connect, Provider } from 'react-redux';
@@ -15,6 +12,13 @@ import { initializeApp } from './redux/appReducer'
 import { compose } from 'redux';
 import { store, ReduxStateType } from './redux/redux-store';
 import { Preloader } from './components/common/Preloader/Preloader';
+// import DialogsContainer from './components/Dialogs/DialogsContainer';
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+// import UsersContainer from './components/Users/UsersContainer';
+// import ProfileContainer from './components/Profile/ProfileContainer';
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+
 
 type AppPropsType = {
   initialized: boolean
@@ -37,19 +41,19 @@ class App extends React.Component<AppPropsType> {
         <HeaderContainer />
         <Navbar />
         <div className="app-wrapper-content">
-          <Route render={() => <DialogsContainer
-          />} path="/dialogs" />
-          <Route render={() => <ProfileContainer
-          />} path="/profile/:userId?" />
+          <Route render={() => { return <React.Suspense fallback={<div>Загрузка...</div>}><DialogsContainer /></React.Suspense> }
+          } path="/dialogs" />
+          <Route render={() => { return <React.Suspense fallback={<div>Загрузка...</div>}> <ProfileContainer /></React.Suspense> }
+          } path="/profile/:userId?" />
           <Route render={() => <News />} path="/news" />
           <Route render={() => <Music />} path="/music" />
-          <Route render={() => <UsersContainer
-          />} path="/users" />
+          <Route render={() => { return <React.Suspense fallback={<div>Загрузка...</div>}> <UsersContainer /></React.Suspense> }
+          } path="/users" />
           <Route render={() => <Setting />} path="/setting" />
           <Route render={() => <Login />} path="/login" />
         </div>
       </div>
-    );
+    ); 
   }
 }
 const mapStateToProps = (state: ReduxStateType) => ({
@@ -61,7 +65,7 @@ let AppContainer = compose<React.ComponentType>(
   connect(mapStateToProps, { initializeApp }))(App)
 //HashRouter  идет отсчет от корня
 const SamuraiJSApp: React.FC = () => {
-  return <HashRouter 
+  return <HashRouter
   //BrowserRouter   basename={process.env.PUBLIC_URL}
   >
     <Provider store={store}>
