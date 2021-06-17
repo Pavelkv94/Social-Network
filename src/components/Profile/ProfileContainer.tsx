@@ -5,6 +5,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { ReduxStateType } from '../../redux/redux-store';
 import { getUserProfileThunkCreator, ProfileDataType, getUserStatus, updateUserStatus } from '../../redux/profileReducer'
 import { compose } from 'redux';
+import { savePhotoTC } from './../../redux/profileReducer'
 
 type MapStatePropsType = {
     profile: ProfileDataType
@@ -16,6 +17,7 @@ type MapDispatchPropsType = {
     getUserProfileThunkCreator: (userId: number | null) => void
     getUserStatus: (userId: number | null) => void
     updateUserStatus: (status: string) => void
+    savePhotoTC: (e: any) => void
 }
 type PathParamsType = {
     userId: string
@@ -47,7 +49,14 @@ class ProfileContainer extends React.Component<CommonPropsType>{
     }
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateUserStatus} />
+            <Profile
+                {...this.props}
+                isOwner={!!this.props.match.params.userId}
+                profile={this.props.profile}
+                status={this.props.status}
+                updateStatus={this.props.updateUserStatus}
+                savePhoto={this.props.savePhotoTC}
+            />
         )
     }
 }
@@ -60,6 +69,6 @@ let mapStateToProps = (state: ReduxStateType): MapStatePropsType => ({
 });
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, { getUserProfileThunkCreator, getUserStatus, updateUserStatus }),
+    connect(mapStateToProps, { getUserProfileThunkCreator, getUserStatus, updateUserStatus, savePhotoTC }),
     withRouter,
 )(ProfileContainer)

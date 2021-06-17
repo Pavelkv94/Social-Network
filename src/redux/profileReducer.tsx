@@ -38,6 +38,7 @@ export type ProfileStateType = {
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
 export type SetStatusType = ReturnType<typeof setStatus>
+export type SavePhotosType = ReturnType<typeof savePhotoAC>
 
 let initialState: ProfileStateType = {
     postData: [
@@ -73,6 +74,12 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
                 ...state,
                 status: action.status
             }
+        case "SOCIAL-NETWORK/PROFILE/SAVE-PHOTO":
+            return {
+                ...state,
+                //@ts-ignore
+                profileData: { ...state.profileData, photos: action.photos }
+            }
         default: return state;
     }
 }
@@ -97,6 +104,13 @@ export const setStatus = (status: string) => {
     return {
         type: "SOCIAL-NETWORK/PROFILE/SET-STATUS",
         status,
+    } as const
+}
+export const savePhotoAC = (photos: PhotosType) => {
+    debugger
+    return {
+        type: "SOCIAL-NETWORK/PROFILE/SAVE-PHOTO",
+        photos
     } as const
 }
 
@@ -125,5 +139,13 @@ export const updateUserStatus = (status: string): ThunkType =>
         //!test
         catch {
             console.log('ERROR')
+        }
+    }
+
+export const savePhotoTC = (file: File): ThunkType =>
+    async (dispatch: Dispatch<ActionTypes>) => {
+        let response = await profileAPI.savePhoto(file)
+        if (response.data.resultCode === ResultCodeENum.Success) {
+            dispatch(savePhotoAC(response.data.data.photos));
         }
     }

@@ -4,7 +4,7 @@ import './App.css';
 import { Navbar } from './components/Navbar/Navbar';
 import { Music } from './components/Music/Music';
 import { News } from './components/News/News';
-import { Setting } from './components/Setting/Setting';
+import { SettingContainer } from './components/Setting/SettingContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { connect, Provider } from 'react-redux';
@@ -49,7 +49,7 @@ class App extends React.Component<AppPropsType> {
           <Route render={() => <Music />} path="/music" />
           <Route render={() => { return <React.Suspense fallback={<Preloader />}> <UsersContainer /></React.Suspense> }
           } path="/users" />
-          <Route render={() => <Setting />} path="/setting" />
+          <Route render={() => <SettingContainer />} path="/setting" />
           <Route render={() => <Login />} path="/login" />
         </div>
       </div>
