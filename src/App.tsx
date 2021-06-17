@@ -41,19 +41,19 @@ class App extends React.Component<AppPropsType> {
         <HeaderContainer />
         <Navbar />
         <div className="app-wrapper-content">
-          <Route render={() => { return <React.Suspense fallback={<div>Загрузка...</div>}><DialogsContainer /></React.Suspense> }
+          <Route render={() => { return <React.Suspense fallback={<Preloader />}><DialogsContainer /></React.Suspense> }
           } path="/dialogs" />
-          <Route render={() => { return <React.Suspense fallback={<div>Загрузка...</div>}> <ProfileContainer /></React.Suspense> }
+          <Route render={() => { return <React.Suspense fallback={<Preloader />}> <ProfileContainer /></React.Suspense> }
           } path="/profile/:userId?" />
           <Route render={() => <News />} path="/news" />
           <Route render={() => <Music />} path="/music" />
-          <Route render={() => { return <React.Suspense fallback={<div>Загрузка...</div>}> <UsersContainer /></React.Suspense> }
+          <Route render={() => { return <React.Suspense fallback={<Preloader />}> <UsersContainer /></React.Suspense> }
           } path="/users" />
           <Route render={() => <Setting />} path="/setting" />
           <Route render={() => <Login />} path="/login" />
         </div>
       </div>
-    ); 
+    );
   }
 }
 const mapStateToProps = (state: ReduxStateType) => ({
