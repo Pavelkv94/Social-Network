@@ -19,7 +19,13 @@ export function ProfileInfo(props: PropsType) {
       <img src="https://demo.qodeinteractive.com/central/wp-content/uploads/2013/05/header.jpg" alt="Background" />
       <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
       <div>AVA </div>
-      <img src={props.profile.photos.large ? props.profile.photos.large : "https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"} alt="ava" style={{ width: "300px", marginLeft: "20px" }} />
+      <img 
+      src={props.profile.photos.large 
+      ? props.profile.photos.large 
+      : "https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"} 
+      alt="ava" 
+      style={{ width: "300px", marginLeft: "20px" }} 
+      />
     </div>
   )
 }
