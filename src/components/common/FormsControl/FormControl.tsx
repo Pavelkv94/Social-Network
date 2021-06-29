@@ -56,19 +56,12 @@ export const Input = (props: WrappedFieldProps) => {
 // };
 
 
-export const CreateField = (
-    placeholder: "password" | "Email" | "",
-    type: "password" | "text" | "checkbox",
-    name: "password" | "email" | "rememberMe",
-    validators: FieldValidatorType[] | "",
-    title?: string) => (
+export const CreateField = (placeholder: string | null, name: string, validators: any, component: any, props = {}, text = "") => (
     <div>
-        <Field
-            component={Input}
-            placeholder={placeholder}
-            type={type}
-            name={name}
+        <Field placeholder={placeholder} name={name}
             validate={validators}
-        />{title}
+            component={component}
+            {...props}
+        /> {text}
     </div>
 )

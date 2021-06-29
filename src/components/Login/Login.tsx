@@ -3,7 +3,7 @@ import { Redirect } from "react-router"
 import { reduxForm } from "redux-form"
 import { login } from "../../redux/authReducer"
 import { ReduxStateType } from "../../redux/redux-store"
-import { FormDataType, LoginForm } from "./LoginForm/LoginForm"
+import { FormDataType, LoginForm,  } from "./LoginForm/LoginForm"
 
 type LoginPropsType = {
     isAuth: boolean

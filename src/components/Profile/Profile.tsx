@@ -9,6 +9,7 @@ export type ProfileType = {
   getUserProfileThunkCreator: (userId: number | null) => void
   updateStatus: (status: string) => void
   savePhoto: (e: any) => void
+  saveProfile: (formData: ProfileDataType) => any
 }
 
 export function Profile(props: ProfileType) {
@@ -21,6 +22,7 @@ export function Profile(props: ProfileType) {
         status={props.status}
         updateStatus={props.updateStatus}
         savePhoto={props.savePhoto}
+        saveProfile={props.saveProfile}
         isOwner={props.isOwner}
       />
       <MyPostsContainer />

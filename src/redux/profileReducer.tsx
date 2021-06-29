@@ -1,7 +1,8 @@
 import { Dispatch } from "redux";
+import { stopSubmit } from "redux-form";
 import { profileAPI, ResultCodeENum, usersAPI } from "../api/api";
 import { ActionTypes, ThunkType } from "./redux-store";
-type ContactsType = {
+export type ContactsType = {
     "facebook": string | null
     "website": string | null
     "vk": string | null
@@ -20,7 +21,7 @@ export type ProfileDataType = {
     "contacts": ContactsType
     "lookingForAJob": boolean
     "lookingForAJobDescription": string | null
-    "fullName": string
+    "fullName": string | null
     "userId": number
     "photos": PhotosType
 } | null
@@ -91,15 +92,12 @@ export const addPostActionCreator = (newPostText: string) => {
         postMessage: newPostText
     } as const
 }
-
-
 export const setUserProfile = (profile: ProfileDataType) => {
     return {
         type: "SOCIAL-NETWORK/PROFILE/SET-USER-PROFILE",
         profile,
     } as const
 }
-
 export const setStatus = (status: string) => {
     return {
         type: "SOCIAL-NETWORK/PROFILE/SET-STATUS",
@@ -107,12 +105,12 @@ export const setStatus = (status: string) => {
     } as const
 }
 export const savePhotoAC = (photos: PhotosType) => {
-    debugger
     return {
         type: "SOCIAL-NETWORK/PROFILE/SAVE-PHOTO",
         photos
     } as const
 }
+
 
 
 //TODO----------------------создаем Thunk-CREATORS----------
@@ -148,4 +146,22 @@ export const savePhotoTC = (file: File): ThunkType =>
         if (response.data.resultCode === ResultCodeENum.Success) {
             dispatch(savePhotoAC(response.data.data.photos));
         }
+    }
+
+export const saveProfileTC = (profile: ProfileDataType): ThunkType =>
+    async (dispatch: Dispatch<ActionTypes>, getState) => {
+        const userId = getState().auth.id
+        let response = await profileAPI.saveProfile(profile)
+        debugger
+        if (response.data.resultCode === 0) {
+            dispatch(setUserProfile(profile))
+            debugger
+            //@ts-ignore
+            dispatch(getUserProfileThunkCreator(userId));
+        } else {
+            dispatch(stopSubmit("edit-profile", { _error: response.data.messages[0] }));
+            debugger
+            return Promise.reject(response.data.messages[0]);
+        }
+
     }
