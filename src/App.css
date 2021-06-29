@@ -14,3 +14,12 @@
   grid-area: c;
   background-color: cornflowerblue;
 }
+
+.errorBack {
+  width: 100%;
+  height:80vh;
+  background-image: url("http://artismedia.by/blog/wp-content/uploads/2018/05/in-blog2-1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+}

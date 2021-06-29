@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, withRouter } from 'react-router-dom';
+import { HashRouter, Route, withRouter, Switch } from 'react-router-dom';
 import './App.css';
 import { Navbar } from './components/Navbar/Navbar';
 import { Music } from './components/Music/Music';
@@ -12,11 +12,10 @@ import { initializeApp } from './redux/appReducer'
 import { compose } from 'redux';
 import { store, ReduxStateType } from './redux/redux-store';
 import { Preloader } from './components/common/Preloader/Preloader';
-// import DialogsContainer from './components/Dialogs/DialogsContainer';
+
+
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
-// import UsersContainer from './components/Users/UsersContainer';
-// import ProfileContainer from './components/Profile/ProfileContainer';
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 
@@ -27,8 +26,21 @@ type AppPropsType = {
 
 class App extends React.Component<AppPropsType> {
 
+  catchError = (reason:any, promise:any) => {
+    alert("Error")
+    console.log(reason)
+  }
+
   componentDidMount() {
     this.props.initializeApp();
+
+    //@ts-ignore
+    window.addEventListener('unhandlerejection', this.catchError)
+  }
+
+  componentWillUnmount() {
+    //@ts-ignore
+    window.removeEventListener('unhandlerejection', this.catchError)
   }
 
   render() {
@@ -37,20 +49,25 @@ class App extends React.Component<AppPropsType> {
     }
 
     return (
-      <div className='app-wrapper'>
+      <div className='app-wrapper' >
         <HeaderContainer />
         <Navbar />
         <div className="app-wrapper-content">
-          <Route render={() => { return <React.Suspense fallback={<Preloader />}><DialogsContainer /></React.Suspense> }
-          } path="/dialogs" />
-          <Route render={() => { return <React.Suspense fallback={<Preloader />}> <ProfileContainer /></React.Suspense> }
-          } path="/profile/:userId?" />
-          <Route render={() => <News />} path="/news" />
-          <Route render={() => <Music />} path="/music" />
-          <Route render={() => { return <React.Suspense fallback={<Preloader />}> <UsersContainer /></React.Suspense> }
-          } path="/users" />
-          <Route render={() => <SettingContainer />} path="/setting" />
-          <Route render={() => <Login />} path="/login" />
+          <Switch>
+            <Route exact path="/" render={() => { return <React.Suspense fallback={<Preloader />}> <ProfileContainer /></React.Suspense> }
+            } />
+            <Route render={() => { return <React.Suspense fallback={<Preloader />}><DialogsContainer /></React.Suspense> }
+            } path="/dialogs" />
+            <Route render={() => { return <React.Suspense fallback={<Preloader />}> <ProfileContainer /></React.Suspense> }
+            } path="/profile/:userId?" />
+            <Route render={() => <News />} path="/news" />
+            <Route render={() => <Music />} path="/music" />
+            <Route render={() => { return <React.Suspense fallback={<Preloader />}> <UsersContainer /></React.Suspense> }
+            } path="/users" />
+            <Route render={() => <SettingContainer />} path="/setting" />
+            <Route render={() => <Login />} path="/login" />
+            <Route render={() => <div className="errorBack"></div>} path="*" />
+          </Switch>
         </div>
       </div>
     );
