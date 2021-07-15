@@ -17,26 +17,25 @@ type PropsType = {
 
 export function ProfileInfo(props: PropsType) {
   let [editMode, setEditMode] = useState<boolean>(false);
+  
   if (!props.profile) { return <Preloader /> }
   // console.log(props)
 
   const onMainPhotoSelected = (e: any) => {
     if (e.target.files.length) {
       props.savePhoto(e.target.files[0]);
+      debugger
     }
   }
 
-  const goToEditMode = () => {
-    setEditMode(true)
-  }
+
 
   const onSubmit = (formData: any) => {
     props.saveProfile(formData).then(
-      () => { setEditMode(false) }
-    )
-      .catch(alert('ошибка промис'))
-
-
+      () => {
+        setEditMode(false);
+      }
+    );
   }
 
 
@@ -57,7 +56,7 @@ export function ProfileInfo(props: PropsType) {
       {editMode
         //@ts-ignore
         ? <ProfileReduxDataForm initialValues={props.profile} onSubmit={onSubmit} profile={props.profile} />
-        : <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={goToEditMode} />}
+        : <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={() => { setEditMode(true) }} />}
 
 
     </div>
@@ -73,7 +72,9 @@ type ProfilerDataType = {
 
 export const ProfileData = ({ profile, isOwner, goToEditMode }: any) => {
   return (<div>
-    {!isOwner && <div><button onClick={goToEditMode}>edit</button></div>}
+    {!isOwner && <div><button onClick={goToEditMode} 
+    disabled//!--------------------------------------------------------------------
+    >edit</button></div>}
     <div>
       <b>Full name</b>: {profile.fullName}
     </div>

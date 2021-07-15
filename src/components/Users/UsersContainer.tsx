@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 import { ReduxStateType } from '../../redux/redux-store';
 import {
-    setCurrentPage, UsersOfSearchType, toggleIsFollowingProgress, getUsersThunkCreator, followThunkCreator,
+    UsersOfSearchType, getUsersThunkCreator, followThunkCreator,
     unFollowThunkCreator
 } from '../../redux/usersReducer';
 import React from 'react';
 import { Users } from './Users';
 import { Preloader } from '../common/Preloader/Preloader';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUserCount, getUsers } from '../../redux/usersSelectors';
 

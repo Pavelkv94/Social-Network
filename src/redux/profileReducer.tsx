@@ -115,10 +115,11 @@ export const savePhotoAC = (photos: PhotosType) => {
 
 //TODO----------------------создаем Thunk-CREATORS----------
 
-export const getUserProfileThunkCreator = (userId: number | null): ThunkType =>
-    async (dispatch: Dispatch<ActionTypes>) => {
+export const getUserProfileThunkCreator = (userId: number | null) =>
+    async (dispatch: Dispatch) => {
         let response = await profileAPI.getProfile(userId)
         dispatch(setUserProfile(response.data));
+        debugger
     }
 export const getUserStatus = (userId: number | null): ThunkType =>
     async (dispatch: Dispatch<ActionTypes>) => {
@@ -154,13 +155,10 @@ export const saveProfileTC = (profile: ProfileDataType): ThunkType =>
         let response = await profileAPI.saveProfile(profile)
         debugger
         if (response.data.resultCode === 0) {
-            dispatch(setUserProfile(profile))
-            debugger
-            //@ts-ignore
-            dispatch(getUserProfileThunkCreator(userId));
+            //@ts-ignore            //!<========================================
+            dispatch(getUserProfileThunkCreator(userId))
         } else {
             dispatch(stopSubmit("edit-profile", { _error: response.data.messages[0] }));
-            debugger
             return Promise.reject(response.data.messages[0]);
         }
 

@@ -52,19 +52,6 @@ export const getAuthUserDataThunkCreator = (): ThunkType => async (dispatch: Dis
 
 }
 
-
-// export const login = (email: string, password: string, rememberMe: boolean): ThunkType => async (dispatch: Dispatch<ActionTypes>) => {
-
-//     let response = await authAPI.login(email, password, rememberMe)
-//     if (response.resultCode === ResultCodeENum.Success) {
-//         //@ts-ignore  //!<<<<=================================================== 
-//         dispatch(getAuthUserDataThunkCreator())
-//     } else {
-//         let message = response.messages.length > 0 ? response.messages[0] : "Entered data is wrong."
-//         dispatch(stopSubmit("login", { _error: message }));
-//     }
-
-// }
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => async (dispatch) => {
     let data = await authAPI.login(email, password, rememberMe, captcha);
     if (data.resultCode === ResultCodeENum.Success) {

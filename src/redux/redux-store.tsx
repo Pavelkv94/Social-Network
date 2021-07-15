@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, compose, createStore, Dispatch, Store } from "redux";
+import { Action, applyMiddleware, combineReducers, compose, createStore, Dispatch, Store } from "redux";
 import { dialogsReducer, SendMessageType } from "./dialogsReducer";
 import { AddPostActionType, profileReducer, SavePhotosType, SetStatusType, SetUserProfileType } from "./profileReducer";
 import { sidebarReducer } from "./sidebarReducer";
@@ -25,6 +25,12 @@ export type ActionTypes =
     | SavePhotosType
     | InitializedSuccessType
     | CapthaType
+
+
+    
+export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
+
+export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, ReduxStateType, unknown, A>
 
 //| FormAction
 
